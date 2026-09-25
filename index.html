@@ -16,10 +16,8 @@
 <style>
 /* =========================================================
    WALL STREET CA PORTFOLIO — DESIGN SYSTEM
-   Terminal aesthetic + Apple glass + Gold accents
    ========================================================= */
 :root{
-  /* Dark by default — Bloomberg/Terminal feel */
   --bg:#08080a;
   --bg-2:#0e0e12;
   --bg-3:#15151a;
@@ -37,7 +35,6 @@
   --green:#00c853;
   --green-soft:rgba(0,200,83,.12);
   --red:#ff3d3d;
-  --red-soft:rgba(255,61,61,.12);
   --blue:#3b82f6;
   --accent:var(--gold);
 
@@ -100,7 +97,7 @@ img{display:block;max-width:100%;height:auto}
 ::-webkit-scrollbar-thumb{background:var(--bg-3);border-radius:6px;border:2px solid var(--bg)}
 ::-webkit-scrollbar-thumb:hover{background:var(--text-4)}
 
-/* ========== GRID BACKGROUND (subtle) ========== */
+/* ========== GRID BACKGROUND ========== */
 .grid-bg{
   position:fixed;inset:0;pointer-events:none;z-index:-2;
   background-image:
@@ -111,25 +108,14 @@ img{display:block;max-width:100%;height:auto}
   -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 40%,transparent 100%);
   opacity:.5;
 }
-.ambient{
-  position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-3;background:var(--bg);
-}
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-3;background:var(--bg)}
 .ambient-orb{position:absolute;border-radius:50%;filter:blur(140px);opacity:.45;will-change:transform}
 .ambient-orb.a{width:min(720px,110vw);height:min(720px,110vw);top:-25vh;left:-15vw;
   background:radial-gradient(circle,var(--gold-soft),transparent 70%)}
 .ambient-orb.b{width:min(620px,90vw);height:min(620px,90vw);bottom:-20vh;right:-15vw;
   background:radial-gradient(circle,rgba(59,130,246,.10),transparent 70%)}
 
-/* ========== GLASS PRIMITIVE ========== */
-.glass{
-  position:relative;background:var(--glass-bg);
-  backdrop-filter:blur(30px) saturate(180%);
-  -webkit-backdrop-filter:blur(30px) saturate(180%);
-  border:1px solid var(--glass-border);
-  box-shadow:var(--glass-shadow),inset 0 1px 0 var(--glass-specular);
-}
-
-/* ========== TOP TICKER BAR ========== */
+/* ========== TICKER — FIXED (no overlap, seamless loop) ========== */
 .ticker{
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:32px;padding-top:var(--safe-top);
@@ -146,13 +132,18 @@ body.light .ticker{background:rgba(245,245,240,.92)}
 }
 .ticker::after{
   content:"";position:absolute;right:0;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;
-  background:linear-gradient(270deg,var(--bg) 0%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,var(--bg) 100%);
 }
 .ticker-track{
-  display:flex;gap:32px;animation:ticker 40s linear infinite;
-  padding-left:100%;white-space:nowrap;will-change:transform;
+  display:flex;gap:32px;
+  animation:ticker-scroll 60s linear infinite;
+  white-space:nowrap;will-change:transform;flex-shrink:0;
 }
-@keyframes ticker{to{transform:translateX(-100%)}}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker-scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
 .tick{display:inline-flex;align-items:center;gap:8px}
 .tick .sym{color:var(--text-2);font-weight:600;letter-spacing:.04em}
 .tick .val{color:var(--text);font-weight:500}
@@ -195,7 +186,6 @@ body.light nav{background:rgba(245,245,240,.8)}
   display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
 .nav-links a:hover{color:var(--text);background:var(--bg-3)}
-.nav-links a.active{color:var(--gold);background:var(--gold-soft)}
 
 .nav-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .status-pill{
@@ -312,7 +302,7 @@ h1 .muted::after{
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   padding:14px 22px;border-radius:var(--radius);
-  font-size:13.5px;font-weight:600;letter-spacing:-.01em;
+  font-size:13.5px;font-weight:600;
   transition:transform .2s var(--ease-out),background .2s,box-shadow .2s,border-color .2s;
   min-height:48px;white-space:nowrap;position:relative;
   font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.04em;
@@ -332,7 +322,6 @@ h1 .muted::after{
 .btn svg{width:13px;height:13px;flex-shrink:0;transition:transform .3s var(--ease-out)}
 .btn:hover svg{transform:translateX(3px)}
 
-/* Trust strip — terminal style data row */
 .trust{
   margin-top:44px;padding-top:28px;border-top:1px solid var(--line);
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:600px;
@@ -371,7 +360,6 @@ h1 .muted::after{
   background:linear-gradient(to bottom,transparent,var(--bg) 92%);z-index:3;
 }
 
-/* Data badges floating over portrait */
 .badge{
   position:absolute;padding:11px 14px;border-radius:var(--radius);
   background:var(--glass-bg-strong);
@@ -400,7 +388,7 @@ h1 .muted::after{
 .badge.status{right:0;top:14%;border-left:2px solid var(--green)}
 .badge.gold{left:4%;top:8%;border-left:2px solid var(--gold)}
 
-/* ========== STATS STRIP ========== */
+/* ========== STATS ========== */
 .stats{
   width:100%;max-width:1280px;margin:0 auto;
   padding:clamp(36px,5vw,64px) var(--pad-x);
@@ -423,7 +411,7 @@ h1 .muted::after{
 .stat-cell:hover{background:var(--bg-2)}
 .stat-num{
   font-size:clamp(28px,3.6vw,44px);line-height:1;letter-spacing:-.045em;font-weight:800;
-  color:var(--text);font-variant-numeric:tabular-nums;font-family:var(--font-sans);
+  color:var(--text);font-variant-numeric:tabular-nums;
   display:flex;align-items:baseline;gap:2px;
 }
 .stat-num em{
@@ -447,9 +435,7 @@ h1 .muted::after{
   letter-spacing:.12em;text-transform:uppercase;font-weight:700;
   margin-bottom:20px;font-family:var(--font-mono);
 }
-.section-tag::before{
-  content:"//";color:var(--text-4);font-weight:700;
-}
+.section-tag::before{content:"//";color:var(--text-4);font-weight:700}
 .heading{
   font-size:clamp(30px,4.5vw,54px);line-height:1.06;letter-spacing:-.04em;font-weight:800;
   color:var(--text);max-width:22ch;text-wrap:balance;
@@ -749,7 +735,7 @@ h1 .muted::after{
   body{font-size:14.5px}
 
   .ticker{height:28px;font-size:10px}
-  .ticker-track{gap:24px}
+  .ticker-track{gap:24px;animation-duration:40s}
 
   nav{top:calc(28px + var(--safe-top));height:56px;padding:0 16px}
 
@@ -845,32 +831,28 @@ h1 .muted::after{
   .stat-num{font-size:22px}
 }
 
-/* Landscape phone */
 @media(max-height:500px) and (orientation:landscape){
   .hero{min-height:auto;padding-top:calc(90px + var(--safe-top));padding-bottom:32px}
   .visual{height:280px}
   .photo{width:min(200px,58%)}
 }
 
-/* Touch devices — disable hover lift */
 @media(hover:none){
   .card:hover,.cert:hover,.btn:hover,.badge:hover{transform:none}
   .card:hover{background:var(--bg-2)}
   .cert:hover{background:var(--bg-2)}
 }
 
-/* Reduced motion */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important;
   }
   h1 .word{transform:none!important}
-  .ticker-track{animation:none;padding-left:0}
+  .ticker-track{animation:none;padding-left:16px}
   .terminal-line .caret{animation:none}
 }
 
-/* Prevent iOS input zoom */
 @supports(-webkit-touch-callout:none){
   input,textarea,select{font-size:16px}
 }
@@ -1103,7 +1085,6 @@ function merge(def, src){
   return (src === undefined || src === null || src === '') ? def : src;
 }
 
-/* Derive initials from brand name for the nav mark */
 function initials(name){
   return (name||'CA').split(/\s+/).filter(Boolean).slice(0,2)
     .map(w=>w[0]).join('').toUpperCase().slice(0,2) || 'CA';
@@ -1113,11 +1094,9 @@ function initials(name){
    RENDER
    ========================================================= */
 function renderAll(d){
-  // ---- meta ----
   document.getElementById('pageTitle').textContent = d.meta.title;
   document.getElementById('pageDesc').setAttribute('content', d.meta.description);
 
-  // ---- nav ----
   document.getElementById('brandName').textContent = d.nav.brandName;
   document.getElementById('brandSub').textContent = d.nav.brandSub;
   document.getElementById('brandMark').textContent = initials(d.nav.brandName);
@@ -1128,10 +1107,8 @@ function renderAll(d){
   if(drawerStatusText) drawerStatusText.textContent = '● ' + d.nav.statusText;
   if(drawerStatusLink) drawerStatusLink.setAttribute('href', d.nav.statusLink || '#');
 
-  // ---- ticker ----
   renderTicker(d);
 
-  // ---- hero ----
   document.getElementById('heroContent').innerHTML = `
     <div class="terminal-line">
       <span class="prompt">›</span>
@@ -1166,7 +1143,6 @@ function renderAll(d){
         </div>`).join('')}
     </div>`;
 
-  // ---- hero visual ----
   const goldBadge = d.photo.badgeGoldLabel
     ? `<div class="badge gold"><small>${esc(d.photo.badgeGoldLabel)}</small><strong>${esc(d.photo.badgeGoldText)}</strong></div>`
     : '';
@@ -1177,14 +1153,12 @@ function renderAll(d){
     <div class="badge status"><small>${esc(d.photo.badgeStatusLabel)}</small><strong><span class="badge-dot"></span>${esc(d.photo.badgeStatusText)}</strong></div>
     ${goldBadge}`;
 
-  // ---- stats ----
   document.getElementById('statsStrip').innerHTML = (d.stats||[]).map(s=>`
     <div class="stat-cell">
       <div class="stat-num">${esc(s.num)}<em>${esc(s.suffix||'')}</em></div>
       <div class="stat-label">${esc(s.label)}</div>
     </div>`).join('');
 
-  // ---- about ----
   document.getElementById('aboutSection').innerHTML = `
     <div class="section-tag">${esc(d.about.tag)}</div>
     <h2 class="heading">${esc(d.about.heading)} <em>${esc(d.about.headingEm)}</em></h2>
@@ -1199,7 +1173,6 @@ function renderAll(d){
       </div>
     </div>`;
 
-  // ---- services ----
   document.getElementById('servicesSection').innerHTML = `
     <div class="section-tag">${esc(d.services.tag)}</div>
     <h2 class="heading">${esc(d.services.heading)} <em>${esc(d.services.headingEm)}</em></h2>
@@ -1213,7 +1186,6 @@ function renderAll(d){
         </article>`).join('')}
     </div>`;
 
-  // ---- tools ----
   document.getElementById('toolsSection').innerHTML = `
     <div class="section-tag">${esc(d.tools.tag)}</div>
     <h2 class="heading">${esc(d.tools.heading)} <em>${esc(d.tools.headingEm)}</em></h2>
@@ -1225,7 +1197,6 @@ function renderAll(d){
         </div>`).join('')}
     </div>`;
 
-  // ---- experience ----
   document.getElementById('experienceSection').innerHTML = `
     <div class="section-tag">${esc(d.experience.tag)}</div>
     <h2 class="heading">${esc(d.experience.heading)} <em>${esc(d.experience.headingEm)}</em></h2>
@@ -1239,7 +1210,6 @@ function renderAll(d){
         </div>`).join('')}
     </div>`;
 
-  // ---- certifications ----
   document.getElementById('certificationsSection').innerHTML = `
     <div class="section-tag">${esc(d.certifications.tag)}</div>
     <h2 class="heading">${esc(d.certifications.heading)} <em>${esc(d.certifications.headingEm)}</em></h2>
@@ -1252,10 +1222,8 @@ function renderAll(d){
         </div>`).join('')}
     </div>`;
 
-  // ---- custom sections ----
   renderCustomSections(d);
 
-  // ---- cta ----
   document.getElementById('ctaSection').innerHTML = `
     <div class="cta-glow"></div>
     <div class="section-tag" style="justify-content:center;margin:0 auto 20px;display:inline-flex;">${esc(d.cta.tag)}</div>
@@ -1271,7 +1239,6 @@ function renderAll(d){
       </a>
     </div>`;
 
-  // ---- footer ----
   document.getElementById('footerSection').innerHTML = `
     <div class="f-brand">
       <div class="brand-mark">${esc(initials(d.nav.brandName))}</div>
@@ -1289,12 +1256,11 @@ function renderAll(d){
     <span>${esc(d.footer.copyright)}</span>
     <span class="f-status"><span class="f-status-dot"></span>${esc(d.footer.statusText)}</span>`;
 
-  // ---- interactions ----
   attachInteractions();
 }
 
 /* =========================================================
-   TICKER — Bloomberg-style
+   TICKER
    ========================================================= */
 function renderTicker(d){
   const cells = [
@@ -1321,7 +1287,6 @@ function renderTicker(d){
     </span>
     <span class="sep">·</span>
   `).join('');
-  // Duplicate for seamless loop
   document.getElementById('tickerTrack').innerHTML = html + html;
 }
 
@@ -1360,7 +1325,6 @@ function renderCustomSections(d){
    INTERACTIONS
    ========================================================= */
 function attachInteractions(){
-  // Reveal on scroll
   const io = new IntersectionObserver(es=>es.forEach(e=>{
     if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
   }),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
@@ -1369,7 +1333,6 @@ function attachInteractions(){
     io.observe(el);
   });
 
-  // Portrait parallax (desktop only)
   const visual = document.querySelector('.visual');
   const photo = document.querySelector('.photo');
   if(visual && photo && window.matchMedia('(hover:hover)').matches){
@@ -1387,7 +1350,6 @@ function attachInteractions(){
    THEME
    ========================================================= */
 const themeBtn = document.getElementById('theme');
-// Dark by default; light only if explicitly saved
 if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
 themeBtn.addEventListener('click',()=>{
   document.body.classList.toggle('light');
@@ -1429,7 +1391,7 @@ window.addEventListener('resize', ()=>{
 });
 
 /* =========================================================
-   SMOOTH SCROLL FOR ANCHORS
+   SMOOTH SCROLL
    ========================================================= */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', e=>{
@@ -1460,7 +1422,7 @@ window.addEventListener('mousemove', e=>{
 },{passive:true});
 
 /* =========================================================
-   LIVE PREVIEW BRIDGE — from admin.html
+   LIVE PREVIEW BRIDGE
    ========================================================= */
 window.addEventListener('message', (e)=>{
   if(e.data && e.data.type === 'PORTFOLIO_UPDATE' && e.data.data){
@@ -1473,7 +1435,6 @@ window.addEventListener('message', (e)=>{
   }
 });
 
-/* Tell parent we're ready */
 try{
   if(window.parent !== window){
     window.parent.postMessage({type:'PORTFOLIO_READY'}, '*');
@@ -1488,7 +1449,7 @@ try{
   try{
     const r = await fetch('/api/data',{cache:'no-store'});
     if(r.ok) remote = await r.json();
-  }catch(e){ /* offline / preview — use defaults */ }
+  }catch(e){}
   const data = merge(DEFAULT_DATA, remote || {});
   renderAll(data);
 })();
