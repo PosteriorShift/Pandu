@@ -593,11 +593,12 @@ function renderAll(d){
     ${goldBadge}`;
 
   // Stats
-  document.getElementById('statsStrip').innerHTML = arr(d.stats).map(s=>`
-    <div class="stat-cell">
-      <div class="stat-num">${esc(s.num||'')}<em>${esc(s.suffix||'')}</em></div>
-      <div class="stat-label">${esc(s.label||'')}</div>
-    </div>`).join('');
+const statsArr = Array.isArray(d.stats) ? d.stats : (d.stats?.items || []);
+document.getElementById('statsStrip').innerHTML = statsArr.map(s=>`
+  <div class="stat-cell">
+    <div class="stat-num">${esc(s.num||'')}<em>${esc(s.suffix||'')}</em></div>
+    <div class="stat-label">${esc(s.label||'')}</div>
+  </div>`).join('');
 
   // About
   const about = d.about || {};
@@ -720,30 +721,27 @@ function renderAll(d){
    TICKER
    ========================================================= */
 function renderTicker(d){
-  const statsArr = arr(d.stats);
-  const statusText = pick(d, 'nav.statusText', 'Available');
-  const cells = [
-    {sym:"CA", val: pick(d,'hero.role','Chartered Accountant'), chg:"up", chgText:"ACTIVE"},
-    {sym:"EXP", val:(statsArr[0]?.num||"—")+(statsArr[0]?.suffix||""), chg:"up", chgText:(statsArr[0]?.label||'EXPERIENCE').toUpperCase()},
-    {sym:"AUD", val:(statsArr[1]?.num||"—")+(statsArr[1]?.suffix||""), chg:"up", chgText:(statsArr[1]?.label||'AUDITS').toUpperCase()},
-    {sym:"TAX", val:(statsArr[2]?.num||"—")+(statsArr[2]?.suffix||""), chg:"up", chgText:(statsArr[2]?.label||'FILED').toUpperCase()},
-    {sym:"ETH", val:(statsArr[3]?.num||"—")+(statsArr[3]?.suffix||""), chg:"up", chgText:(statsArr[3]?.label||'COMPLIANCE').toUpperCase()},
-    {sym:"STATUS", val:String(statusText).toUpperCase(), chg:"up", chgText:"●"},
-    {sym:"FOCUS", val:String(pick(d,'hero.roleCompany','—')).toUpperCase(), chg:"up", chgText:"▸"},
-    {sym:"NIFTY", val:"24,812.30", chg:"up", chgText:"+0.42%"},
-    {sym:"SENSEX", val:"81,437.15", chg:"up", chgText:"+0.31%"},
-    {sym:"USD/INR", val:"83.24", chg:"down", chgText:"-0.08%"},
-    {sym:"GOLD", val:"₹72,140", chg:"up", chgText:"+0.56%"},
-    {sym:"BRENT", val:"$82.15", chg:"down", chgText:"-0.24%"}
-  ];
-  const html = cells.map(c=>`
-    <span class="tick">
-      <span class="sym">${esc(c.sym)}</span>
-      <span class="val">${esc(c.val)}</span>
-      <span class="chg ${c.chg}">${esc(c.chgText)}</span>
-    </span>
-    <span class="sep">·</span>
-  `).join('');
+  // Read ticker items from data if present, else fall back to defaults
+  const items = Array.isArray(d.ticker?.items)
+    ? d.ticker.items
+    : (Array.isArray(d.ticker) ? d.ticker : []);
+
+  if(!items.length){
+    document.getElementById('tickerTrack').innerHTML = '';
+    return;
+  }
+
+  const html = items.map(c=>{
+    const dir = (c.chg === 'down') ? 'down' : 'up';
+    return `
+      <span class="tick">
+        <span class="sym">${esc(c.sym || '')}</span>
+        <span class="val">${esc(c.val || '')}</span>
+        <span class="chg ${dir}">${esc(c.chgText || '')}</span>
+      </span>
+      <span class="sep">·</span>
+    `;
+  }).join('');
   document.getElementById('tickerTrack').innerHTML = html + html;
 }
 
