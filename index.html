@@ -1,1974 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Eshwar Goud — Chartered Accountant (Intern) · Audit & Taxation</title>
-  <meta name="description" content="Eshwar Goud — CA intern specialising in audit, taxation, financial reporting, and forensic accounting. Precision-driven, ethics-first.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#f5f5f7;
-      --bg-elev:#ffffff;
-      --text:#0a0a0c;
-      --muted:#6e6e73;
-      --muted-2:#8e8e93;
-      --blue:#0071e3;
-      --blue-bright:#1877F2;
-      --blue-ink:#0066FF;
-      --line:rgba(0,0,0,.08);
-      --line-strong:rgba(0,0,0,.14);
-      --glass:rgba(255,255,255,.68);
-      --glass-strong:rgba(255,255,255,.85);
-      --glass-border:rgba(255,255,255,.72);
-      --glass-border-strong:rgba(255,255,255,.95);
-      --grain-blend:multiply;
-      --grain-opacity:.035;
-      --shadow-deep:0 30px 90px rgba(0,0,0,.12);
-      --shadow-soft:0 16px 40px rgba(0,0,0,.07);
-      --shadow-tiny:0 4px 16px rgba(0,0,0,.05);
-      --accent-green:#22c55e;
-      --accent-gold:#d4a017;
-      --accent-navy:#0a2540;
-    }
-
-    body.dark{
-      --bg:#000000;
-      --bg-elev:#0a0a0c;
-      --text:#f5f5f7;
-      --muted:#98989f;
-      --muted-2:#7c7c84;
-      --blue:#1877F2;
-      --blue-bright:#4A9BFF;
-      --blue-ink:#4A9BFF;
-      --line:rgba(255,255,255,.10);
-      --line-strong:rgba(255,255,255,.18);
-      --glass:rgba(20,20,20,.72);
-      --glass-strong:rgba(28,28,28,.85);
-      --glass-border:rgba(255,255,255,.12);
-      --glass-border-strong:rgba(255,255,255,.20);
-      --grain-blend:overlay;
-      --grain-opacity:.045;
-      --shadow-deep:0 30px 90px rgba(0,0,0,.6);
-      --shadow-soft:0 16px 40px rgba(0,0,0,.4);
-      --shadow-tiny:0 4px 16px rgba(0,0,0,.3);
-      --accent-gold:#e8b923;
-    }
-
-    *{margin:0;padding:0;box-sizing:border-box;}
-
-    html{
-      scroll-behavior:smooth;
-      background:var(--bg);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
-
-    body{
-      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      overflow-x:hidden;
-      line-height:1.5;
-      letter-spacing:-.011em;
-      transition:background .45s ease, color .45s ease;
-    }
-
-    a{color:inherit;text-decoration:none;}
-    button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;}
-    img{display:block;max-width:100%;height:auto;}
-    ::selection{background:var(--blue);color:#fff;}
-
-    /* ================= BACKGROUND ================= */
-    .ambient{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:-2;
-    }
-
-    .blue-light{
-      position:absolute;
-      width:640px;
-      height:640px;
-      border-radius:50%;
-      background:rgba(0,113,227,.10);
-      filter:blur(140px);
-      transition:opacity .45s ease, transform 1.2s cubic-bezier(.22,1,.36,1);
-      will-change:transform;
-    }
-
-    .blue-light.one{top:-350px;left:-200px;}
-    .blue-light.two{right:-350px;bottom:-300px;}
-    body.dark .blue-light{opacity:0;}
-
-    .grid{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:-1;
-      opacity:.16;
-      background-image:
-        linear-gradient(var(--line) 1px,transparent 1px),
-        linear-gradient(90deg, var(--line) 1px,transparent 1px);
-      background-size:90px 90px;
-      mask-image:linear-gradient(to bottom, black, transparent 70%);
-      -webkit-mask-image:linear-gradient(to bottom, black, transparent 70%);
-    }
-
-    .grain{
-      position:fixed;
-      inset:-100%;
-      pointer-events:none;
-      z-index:9999;
-      opacity:var(--grain-opacity);
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:200px 200px;
-      animation:grain 8s steps(6) infinite;
-      mix-blend-mode:var(--grain-blend);
-    }
-
-    @keyframes grain{
-      0%,100%{transform:translate(0,0);}
-      10%{transform:translate(-5%,-8%);}
-      20%{transform:translate(-12%,4%);}
-      30%{transform:translate(6%,-12%);}
-      40%{transform:translate(-4%,14%);}
-      50%{transform:translate(-12%,8%);}
-      60%{transform:translate(12%,0%);}
-      70%{transform:translate(0%,12%);}
-      80%{transform:translate(3%,14%);}
-      90%{transform:translate(-8%,6%);}
-    }
-
-    .cursor-light{
-      position:fixed;
-      width:640px;
-      height:640px;
-      border-radius:50%;
-      pointer-events:none;
-      z-index:-1;
-      transform:translate(-50%,-50%);
-      background:radial-gradient(circle, rgba(0,113,227,.13), transparent 65%);
-      filter:blur(60px);
-      opacity:0;
-      transition:opacity .9s ease;
-      mix-blend-mode:var(--grain-blend);
-      will-change:transform;
-    }
-
-    body:hover .cursor-light{opacity:.5;}
-    body.dark .cursor-light{
-      background:radial-gradient(circle, rgba(24,119,242,.18), transparent 65%);
-    }
-
-    /* ================= NAV ================= */
-    nav{
-      position:fixed;
-      top:18px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(960px,calc(100% - 30px));
-      z-index:100;
-    }
-
-    .nav{
-      height:54px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:7px 8px 7px 18px;
-      border:1px solid var(--glass-border);
-      border-radius:999px;
-      background:var(--glass);
-      backdrop-filter:blur(30px) saturate(180%);
-      -webkit-backdrop-filter:blur(30px) saturate(180%);
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.07),
-        inset 0 1px rgba(255,255,255,.7);
-      transition:background .45s ease, border .45s ease, box-shadow .45s ease;
-    }
-
-    body.dark .nav{
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.5),
-        inset 0 1px rgba(255,255,255,.05);
-    }
-
-    .brand{
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:-.025em;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .brand-glyph{
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      background:linear-gradient(140deg, var(--text) 0%, color-mix(in srgb, var(--text) 70%, transparent) 100%);
-      position:relative;
-      box-shadow:0 0 12px rgba(0,113,227,.35);
-    }
-
-    .brand-glyph::before{
-      content:"";
-      position:absolute;
-      inset:3px;
-      border-radius:50%;
-      background:var(--bg);
-    }
-
-    .brand-glyph::after{
-      content:"";
-      position:absolute;
-      width:5px;
-      height:5px;
-      right:2px;
-      bottom:2px;
-      border-radius:50%;
-      background:var(--accent-gold);
-      box-shadow:0 0 8px var(--accent-gold);
-    }
-
-    .brand span{
-      color:var(--muted);
-      font-weight:400;
-    }
-
-    .nav-right{
-      display:flex;
-      align-items:center;
-      gap:3px;
-    }
-
-    .nav-link{
-      color:var(--muted);
-      font-size:12px;
-      padding:9px 14px;
-      border-radius:999px;
-      transition:.25s;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-
-    .nav-link:hover{
-      color:var(--text);
-      background:rgba(127,127,127,.1);
-    }
-
-    .nav-link-status{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--accent-green);
-      box-shadow:0 0 8px rgba(34,197,94,.7);
-      animation:pulseDot 2.4s ease-in-out infinite;
-    }
-
-    .theme{
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      color:var(--text);
-      font-size:15px;
-      display:grid;
-      place-items:center;
-      transition:.3s;
-    }
-
-    .theme:hover{
-      background:rgba(127,127,127,.12);
-      transform:rotate(20deg);
-    }
-
-    /* ================= HERO ================= */
-    .hero{
-      width:min(1250px,calc(100% - 40px));
-      min-height:100vh;
-      margin:auto;
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      align-items:center;
-      gap:60px;
-      padding-top:70px;
-      position:relative;
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:3;
-    }
-
-    .eyebrow{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:28px;
-      color:var(--muted);
-      font-family:'JetBrains Mono',monospace;
-      font-size:11px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      opacity:0;
-      animation:fadeUp 1s .1s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .eyebrow-dot{
-      width:6px;
-      height:6px;
-      background:var(--accent-gold);
-      border-radius:50%;
-      box-shadow:0 0 12px rgba(212,160,23,.65);
-      animation:pulseDot 2.4s ease-in-out infinite;
-    }
-
-    @keyframes pulseDot{
-      0%,100%{opacity:1;}
-      50%{opacity:.4;}
-    }
-
-    h1{
-      font-size:clamp(60px,8.6vw,122px);
-      line-height:.86;
-      letter-spacing:-.085em;
-      font-weight:800;
-      overflow:hidden;
-    }
-
-    h1 .line{
-      display:block;
-      overflow:hidden;
-    }
-
-    h1 .word{
-      display:inline-block;
-      transform:translateY(110%);
-      animation:riseUp 1.2s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    h1 .line:nth-child(2) .word{
-      animation-delay:.1s;
-    }
-
-    @keyframes riseUp{
-      to{transform:translateY(0);}
-    }
-
-    h1 .gray{
-      color:var(--muted);
-    }
-
-    .role{
-      margin-top:32px;
-      font-size:clamp(17px,1.9vw,23px);
-      letter-spacing:-.035em;
-      font-weight:500;
-      opacity:0;
-      animation:fadeUp 1s .5s cubic-bezier(.22,1,.36,1) forwards;
-      display:flex;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:6px;
-    }
-
-    .role .separator{
-      color:var(--muted-2);
-      margin:0 4px;
-      font-weight:400;
-    }
-
-    .role .company{
-      color:var(--accent-gold);
-      font-weight:600;
-    }
-
-    .description{
-      max-width:560px;
-      margin-top:22px;
-      color:var(--muted);
-      font-size:15.5px;
-      line-height:1.7;
-      opacity:0;
-      animation:fadeUp 1s .65s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .description strong{
-      color:var(--text);
-      font-weight:500;
-    }
-
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(20px);}
-      to{opacity:1;transform:translateY(0);}
-    }
-
-    .actions{
-      display:flex;
-      gap:10px;
-      margin-top:34px;
-      flex-wrap:wrap;
-      opacity:0;
-      animation:fadeUp 1s .8s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .button{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-      padding:13px 20px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:var(--glass);
-      color:var(--text);
-      backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
-      font-size:12.5px;
-      font-weight:600;
-      letter-spacing:-.005em;
-      transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease, background .3s ease;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .button:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 30px rgba(0,0,0,.10);
-    }
-
-    .button.primary{
-      background:var(--blue);
-      color:#fff;
-      border-color:var(--blue);
-      box-shadow:0 10px 30px rgba(0,113,227,.25);
-    }
-
-    .button.primary::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
-      transform:translateX(-100%);
-      transition:transform .9s cubic-bezier(.22,1,.36,1);
-    }
-
-    .button.primary:hover::before{transform:translateX(100%);}
-
-    .button.primary:hover{
-      background:var(--blue-bright);
-      box-shadow:0 16px 40px rgba(0,113,227,.4);
-    }
-
-    .button span{position:relative;z-index:1;}
-
-    .button svg{
-      width:13px;
-      height:13px;
-      position:relative;
-      z-index:1;
-      transition:transform .35s cubic-bezier(.22,1,.36,1);
-    }
-
-    .button:hover svg{transform:translateX(3px);}
-
-    /* ================= TRUST BAR ================= */
-    .trust{
-      margin-top:44px;
-      padding-top:28px;
-      border-top:1px solid var(--line);
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:24px;
-      max-width:560px;
-      opacity:0;
-      animation:fadeUp 1s .95s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .trust-item{
-      position:relative;
-      padding-left:12px;
-    }
-
-    .trust-item::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:5px;
-      width:1px;
-      height:11px;
-      background:var(--accent-gold);
-      opacity:.7;
-    }
-
-    .trust-label{
-      font-family:'JetBrains Mono',monospace;
-      font-size:10px;
-      color:var(--muted);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-    }
-
-    .trust-value{
-      margin-top:6px;
-      font-size:13px;
-      font-weight:500;
-      letter-spacing:-.015em;
-      color:var(--text);
-    }
-
-    /* ================= VISUAL / PORTRAIT ================= */
-    .visual{
-      position:relative;
-      height:660px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      opacity:0;
-      animation:fadeIn 1.6s .3s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    @keyframes fadeIn{
-      to{opacity:1;}
-    }
-
-    .photo-aura{
-      position:absolute;
-      width:520px;
-      height:520px;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(212,160,23,.18), rgba(212,160,23,.04) 45%, transparent 70%);
-      filter:blur(30px);
-      transition:opacity .45s ease;
-      animation:auraPulse 8s ease-in-out infinite;
-      z-index:0;
-      pointer-events:none;
-    }
-
-    @keyframes auraPulse{
-      0%,100%{transform:scale(1);opacity:.85;}
-      50%{transform:scale(1.06);opacity:1;}
-    }
-
-    body.dark .photo-aura{
-      opacity:0;
-      animation:none;
-    }
-
-    .photo{
-      position:relative;
-      width:min(500px,100%);
-      height:640px;
-      object-fit:cover;
-      filter:saturate(1) contrast(1.02);
-      z-index:2;
-      mask-image:radial-gradient(
-        ellipse 78% 82% at center 45%,
-        #000 62%,
-        rgba(0,0,0,.85) 78%,
-        rgba(0,0,0,.35) 90%,
-        transparent 100%
-      );
-      -webkit-mask-image:radial-gradient(
-        ellipse 78% 82% at center 45%,
-        #000 62%,
-        rgba(0,0,0,.85) 78%,
-        rgba(0,0,0,.35) 90%,
-        transparent 100%
-      );
-    }
-
-    .visual::after{
-      content:"";
-      position:absolute;
-      inset:auto 0 0 0;
-      height:28%;
-      pointer-events:none;
-      background:linear-gradient(
-        to bottom,
-        transparent,
-        var(--bg) 92%
-      );
-      z-index:3;
-      opacity:.85;
-    }
-
-    /* ================= FLOATING BADGES ================= */
-    .badge{
-      position:absolute;
-      padding:14px 17px;
-      border:1px solid var(--glass-border);
-      border-radius:16px;
-      background:var(--glass);
-      backdrop-filter:blur(25px) saturate(160%);
-      -webkit-backdrop-filter:blur(25px) saturate(160%);
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.1),
-        inset 0 1px rgba(255,255,255,.6);
-      z-index:5;
-      transition:transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s ease;
-    }
-
-    body.dark .badge{
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.6),
-        inset 0 1px rgba(255,255,255,.08);
-    }
-
-    .badge:hover{
-      transform:translateY(-3px);
-      box-shadow:var(--shadow-deep);
-    }
-
-    .badge small{
-      display:block;
-      color:var(--muted);
-      font-family:'JetBrains Mono',monospace;
-      font-size:9px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin-bottom:5px;
-    }
-
-    .badge strong{
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:-.015em;
-      display:flex;
-      align-items:center;
-      gap:7px;
-    }
-
-    .badge-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--accent-green);
-      box-shadow:0 0 8px rgba(34,197,94,.7);
-      animation:pulseDot 2.4s ease-in-out infinite;
-    }
-
-    .badge.founder{
-      left:0;
-      bottom:110px;
-      animation:floatOne 7s ease-in-out infinite;
-    }
-
-    .badge.status{
-      right:-10px;
-      top:110px;
-      animation:floatTwo 8s ease-in-out infinite;
-    }
-
-    .badge.gold{
-      left:20px;
-      top:70px;
-      animation:floatThree 9s ease-in-out infinite;
-    }
-
-    @keyframes floatOne{
-      0%,100%{translate:0 0;}
-      50%{translate:0 -8px;}
-    }
-
-    @keyframes floatTwo{
-      0%,100%{translate:0 0;}
-      50%{translate:0 10px;}
-    }
-
-    @keyframes floatThree{
-      0%,100%{translate:0 0;}
-      50%{translate:0 -6px;}
-    }
-
-    /* ================= SECTIONS ================= */
-    .section{
-      width:min(1100px,calc(100% - 40px));
-      margin:auto;
-      padding:120px 0;
-      position:relative;
-    }
-
-    .section-tag{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-family:'JetBrains Mono',monospace;
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-      margin-bottom:28px;
-    }
-
-    .section-tag::before{
-      content:"";
-      width:20px;
-      height:1px;
-      background:var(--accent-gold);
-    }
-
-    .section-heading{
-      font-size:clamp(36px,4.6vw,64px);
-      line-height:1;
-      letter-spacing:-.05em;
-      font-weight:600;
-      max-width:20ch;
-      color:var(--text);
-    }
-
-    .section-heading em{
-      font-family:'Instrument Serif',Georgia,serif;
-      font-style:italic;
-      font-weight:400;
-      color:var(--accent-gold);
-      letter-spacing:-.02em;
-    }
-
-    /* ================= ABOUT ================= */
-    .about-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:80px;
-      align-items:start;
-      margin-top:60px;
-    }
-
-    .about-copy p{
-      font-size:17px;
-      line-height:1.75;
-      color:var(--muted);
-      margin-bottom:22px;
-      letter-spacing:-.012em;
-    }
-
-    .about-copy p:last-child{margin-bottom:0;}
-
-    .about-copy p strong{
-      color:var(--text);
-      font-weight:500;
-    }
-
-    .about-facts{
-      display:flex;
-      flex-direction:column;
-      gap:1px;
-      background:var(--line);
-      border:1px solid var(--line);
-      border-radius:24px;
-      overflow:hidden;
-    }
-
-    .fact{
-      background:var(--bg);
-      padding:22px 26px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-      transition:background .4s ease;
-    }
-
-    .fact:hover{background:var(--bg-elev);}
-
-    .fact-label{
-      font-family:'JetBrains Mono',monospace;
-      font-size:10.5px;
-      color:var(--muted);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-    }
-
-    .fact-value{
-      font-size:14px;
-      font-weight:500;
-      letter-spacing:-.015em;
-      color:var(--text);
-      text-align:right;
-    }
-
-    /* ================= STATS STRIP ================= */
-    .stats-strip{
-      width:min(1100px,calc(100% - 40px));
-      margin:auto;
-      padding:60px 0;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:32px;
-    }
-
-    .stat-item .stat-num{
-      font-size:clamp(32px,4vw,48px);
-      line-height:1;
-      letter-spacing:-.05em;
-      font-weight:700;
-      color:var(--text);
-      font-variant-numeric:tabular-nums;
-    }
-
-    .stat-item .stat-num em{
-      font-family:'Instrument Serif',Georgia,serif;
-      font-style:italic;
-      font-weight:400;
-      color:var(--accent-gold);
-    }
-
-    .stat-item .stat-label{
-      margin-top:10px;
-      font-family:'JetBrains Mono',monospace;
-      font-size:10.5px;
-      color:var(--muted);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-    }
-
-    /* ================= FOCUS ================= */
-    .focus-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1px;
-      background:var(--line);
-      border:1px solid var(--line);
-      border-radius:28px;
-      overflow:hidden;
-      margin-top:56px;
-    }
-
-    .focus-card{
-      background:var(--bg);
-      padding:38px 32px 42px;
-      min-height:280px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      transition:background .4s ease;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .focus-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(
-        400px circle at var(--mx,50%) var(--my,50%),
-        rgba(212,160,23,.08),
-        transparent 45%
-      );
-      opacity:0;
-      transition:opacity .5s ease;
-      pointer-events:none;
-    }
-
-    .focus-card:hover{background:var(--bg-elev);}
-    .focus-card:hover::before{opacity:1;}
-
-    .focus-num{
-      font-family:'JetBrains Mono',monospace;
-      font-size:11px;
-      color:var(--muted);
-      letter-spacing:.1em;
-    }
-
-    .focus-content{
-      margin-top:auto;
-      position:relative;
-      z-index:1;
-    }
-
-    .focus-card h3{
-      font-size:22px;
-      line-height:1.1;
-      letter-spacing:-.035em;
-      font-weight:600;
-      margin-bottom:12px;
-      color:var(--text);
-    }
-
-    .focus-card h3 em{
-      font-family:'Instrument Serif',Georgia,serif;
-      font-style:italic;
-      font-weight:400;
-      color:var(--muted);
-    }
-
-    .focus-card p{
-      color:var(--muted);
-      font-size:13.5px;
-      line-height:1.6;
-      letter-spacing:-.008em;
-    }
-
-    /* ================= SERVICES / WHAT I DO ================= */
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1px;
-      background:var(--line);
-      border:1px solid var(--line);
-      border-radius:28px;
-      overflow:hidden;
-      margin-top:56px;
-    }
-
-    .service-card{
-      background:var(--bg);
-      padding:36px 30px 40px;
-      min-height:260px;
-      display:flex;
-      flex-direction:column;
-      transition:background .4s ease;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .service-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(
-        400px circle at var(--mx,50%) var(--my,50%),
-        rgba(0,113,227,.07),
-        transparent 45%
-      );
-      opacity:0;
-      transition:opacity .5s ease;
-      pointer-events:none;
-    }
-
-    .service-card:hover{background:var(--bg-elev);}
-    .service-card:hover::before{opacity:1;}
-
-    .service-icon{
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      background:linear-gradient(135deg, rgba(212,160,23,.15), rgba(0,113,227,.1));
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      font-size:20px;
-      margin-bottom:24px;
-    }
-
-    .service-card h3{
-      font-size:19px;
-      line-height:1.15;
-      letter-spacing:-.035em;
-      font-weight:600;
-      margin-bottom:10px;
-      color:var(--text);
-    }
-
-    .service-card p{
-      color:var(--muted);
-      font-size:13.5px;
-      line-height:1.65;
-      letter-spacing:-.008em;
-    }
-
-    .service-tags{
-      margin-top:auto;
-      padding-top:20px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-    }
-
-    .service-tag{
-      font-family:'JetBrains Mono',monospace;
-      font-size:9.5px;
-      padding:4px 9px;
-      border-radius:999px;
-      background:rgba(127,127,127,.08);
-      border:1px solid var(--line);
-      color:var(--muted);
-      letter-spacing:.05em;
-    }
-
-    /* ================= TOOLS ================= */
-    .tools-grid{
-      display:grid;
-      grid-template-columns:repeat(6,1fr);
-      gap:1px;
-      background:var(--line);
-      border:1px solid var(--line);
-      border-radius:24px;
-      overflow:hidden;
-      margin-top:56px;
-    }
-
-    .tool-cell{
-      background:var(--bg);
-      padding:28px 18px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      transition:background .4s ease;
-      text-align:center;
-    }
-
-    .tool-cell:hover{background:var(--bg-elev);}
-
-    .tool-icon{
-      width:40px;
-      height:40px;
-      border-radius:10px;
-      background:linear-gradient(135deg, rgba(0,113,227,.1), rgba(212,160,23,.08));
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      font-size:18px;
-    }
-
-    .tool-name{
-      font-size:12px;
-      font-weight:500;
-      color:var(--muted);
-      letter-spacing:-.01em;
-    }
-
-    /* ================= TIMELINE ================= */
-    .timeline{
-      margin-top:56px;
-      position:relative;
-      padding-left:36px;
-    }
-
-    .timeline::before{
-      content:"";
-      position:absolute;
-      left:7px;
-      top:8px;
-      bottom:8px;
-      width:1px;
-      background:var(--line-strong);
-    }
-
-    .timeline-item{
-      position:relative;
-      padding-bottom:44px;
-    }
-
-    .timeline-item:last-child{padding-bottom:0;}
-
-    .timeline-dot{
-      position:absolute;
-      left:-36px;
-      top:4px;
-      width:15px;
-      height:15px;
-      border-radius:50%;
-      background:var(--bg);
-      border:2px solid var(--accent-gold);
-      box-shadow:0 0 12px rgba(212,160,23,.4);
-    }
-
-    .timeline-item:first-child .timeline-dot{
-      background:var(--accent-gold);
-      box-shadow:0 0 16px rgba(212,160,23,.7);
-    }
-
-    .timeline-date{
-      font-family:'JetBrains Mono',monospace;
-      font-size:10.5px;
-      color:var(--accent-gold);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-      margin-bottom:8px;
-    }
-
-    .timeline-title{
-      font-size:18px;
-      font-weight:600;
-      letter-spacing:-.03em;
-      margin-bottom:6px;
-      color:var(--text);
-    }
-
-    .timeline-desc{
-      font-size:14px;
-      color:var(--muted);
-      line-height:1.65;
-      letter-spacing:-.01em;
-      max-width:60ch;
-    }
-
-    /* ================= CERTIFICATIONS ================= */
-    .cert-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:1px;
-      background:var(--line);
-      border:1px solid var(--line);
-      border-radius:24px;
-      overflow:hidden;
-      margin-top:56px;
-    }
-
-    .cert-card{
-      background:var(--bg);
-      padding:32px 28px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      transition:background .4s ease;
-    }
-
-    .cert-card:hover{background:var(--bg-elev);}
-
-    .cert-badge{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      background:linear-gradient(135deg, rgba(212,160,23,.2), rgba(212,160,23,.05));
-      border:1px solid rgba(212,160,23,.3);
-      display:grid;
-      place-items:center;
-      font-size:16px;
-    }
-
-    .cert-title{
-      font-size:15px;
-      font-weight:600;
-      letter-spacing:-.02em;
-      color:var(--text);
-    }
-
-    .cert-sub{
-      font-size:12.5px;
-      color:var(--muted);
-      line-height:1.5;
-      letter-spacing:-.008em;
-    }
-
-    /* ================= CTA ================= */
-    .cta-section{
-      width:min(1100px,calc(100% - 40px));
-      margin:auto;
-      padding:120px 0 100px;
-      text-align:center;
-      position:relative;
-    }
-
-    .cta-glow{
-      position:absolute;
-      width:700px;
-      height:700px;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      background:radial-gradient(circle, rgba(212,160,23,.12), transparent 60%);
-      filter:blur(80px);
-      pointer-events:none;
-      z-index:-1;
-    }
-
-    body.dark .cta-glow{
-      background:radial-gradient(circle, rgba(232,185,35,.18), transparent 60%);
-    }
-
-    .cta-title{
-      margin-top:24px;
-      font-size:clamp(44px,6vw,88px);
-      line-height:.94;
-      letter-spacing:-.055em;
-      font-weight:600;
-      max-width:16ch;
-      margin-left:auto;
-      margin-right:auto;
-    }
-
-    .cta-title em{
-      font-family:'Instrument Serif',Georgia,serif;
-      font-style:italic;
-      font-weight:400;
-      color:var(--accent-gold);
-      letter-spacing:-.02em;
-    }
-
-    .cta-sub{
-      margin:26px auto 0;
-      max-width:480px;
-      color:var(--muted);
-      font-size:15.5px;
-      line-height:1.65;
-    }
-
-    .cta-actions{
-      margin-top:38px;
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    /* ================= FOOTER ================= */
-    footer{
-      width:min(1100px,calc(100% - 40px));
-      margin:auto;
-      padding:40px 0 50px;
-      border-top:1px solid var(--line);
-      display:grid;
-      grid-template-columns:2fr 1fr 1fr;
-      gap:60px;
-    }
-
-    .footer-brand .brand{
-      margin-bottom:14px;
-    }
-
-    .footer-brand p{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.6;
-      max-width:36ch;
-    }
-
-    .footer-col h4{
-      font-family:'JetBrains Mono',monospace;
-      font-size:10.5px;
-      color:var(--muted);
-      letter-spacing:.1em;
-      text-transform:uppercase;
-      font-weight:400;
-      margin-bottom:16px;
-    }
-
-    .footer-col a{
-      display:block;
-      padding:6px 0;
-      color:var(--muted);
-      font-size:13px;
-      letter-spacing:-.01em;
-      transition:color .3s ease;
-      width:fit-content;
-    }
-
-    .footer-col a:hover{color:var(--text);}
-
-    .footer-bottom{
-      width:min(1100px,calc(100% - 40px));
-      margin:auto;
-      padding:26px 0 40px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:24px;
-      flex-wrap:wrap;
-      font-size:11px;
-      color:var(--muted);
-      font-family:'JetBrains Mono',monospace;
-      letter-spacing:.02em;
-    }
-
-    .footer-status{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .footer-status-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--accent-green);
-      box-shadow:0 0 10px rgba(34,197,94,.6);
-      animation:pulseDot 2.4s ease-in-out infinite;
-    }
-
-    /* ================= REVEAL ================= */
-    .reveal{
-      opacity:0;
-      transform:translateY(36px);
-      transition:opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
-    }
-
-    .reveal.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    /* ================= MOBILE ================= */
-    @media(max-width:960px){
-      .about-grid{grid-template-columns:1fr;gap:40px;margin-top:40px;}
-      .focus-grid{grid-template-columns:repeat(2,1fr);}
-      .services-grid{grid-template-columns:repeat(2,1fr);}
-      .tools-grid{grid-template-columns:repeat(3,1fr);}
-      .cert-grid{grid-template-columns:repeat(2,1fr);}
-      .stats-strip{grid-template-columns:repeat(2,1fr);gap:28px;}
-      footer{grid-template-columns:1fr 1fr;}
-      .footer-brand{grid-column:1 / -1;}
-    }
-
-    @media(max-width:850px){
-      .nav-link{display:none;}
-
-      .hero{
-        width:calc(100% - 28px);
-        grid-template-columns:1fr;
-        gap:0;
-        padding-top:130px;
-      }
-
-      h1{font-size:clamp(58px,16vw,100px);}
-
-      .visual{
-        height:520px;
-        margin-top:20px;
-      }
-
-      .photo{
-        width:min(400px,100%);
-        height:500px;
-      }
-
-      .badge.founder{left:0;bottom:70px;}
-      .badge.status{right:0;top:60px;}
-      .badge.gold{display:none;}
-
-      .trust{grid-template-columns:1fr;gap:18px;}
-
-      .section{padding:80px 0;}
-
-      .focus-grid{grid-template-columns:1fr;}
-      .services-grid{grid-template-columns:1fr;}
-      .tools-grid{grid-template-columns:repeat(2,1fr);}
-      .cert-grid{grid-template-columns:1fr;}
-
-      footer{
-        grid-template-columns:1fr;
-        gap:40px;
-        padding:40px 0;
-      }
-
-      .footer-bottom{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:12px;
-      }
-
-      .timeline{padding-left:30px;}
-      .timeline-dot{left:-30px;}
-    }
-
-    @media(max-width:500px){
-      .description{font-size:14.5px;}
-      .visual{height:440px;}
-      .photo{height:440px;}
-      .badge.status{display:none;}
-      .tools-grid{grid-template-columns:repeat(2,1fr);}
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        transition-duration:.01ms !important;
-      }
-      .grain,.cursor-light{display:none;}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title id="pageTitle">Eshwar Goud — Chartered Accountant (Intern)</title>
+<meta name="description" id="pageDesc" content="Eshwar Goud — CA intern specialising in audit, taxation, and forensic accounting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f7;--bg-elev:#fff;--text:#0a0a0c;--muted:#6e6e73;--muted-2:#8e8e93;
+  --blue:#0071e3;--blue-bright:#1877F2;--line:rgba(0,0,0,.08);
+  --glass:rgba(255,255,255,.68);--glass-border:rgba(255,255,255,.72);
+  --grain-blend:multiply;--grain-opacity:.035;
+  --shadow-deep:0 30px 90px rgba(0,0,0,.12);
+  --accent-green:#22c55e;--accent-gold:#d4a017;
+}
+body.dark{
+  --bg:#000;--bg-elev:#0a0a0c;--text:#f5f5f7;--muted:#98989f;--muted-2:#7c7c84;
+  --blue:#1877F2;--blue-bright:#4A9BFF;--line:rgba(255,255,255,.10);
+  --glass:rgba(20,20,20,.72);--glass-border:rgba(255,255,255,.12);
+  --grain-blend:overlay;--grain-opacity:.045;
+  --shadow-deep:0 30px 90px rgba(0,0,0,.6);--accent-gold:#e8b923;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg);-webkit-font-smoothing:antialiased}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.5;letter-spacing:-.011em;transition:background .45s ease,color .45s ease}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+img{display:block;max-width:100%;height:auto}
+::selection{background:var(--blue);color:#fff}
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-2}
+.blue-light{position:absolute;width:640px;height:640px;border-radius:50%;background:rgba(0,113,227,.10);filter:blur(140px);transition:opacity .45s ease,transform 1.2s cubic-bezier(.22,1,.36,1);will-change:transform}
+.blue-light.one{top:-350px;left:-200px}.blue-light.two{right:-350px;bottom:-300px}
+body.dark .blue-light{opacity:0}
+.grid{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.16;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:90px 90px;mask-image:linear-gradient(to bottom,black,transparent 70%);-webkit-mask-image:linear-gradient(to bottom,black,transparent 70%)}
+.grain{position:fixed;inset:-100%;pointer-events:none;z-index:9999;opacity:var(--grain-opacity);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px 200px;animation:grain 8s steps(6) infinite;mix-blend-mode:var(--grain-blend)}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-8%)}20%{transform:translate(-12%,4%)}30%{transform:translate(6%,-12%)}40%{transform:translate(-4%,14%)}50%{transform:translate(-12%,8%)}60%{transform:translate(12%,0)}70%{transform:translate(0,12%)}80%{transform:translate(3%,14%)}90%{transform:translate(-8%,6%)}}
+.cursor-light{position:fixed;width:640px;height:640px;border-radius:50%;pointer-events:none;z-index:-1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,113,227,.13),transparent 65%);filter:blur(60px);opacity:0;transition:opacity .9s ease;mix-blend-mode:var(--grain-blend);will-change:transform}
+body:hover .cursor-light{opacity:.5}
+body.dark .cursor-light{background:radial-gradient(circle,rgba(24,119,242,.18),transparent 65%)}
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 30px));z-index:100}
+.nav{height:54px;display:flex;align-items:center;justify-content:space-between;padding:7px 8px 7px 18px;border:1px solid var(--glass-border);border-radius:999px;background:var(--glass);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);box-shadow:0 20px 60px rgba(0,0,0,.07),inset 0 1px rgba(255,255,255,.7)}
+body.dark .nav{box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px rgba(255,255,255,.05)}
+.brand{font-size:13px;font-weight:600;letter-spacing:-.025em;display:flex;align-items:center;gap:8px}
+.brand-glyph{width:18px;height:18px;border-radius:50%;background:linear-gradient(140deg,var(--text) 0%,color-mix(in srgb,var(--text) 70%,transparent) 100%);position:relative;box-shadow:0 0 12px rgba(0,113,227,.35)}
+.brand-glyph::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--bg)}
+.brand-glyph::after{content:"";position:absolute;width:5px;height:5px;right:2px;bottom:2px;border-radius:50%;background:var(--accent-gold);box-shadow:0 0 8px var(--accent-gold)}
+.brand span{color:var(--muted);font-weight:400}
+.nav-right{display:flex;align-items:center;gap:3px}
+.nav-link{color:var(--muted);font-size:12px;padding:9px 14px;border-radius:999px;transition:.25s;display:inline-flex;align-items:center;gap:6px}
+.nav-link:hover{color:var(--text);background:rgba(127,127,127,.1)}
+.nav-link-status{width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 8px rgba(34,197,94,.7);animation:pulseDot 2.4s ease-in-out infinite}
+.theme{width:36px;height:36px;border-radius:50%;color:var(--text);font-size:15px;display:grid;place-items:center;transition:.3s}
+.theme:hover{background:rgba(127,127,127,.12);transform:rotate(20deg)}
+.hero{width:min(1250px,calc(100% - 40px));min-height:100vh;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:60px;padding-top:70px;position:relative}
+.hero-content{position:relative;z-index:3}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:28px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:fadeUp 1s .1s cubic-bezier(.22,1,.36,1) forwards}
+.eyebrow-dot{width:6px;height:6px;background:var(--accent-gold);border-radius:50%;box-shadow:0 0 12px rgba(212,160,23,.65);animation:pulseDot 2.4s ease-in-out infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-size:clamp(60px,8.6vw,122px);line-height:.86;letter-spacing:-.085em;font-weight:800;overflow:hidden}
+h1 .line{display:block;overflow:hidden}
+h1 .word{display:inline-block;transform:translateY(110%);animation:riseUp 1.2s cubic-bezier(.22,1,.36,1) forwards}
+h1 .line:nth-child(2) .word{animation-delay:.1s}
+@keyframes riseUp{to{transform:translateY(0)}}
+h1 .gray{color:var(--muted)}
+.role{margin-top:32px;font-size:clamp(17px,1.9vw,23px);letter-spacing:-.035em;font-weight:500;opacity:0;animation:fadeUp 1s .5s cubic-bezier(.22,1,.36,1) forwards;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.role .separator{color:var(--muted-2);margin:0 4px;font-weight:400}
+.role .company{color:var(--accent-gold);font-weight:600}
+.description{max-width:560px;margin-top:22px;color:var(--muted);font-size:15.5px;line-height:1.7;opacity:0;animation:fadeUp 1s .65s cubic-bezier(.22,1,.36,1) forwards}
+.description strong{color:var(--text);font-weight:500}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.actions{display:flex;gap:10px;margin-top:34px;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .8s cubic-bezier(.22,1,.36,1) forwards}
+.button{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--text);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-size:12.5px;font-weight:600;letter-spacing:-.005em;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,background .3s ease;position:relative;overflow:hidden}
+.button:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.1)}
+.button.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 10px 30px rgba(0,113,227,.25)}
+.button.primary::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-100%);transition:transform .9s cubic-bezier(.22,1,.36,1)}
+.button.primary:hover::before{transform:translateX(100%)}
+.button.primary:hover{background:var(--blue-bright);box-shadow:0 16px 40px rgba(0,113,227,.4)}
+.button span{position:relative;z-index:1}
+.button svg{width:13px;height:13px;position:relative;z-index:1;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.button:hover svg{transform:translateX(3px)}
+.trust{margin-top:44px;padding-top:28px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:560px;opacity:0;animation:fadeUp 1s .95s cubic-bezier(.22,1,.36,1) forwards}
+.trust-item{position:relative;padding-left:12px}
+.trust-item::before{content:"";position:absolute;left:0;top:5px;width:1px;height:11px;background:var(--accent-gold);opacity:.7}
+.trust-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.trust-value{margin-top:6px;font-size:13px;font-weight:500;letter-spacing:-.015em;color:var(--text)}
+.visual{position:relative;height:660px;display:flex;align-items:center;justify-content:center;opacity:0;animation:fadeIn 1.6s .3s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes fadeIn{to{opacity:1}}
+.photo-aura{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.18),rgba(212,160,23,.04) 45%,transparent 70%);filter:blur(30px);transition:opacity .45s ease;animation:auraPulse 8s ease-in-out infinite;z-index:0;pointer-events:none}
+@keyframes auraPulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.06);opacity:1}}
+body.dark .photo-aura{opacity:0;animation:none}
+.photo{position:relative;width:min(500px,100%);height:640px;object-fit:cover;filter:saturate(1) contrast(1.02);z-index:2;mask-image:radial-gradient(ellipse 78% 82% at center 45%,#000 62%,rgba(0,0,0,.85) 78%,rgba(0,0,0,.35) 90%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 78% 82% at center 45%,#000 62%,rgba(0,0,0,.85) 78%,rgba(0,0,0,.35) 90%,transparent 100%)}
+.visual::after{content:"";position:absolute;inset:auto 0 0 0;height:28%;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--bg) 92%);z-index:3;opacity:.85}
+.badge{position:absolute;padding:14px 17px;border:1px solid var(--glass-border);border-radius:16px;background:var(--glass);backdrop-filter:blur(25px) saturate(160%);-webkit-backdrop-filter:blur(25px) saturate(160%);box-shadow:0 20px 50px rgba(0,0,0,.1),inset 0 1px rgba(255,255,255,.6);z-index:5;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease}
+body.dark .badge{box-shadow:0 20px 50px rgba(0,0,0,.6),inset 0 1px rgba(255,255,255,.08)}
+.badge:hover{transform:translateY(-3px);box-shadow:var(--shadow-deep)}
+.badge small{display:block;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+.badge strong{font-size:13px;font-weight:600;letter-spacing:-.015em;display:flex;align-items:center;gap:7px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 8px rgba(34,197,94,.7);animation:pulseDot 2.4s ease-in-out infinite}
+.badge.founder{left:0;bottom:110px;animation:floatOne 7s ease-in-out infinite}
+.badge.status{right:-10px;top:110px;animation:floatTwo 8s ease-in-out infinite}
+.badge.gold{left:20px;top:70px;animation:floatThree 9s ease-in-out infinite}
+@keyframes floatOne{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes floatTwo{0%,100%{translate:0 0}50%{translate:0 10px}}
+@keyframes floatThree{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.section{width:min(1100px,calc(100% - 40px));margin:auto;padding:120px 0;position:relative}
+.section-tag{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px}
+.section-tag::before{content:"";width:20px;height:1px;background:var(--accent-gold)}
+.section-heading{font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.05em;font-weight:600;max-width:20ch;color:var(--text)}
+.section-heading em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--accent-gold);letter-spacing:-.02em}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.about-copy p{font-size:17px;line-height:1.75;color:var(--muted);margin-bottom:22px;letter-spacing:-.012em}
+.about-copy p:last-child{margin-bottom:0}
+.about-copy p strong{color:var(--text);font-weight:500}
+.about-facts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.fact{background:var(--bg);padding:22px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;transition:background .4s ease}
+.fact:hover{background:var(--bg-elev)}
+.fact-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.fact-value{font-size:14px;font-weight:500;letter-spacing:-.015em;color:var(--text);text-align:right}
+.stats-strip{width:min(1100px,calc(100% - 40px));margin:auto;padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.stat-item .stat-num{font-size:clamp(32px,4vw,48px);line-height:1;letter-spacing:-.05em;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.stat-item .stat-num em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--accent-gold)}
+.stat-item .stat-label{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.focus-grid,.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:28px;overflow:hidden;margin-top:56px}
+.focus-card,.service-card{background:var(--bg);padding:36px 30px 40px;min-height:260px;display:flex;flex-direction:column;transition:background .4s ease;position:relative;overflow:hidden}
+.focus-card::before,.service-card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(212,160,23,.08),transparent 45%);opacity:0;transition:opacity .5s ease;pointer-events:none}
+.focus-card:hover,.service-card:hover{background:var(--bg-elev)}
+.focus-card:hover::before,.service-card:hover::before{opacity:1}
+.focus-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em}
+.focus-content{margin-top:auto;position:relative;z-index:1}
+.focus-card h3,.service-card h3{font-size:20px;line-height:1.15;letter-spacing:-.035em;font-weight:600;margin-bottom:12px;color:var(--text)}
+.focus-card p,.service-card p{color:var(--muted);font-size:13.5px;line-height:1.65;letter-spacing:-.008em}
+.service-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(212,160,23,.15),rgba(0,113,227,.1));border:1px solid var(--line);display:grid;place-items:center;font-size:20px;margin-bottom:24px}
+.service-tags{margin-top:auto;padding-top:20px;display:flex;flex-wrap:wrap;gap:6px}
+.service-tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;padding:4px 9px;border-radius:999px;background:rgba(127,127,127,.08);border:1px solid var(--line);color:var(--muted);letter-spacing:.05em}
+.tools-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-top:56px}
+.tool-cell{background:var(--bg);padding:28px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:background .4s ease;text-align:center}
+.tool-cell:hover{background:var(--bg-elev)}
+.tool-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(0,113,227,.1),rgba(212,160,23,.08));border:1px solid var(--line);display:grid;place-items:center;font-size:18px}
+.tool-name{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:-.01em}
+.timeline{margin-top:56px;position:relative;padding-left:36px}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:1px;background:var(--line-strong,var(--line))}
+.timeline-item{position:relative;padding-bottom:44px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute;left:-36px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:2px solid var(--accent-gold);box-shadow:0 0 12px rgba(212,160,23,.4)}
+.timeline-item:first-child .timeline-dot{background:var(--accent-gold);box-shadow:0 0 16px rgba(212,160,23,.7)}
+.timeline-date{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--accent-gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.timeline-title{font-size:18px;font-weight:600;letter-spacing:-.03em;margin-bottom:6px;color:var(--text)}
+.timeline-desc{font-size:14px;color:var(--muted);line-height:1.65;letter-spacing:-.01em;max-width:60ch}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-top:56px}
+.cert-card{background:var(--bg);padding:32px 28px;display:flex;flex-direction:column;gap:14px;transition:background .4s ease}
+.cert-card:hover{background:var(--bg-elev)}
+.cert-badge{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(212,160,23,.2),rgba(212,160,23,.05));border:1px solid rgba(212,160,23,.3);display:grid;place-items:center;font-size:16px}
+.cert-title{font-size:15px;font-weight:600;letter-spacing:-.02em;color:var(--text)}
+.cert-sub{font-size:12.5px;color:var(--muted);line-height:1.5;letter-spacing:-.008em}
+.cta-section{width:min(1100px,calc(100% - 40px));margin:auto;padding:120px 0 100px;text-align:center;position:relative}
+.cta-glow{position:absolute;width:700px;height:700px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(212,160,23,.12),transparent 60%);filter:blur(80px);pointer-events:none;z-index:-1}
+body.dark .cta-glow{background:radial-gradient(circle,rgba(232,185,35,.18),transparent 60%)}
+.cta-title{margin-top:24px;font-size:clamp(44px,6vw,88px);line-height:.94;letter-spacing:-.055em;font-weight:600;max-width:16ch;margin-left:auto;margin-right:auto}
+.cta-title em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--accent-gold);letter-spacing:-.02em}
+.cta-sub{margin:26px auto 0;max-width:480px;color:var(--muted);font-size:15.5px;line-height:1.65}
+.cta-actions{margin-top:38px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+footer{width:min(1100px,calc(100% - 40px));margin:auto;padding:40px 0 50px;border-top:1px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr;gap:60px}
+.footer-brand .brand{margin-bottom:14px}
+.footer-brand p{color:var(--muted);font-size:13px;line-height:1.6;max-width:36ch}
+.footer-col h4{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:400;margin-bottom:16px}
+.footer-col a{display:block;padding:6px 0;color:var(--muted);font-size:13px;letter-spacing:-.01em;transition:color .3s ease;width:fit-content}
+.footer-col a:hover{color:var(--text)}
+.footer-bottom{width:min(1100px,calc(100% - 40px));margin:auto;padding:26px 0 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+.footer-status{display:inline-flex;align-items:center;gap:8px}
+.footer-status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 10px rgba(34,197,94,.6);animation:pulseDot 2.4s ease-in-out infinite}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:960px){.about-grid{grid-template-columns:1fr;gap:40px;margin-top:40px}.focus-grid,.services-grid{grid-template-columns:repeat(2,1fr)}.tools-grid{grid-template-columns:repeat(3,1fr)}.cert-grid{grid-template-columns:repeat(2,1fr)}.stats-strip{grid-template-columns:repeat(2,1fr);gap:28px}footer{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}}
+@media(max-width:850px){.nav-link{display:none}.hero{width:calc(100% - 28px);grid-template-columns:1fr;gap:0;padding-top:130px}h1{font-size:clamp(58px,16vw,100px)}.visual{height:520px;margin-top:20px}.photo{width:min(400px,100%);height:500px}.badge.founder{left:0;bottom:70px}.badge.status{right:0;top:60px}.badge.gold{display:none}.trust{grid-template-columns:1fr;gap:18px}.section{padding:80px 0}.focus-grid,.services-grid{grid-template-columns:1fr}.tools-grid{grid-template-columns:repeat(2,1fr)}.cert-grid{grid-template-columns:1fr}footer{grid-template-columns:1fr;gap:40px;padding:40px 0}.footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}.timeline{padding-left:30px}.timeline-dot{left:-30px}}
+@media(max-width:500px){.description{font-size:14.5px}.visual{height:440px}.photo{height:440px}.badge.status{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.grain,.cursor-light{display:none}}
+</style>
 </head>
 <body>
-
-<!-- BACKGROUND -->
-<div class="ambient">
-  <div class="blue-light one"></div>
-  <div class="blue-light two"></div>
-</div>
-<div class="grid"></div>
-<div class="grain"></div>
+<div class="ambient"><div class="blue-light one"></div><div class="blue-light two"></div></div>
+<div class="grid"></div><div class="grain"></div>
 <div class="cursor-light" id="cursorLight"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav">
     <div class="brand">
       <span class="brand-glyph"></span>
-      Eshwar Goud
-      <span>/ CA Intern</span>
+      <span id="brandName">Eshwar Goud</span>
+      <span id="brandSub">/ CA Intern</span>
     </div>
     <div class="nav-right">
-      <a href="mailto:eshwar@ca.in" class="nav-link">
+      <a href="#" class="nav-link" id="navStatusLink">
         <span class="nav-link-status"></span>
-        Open to opportunities
+        <span id="navStatusText">Open to opportunities</span>
       </a>
       <button class="theme" id="theme" aria-label="Toggle dark mode">◐</button>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="eyebrow">
-      <span class="eyebrow-dot"></span>
-      CA Intern · Audit · Taxation · Forensic Accounting
-    </div>
-
-    <h1>
-      <span class="line"><span class="word">Eshwar</span></span>
-      <span class="line"><span class="word gray">Goud.</span></span>
-    </h1>
-
-    <div class="role">
-      Chartered Accountant (Intern)
-      <span class="separator">·</span>
-      <span class="company">Audit & Assurance</span>
-    </div>
-
-    <p class="description">
-      I'm a <strong>Chartered Accountant intern</strong> with a sharp eye for
-      detail and a passion for <strong>forensic accounting, audit, and
-      strategic tax planning</strong>. Currently completing my articleship,
-      I bring technical rigour, ethical discipline, and a modern toolkit
-      to every engagement.
-    </p>
-
-    <div class="actions">
-      <a href="mailto:eshwargoudvanamdas@gmail.com" class="button primary">
-        <span>Get in touch</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
-        </svg>
-      </a>
-      <a href="#" class="button">
-        <span>Download CV</span>
-      </a>
-    </div>
-
-    <div class="trust">
-      <div class="trust-item">
-        <div class="trust-label">Based in</div>
-        <div class="trust-value">Hyderabad, India</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-label">CA Progress</div>
-        <div class="trust-value">IPCC cleared · Final pursuing</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-label">Special interest</div>
-        <div class="trust-value">Forensic & Fraud Audit</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PORTRAIT -->
-  <div class="visual">
-    <div class="photo-aura"></div>
-    <img
-      src="pandu.jpg"
-      alt="Eshwar Goud, Chartered Accountant Intern"
-      class="photo"
-    >
-    <div class="badge founder">
-      <small>CA Intern</small>
-      <strong>Audit & Assurance</strong>
-    </div>
-    <div class="badge status">
-      <small>Currently</small>
-      <strong>
-        <span class="badge-dot"></span>
-        Articleship · Active
-      </strong>
-    </div>
-    <div class="badge gold">
-      <small>IPCC</small>
-      <strong>✓ Cleared</strong>
-    </div>
-  </div>
+  <div class="hero-content" id="heroContent"></div>
+  <div class="visual" id="heroVisual"></div>
 </section>
 
-<!-- STATS STRIP -->
-<div class="stats-strip reveal">
-  <div class="stat-item">
-    <div class="stat-num">2<em>+</em></div>
-    <div class="stat-label">Years of articleship</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">25<em>+</em></div>
-    <div class="stat-label">Audits assisted</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">12<em>+</em></div>
-    <div class="stat-label">Tax returns filed</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">100<em>%</em></div>
-    <div class="stat-label">Ethical compliance</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="section reveal">
-  <div class="section-tag">About</div>
-  <h2 class="section-heading">
-    Beyond the balance sheet — I find the <em>story.</em>
-  </h2>
-
-  <div class="about-grid">
-    <div class="about-copy">
-      <p>
-        I'm a <strong>Chartered Accountant intern</strong> currently pursuing
-        my articleship at a leading CA firm. I've cleared my IPCC and am
-        working toward the final level with a focus on <strong>audit,
-        taxation, and forensic accounting</strong>.
-      </p>
-      <p>
-        My experience spans <strong>statutory audits, internal audits,
-        income tax filings, GST compliance, and financial statement
-        analysis</strong>. I enjoy the investigative side of accounting —
-        tracing discrepancies, understanding business logic, and ensuring
-        that every number has a defensible basis.
-      </p>
-      <p>
-        Outside of work, I follow <strong>IFRS, Ind AS updates, corporate
-        finance trends, and financial modelling</strong>. I'm also deeply
-        interested in how technology — from Excel automation to AI — is
-        reshaping the accounting profession.
-      </p>
-    </div>
-
-    <div class="about-facts">
-      <div class="fact">
-        <span class="fact-label">Role</span>
-        <span class="fact-value">CA Intern (Articleship)</span>
-      </div>
-      <div class="fact">
-        <span class="fact-label">Qualification</span>
-        <span class="fact-value">IPCC Cleared · CA Final Pursuing</span>
-      </div>
-      <div class="fact">
-        <span class="fact-label">Focus</span>
-        <span class="fact-value">Audit · Taxation · Forensic</span>
-      </div>
-      <div class="fact">
-        <span class="fact-label">Based</span>
-        <span class="fact-value">Hyderabad, India</span>
-      </div>
-      <div class="fact">
-        <span class="fact-label">Languages</span>
-        <span class="fact-value">English · Hindi · Telugu</span>
-      </div>
-      <div class="fact">
-        <span class="fact-label">Availability</span>
-        <span class="fact-value">Open to full-time roles</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES / WHAT I DO -->
-<section class="section reveal">
-  <div class="section-tag">What I do</div>
-  <h2 class="section-heading">
-    Services I <em>deliver.</em>
-  </h2>
-
-  <div class="services-grid">
-    <article class="service-card tilt">
-      <div class="service-icon">📊</div>
-      <h3>Statutory & Internal Audit</h3>
-      <p>End-to-end audit support — planning, vouching, verification, and documentation aligned with Indian GAAP and the Companies Act, 2013.</p>
-      <div class="service-tags">
-        <span class="service-tag">AUDIT</span>
-        <span class="service-tag">COMPANIES ACT</span>
-        <span class="service-tag">ICAI NORMS</span>
-      </div>
-    </article>
-
-    <article class="service-card tilt">
-      <div class="service-icon">🧾</div>
-      <h3>Taxation & GST</h3>
-      <p>Income tax computation, TDS returns, GST filing, and reconciliation. Detail-first approach to ensure zero penalties and maximum compliance.</p>
-      <div class="service-tags">
-        <span class="service-tag">ITR</span>
-        <span class="service-tag">GST</span>
-        <span class="service-tag">TDS</span>
-      </div>
-    </article>
-
-    <article class="service-card tilt">
-      <div class="service-icon">🔍</div>
-      <h3>Forensic Accounting</h3>
-      <p>Fraud detection, financial discrepancy analysis, and investigative reporting. Using data analytics to uncover anomalies that traditional audits miss.</p>
-      <div class="service-tags">
-        <span class="service-tag">FRAUD</span>
-        <span class="service-tag">FORENSICS</span>
-        <span class="service-tag">ANALYTICS</span>
-      </div>
-    </article>
-
-    <article class="service-card tilt">
-      <div class="service-icon">📈</div>
-      <h3>Financial Reporting</h3>
-      <p>Preparation of financial statements, schedules, and notes. Ensuring accuracy, consistency, and full regulatory compliance.</p>
-      <div class="service-tags">
-        <span class="service-tag">FINANCIALS</span>
-        <span class="service-tag">IND AS</span>
-        <span class="service-tag">IFRS</span>
-      </div>
-    </article>
-
-    <article class="service-card tilt">
-      <div class="service-icon">💼</div>
-      <h3>Business Advisory</h3>
-      <p>Supporting clients with financial modelling, budgeting, variance analysis, and strategic decision-making backed by solid data.</p>
-      <div class="service-tags">
-        <span class="service-tag">MODELLING</span>
-        <span class="service-tag">BUDGETING</span>
-        <span class="service-tag">VALUATION</span>
-      </div>
-    </article>
-
-    <article class="service-card tilt">
-      <div class="service-icon">⚖️</div>
-      <h3>Compliance & Due Diligence</h3>
-      <p>Regulatory compliance checks, secretarial support, and due diligence for M&A transactions. Keeping clients on the right side of the law.</p>
-      <div class="service-tags">
-        <span class="service-tag">COMPLIANCE</span>
-        <span class="service-tag">DUE DILIGENCE</span>
-        <span class="service-tag">LEGAL</span>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- TOOLS / SOFTWARE -->
-<section class="section reveal">
-  <div class="section-tag">Tools & Software</div>
-  <h2 class="section-heading">
-    The <em>stack</em> I work with.
-  </h2>
-
-  <div class="tools-grid">
-    <div class="tool-cell">
-      <div class="tool-icon">📗</div>
-      <div class="tool-name">MS Excel</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📘</div>
-      <div class="tool-name">Tally Prime</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📙</div>
-      <div class="tool-name">SAP FICO</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📕</div>
-      <div class="tool-name">Zoho Books</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📓</div>
-      <div class="tool-name">ClearTax</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📔</div>
-      <div class="tool-name">Winman</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">🗂️</div>
-      <div class="tool-name">CaseWare</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📋</div>
-      <div class="tool-name">Genius</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">🔢</div>
-      <div class="tool-name">Advanced Excel</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📊</div>
-      <div class="tool-name">Power BI</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">🧮</div>
-      <div class="tool-name">QuickBooks</div>
-    </div>
-    <div class="tool-cell">
-      <div class="tool-icon">📑</div>
-      <div class="tool-name">CompuTax</div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE TIMELINE -->
-<section class="section reveal">
-  <div class="section-tag">Experience</div>
-  <h2 class="section-heading">
-    My <em>journey</em> so far.
-  </h2>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2024 — Present</div>
-      <div class="timeline-title">CA Articleship — Audit & Assurance</div>
-      <div class="timeline-desc">
-        Currently completing articleship at a reputed CA firm. Handling statutory audits,
-        internal audits, tax filings, and client advisory across manufacturing, retail,
-        and service sectors. Leading audit teams for smaller engagements.
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2023 — 2024</div>
-      <div class="timeline-title">CA IPCC Cleared</div>
-      <div class="timeline-desc">
-        Cleared IPCC (CA Intermediate) in first attempt. Subjects: Accounting, Corporate
-        Laws, Taxation, Cost Accounting, Auditing, and Financial Management.
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2022 — 2023</div>
-      <div class="timeline-title">CA Foundation Cleared</div>
-      <div class="timeline-desc">
-        Cleared CA Foundation with distinction. Built strong fundamentals in accounting,
-        business law, quantitative aptitude, and business economics.
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2021 — 2022</div>
-      <div class="timeline-title">B.Com — Osmania University</div>
-      <div class="timeline-desc">
-        Graduated with a Bachelor of Commerce. Specialised in accounting, taxation,
-        and business management. Active in finance and commerce clubs.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section class="section reveal">
-  <div class="section-tag">Certifications</div>
-  <h2 class="section-heading">
-    Credentials & <em>learning.</em>
-  </h2>
-
-  <div class="cert-grid">
-    <div class="cert-card">
-      <div class="cert-badge">🏅</div>
-      <div class="cert-title">CA IPCC</div>
-      <div class="cert-sub">Institute of Chartered Accountants of India (ICAI) — Cleared</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">📜</div>
-      <div class="cert-title">CA Foundation</div>
-      <div class="cert-sub">ICAI — Cleared with distinction</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">🎓</div>
-      <div class="cert-title">B.Com</div>
-      <div class="cert-sub">Osmania University — Commerce graduate</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">💻</div>
-      <div class="cert-title">Advanced Excel</div>
-      <div class="cert-sub">Financial modelling & data analysis certification</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">🧮</div>
-      <div class="cert-title">Tally Prime</div>
-      <div class="cert-sub">Certified in Tally ERP & Prime</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">🔍</div>
-      <div class="cert-title">Forensic Accounting</div>
-      <div class="cert-sub">Workshop certified — fraud detection & investigation</div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section reveal">
-  <div class="cta-glow"></div>
-
-  <div class="section-tag" style="justify-content:center; margin:0 auto 20px; display:inline-flex;">
-    Let's connect
-  </div>
-
-  <h2 class="cta-title">
-    Looking for a dedicated<br /><em>CA professional?</em>
-  </h2>
-
-  <p class="cta-sub">
-    I'm available for articleship transfers, audit assistance, tax filing
-    support, and entry-level CA roles. Let's talk about how I can add value
-    to your team.
-  </p>
-
-  <div class="cta-actions">
-    <a href="mailto:eshwar@ca.in" class="button primary">
-      <span>eshwar@ca.in</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14M13 6l6 6-6 6"/>
-      </svg>
-    </a>
-    <a href="#" class="button">
-      <span>Download resume</span>
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">
-    <div class="brand">
-      <span class="brand-glyph"></span>
-      Eshwar Goud
-      <span>/ CA Intern</span>
-    </div>
-    <p>
-      Chartered Accountant intern with a passion for audit, taxation,
-      forensic accounting, and financial integrity. Building a career
-      grounded in ethics and precision.
-    </p>
-  </div>
-
-  <div class="footer-col">
-    <h4>Contact</h4>
-    <a href="mailto:eshwar@ca.in">eshwargoudvanamdas@gmail.com</a>
-    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="#" target="_blank" rel="noopener">Twitter / X</a>
-  </div>
-
-  <div class="footer-col">
-    <h4>Details</h4>
-    <a href="#">Hyderabad, India</a>
-    <a href="#">IPCC Cleared</a>
-    <a href="#">Articleship ongoing</a>
-    <a href="#">Forensic accounting</a>
-  </div>
-</footer>
-
-<div class="footer-bottom">
-  <span>© <span id="year"></span> Eshwar Goud · All rights reserved</span>
-  <span class="footer-status">
-    <span class="footer-status-dot"></span>
-    Open to opportunities · Reply within 24h
-  </span>
-</div>
+<div class="stats-strip reveal" id="statsStrip"></div>
+<section class="section reveal" id="aboutSection"></section>
+<section class="section reveal" id="servicesSection"></section>
+<section class="section reveal" id="toolsSection"></section>
+<section class="section reveal" id="experienceSection"></section>
+<section class="section reveal" id="certificationsSection"></section>
+<section class="cta-section reveal" id="ctaSection"></section>
+<footer id="footerSection"></footer>
+<div class="footer-bottom" id="footerBottom"></div>
 
 <script>
-  /* ================= THEME ================= */
-  const theme = document.getElementById("theme");
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
+/* ======================= DEFAULTS (fallback) ======================= */
+const DEFAULT_DATA = {
+  meta:{title:"Eshwar Goud — Chartered Accountant (Intern) · Audit & Taxation",
+        description:"Eshwar Goud — CA intern specialising in audit, taxation, and forensic accounting."},
+  nav:{brandName:"Eshwar Goud",brandSub:"/ CA Intern",statusText:"Open to opportunities",statusLink:"mailto:eshwar@ca.in"},
+  hero:{
+    eyebrow:"CA Intern · Audit · Taxation · Forensic Accounting",
+    firstName:"Eshwar",lastName:"Goud.",
+    role:"Chartered Accountant (Intern)",roleCompany:"Audit & Assurance",
+    description:"I'm a <strong>Chartered Accountant intern</strong> with a sharp eye for detail and a passion for <strong>forensic accounting, audit, and strategic tax planning</strong>. Currently completing my articleship, I bring technical rigour, ethical discipline, and a modern toolkit to every engagement.",
+    primaryBtnText:"Get in touch",primaryBtnLink:"mailto:eshwar@ca.in",
+    secondaryBtnText:"Download CV",secondaryBtnLink:"#",
+    trust:[
+      {label:"Based in",value:"Hyderabad, India"},
+      {label:"CA Progress",value:"IPCC cleared · Final pursuing"},
+      {label:"Special interest",value:"Forensic & Fraud Audit"}
+    ]
+  },
+  photo:{
+    url:"eshwar.jpeg",
+    badgeFounderLabel:"CA Intern",badgeFounderText:"Audit & Assurance",
+    badgeStatusLabel:"Currently",badgeStatusText:"Articleship · Active",
+    badgeGoldLabel:"IPCC",badgeGoldText:"✓ Cleared"
+  },
+  stats:[
+    {num:"2",suffix:"+",label:"Years of articleship"},
+    {num:"25",suffix:"+",label:"Audits assisted"},
+    {num:"12",suffix:"+",label:"Tax returns filed"},
+    {num:"100",suffix:"%",label:"Ethical compliance"}
+  ],
+  about:{
+    tag:"About",
+    heading:"Beyond the balance sheet — I find the",
+    headingEm:"story.",
+    paragraphs:[
+      "I'm a <strong>Chartered Accountant intern</strong> currently pursuing my articleship at a leading CA firm. I've cleared my IPCC and am working toward the final level with a focus on <strong>audit, taxation, and forensic accounting</strong>.",
+      "My experience spans <strong>statutory audits, internal audits, income tax filings, GST compliance, and financial statement analysis</strong>. I enjoy the investigative side of accounting — tracing discrepancies, understanding business logic, and ensuring that every number has a defensible basis.",
+      "Outside of work, I follow <strong>IFRS, Ind AS updates, corporate finance trends, and financial modelling</strong>. I'm also deeply interested in how technology — from Excel automation to AI — is reshaping the accounting profession."
+    ],
+    facts:[
+      {label:"Role",value:"CA Intern (Articleship)"},
+      {label:"Qualification",value:"IPCC Cleared · CA Final Pursuing"},
+      {label:"Focus",value:"Audit · Taxation · Forensic"},
+      {label:"Based",value:"Hyderabad, India"},
+      {label:"Languages",value:"English · Hindi · Telugu"},
+      {label:"Availability",value:"Open to full-time roles"}
+    ]
+  },
+  services:{
+    tag:"What I do",heading:"Services I",headingEm:"deliver.",
+    items:[
+      {icon:"📊",title:"Statutory & Internal Audit",desc:"End-to-end audit support — planning, vouching, verification, and documentation aligned with Indian GAAP and the Companies Act, 2013.",tags:["AUDIT","COMPANIES ACT","ICAI NORMS"]},
+      {icon:"🧾",title:"Taxation & GST",desc:"Income tax computation, TDS returns, GST filing, and reconciliation. Detail-first approach to ensure zero penalties and maximum compliance.",tags:["ITR","GST","TDS"]},
+      {icon:"🔍",title:"Forensic Accounting",desc:"Fraud detection, financial discrepancy analysis, and investigative reporting. Using data analytics to uncover anomalies that traditional audits miss.",tags:["FRAUD","FORENSICS","ANALYTICS"]},
+      {icon:"📈",title:"Financial Reporting",desc:"Preparation of financial statements, schedules, and notes. Ensuring accuracy, consistency, and full regulatory compliance.",tags:["FINANCIALS","IND AS","IFRS"]},
+      {icon:"💼",title:"Business Advisory",desc:"Supporting clients with financial modelling, budgeting, variance analysis, and strategic decision-making backed by solid data.",tags:["MODELLING","BUDGETING","VALUATION"]},
+      {icon:"⚖️",title:"Compliance & Due Diligence",desc:"Regulatory compliance checks, secretarial support, and due diligence for M&A transactions. Keeping clients on the right side of the law.",tags:["COMPLIANCE","DUE DILIGENCE","LEGAL"]}
+    ]
+  },
+  tools:{
+    tag:"Tools & Software",heading:"The",headingEm:"stack I work with.",
+    items:[
+      {icon:"📗",name:"MS Excel"},{icon:"📘",name:"Tally Prime"},{icon:"📙",name:"SAP FICO"},
+      {icon:"📕",name:"Zoho Books"},{icon:"📓",name:"ClearTax"},{icon:"📔",name:"Winman"},
+      {icon:"🗂️",name:"CaseWare"},{icon:"📋",name:"Genius"},{icon:"🔢",name:"Advanced Excel"},
+      {icon:"📊",name:"Power BI"},{icon:"🧮",name:"QuickBooks"},{icon:"📑",name:"CompuTax"}
+    ]
+  },
+  experience:{
+    tag:"Experience",heading:"My",headingEm:"journey so far.",
+    items:[
+      {date:"2024 — Present",title:"CA Articleship — Audit & Assurance",desc:"Currently completing articleship at a reputed CA firm. Handling statutory audits, internal audits, tax filings, and client advisory across manufacturing, retail, and service sectors. Leading audit teams for smaller engagements."},
+      {date:"2023 — 2024",title:"CA IPCC Cleared",desc:"Cleared IPCC (CA Intermediate) in first attempt. Subjects: Accounting, Corporate Laws, Taxation, Cost Accounting, Auditing, and Financial Management."},
+      {date:"2022 — 2023",title:"CA Foundation Cleared",desc:"Cleared CA Foundation with distinction. Built strong fundamentals in accounting, business law, quantitative aptitude, and business economics."},
+      {date:"2021 — 2022",title:"B.Com — Osmania University",desc:"Graduated with a Bachelor of Commerce. Specialised in accounting, taxation, and business management. Active in finance and commerce clubs."}
+    ]
+  },
+  certifications:{
+    tag:"Certifications",heading:"Credentials &",headingEm:"learning.",
+    items:[
+      {badge:"🏅",title:"CA IPCC",sub:"Institute of Chartered Accountants of India (ICAI) — Cleared"},
+      {badge:"📜",title:"CA Foundation",sub:"ICAI — Cleared with distinction"},
+      {badge:"🎓",title:"B.Com",sub:"Osmania University — Commerce graduate"},
+      {badge:"💻",title:"Advanced Excel",sub:"Financial modelling & data analysis certification"},
+      {badge:"🧮",title:"Tally Prime",sub:"Certified in Tally ERP & Prime"},
+      {badge:"🔍",title:"Forensic Accounting",sub:"Workshop certified — fraud detection & investigation"}
+    ]
+  },
+  cta:{
+    tag:"Let's connect",title:"Looking for a dedicated",titleEm:"CA professional?",
+    sub:"I'm available for articleship transfers, audit assistance, tax filing support, and entry-level CA roles. Let's talk about how I can add value to your team.",
+    primaryBtnText:"eshwar@ca.in",primaryBtnLink:"mailto:eshwar@ca.in",
+    secondaryBtnText:"Download resume",secondaryBtnLink:"#"
+  },
+  footer:{
+    brandText:"Chartered Accountant intern with a passion for audit, taxation, forensic accounting, and financial integrity. Building a career grounded in ethics and precision.",
+    columns:[
+      {title:"Contact",links:[
+        {label:"eshwar@ca.in",href:"mailto:eshwar@ca.in"},
+        {label:"eshwar.goud@ca.in",href:"mailto:eshwar.goud@ca.in"},
+        {label:"LinkedIn",href:"#"},
+        {label:"Twitter / X",href:"#"}
+      ]},
+      {title:"Details",links:[
+        {label:"Hyderabad, India",href:"#"},
+        {label:"IPCC Cleared",href:"#"},
+        {label:"Articleship ongoing",href:"#"},
+        {label:"Forensic accounting",href:"#"}
+      ]}
+    ],
+    copyright:"© " + new Date().getFullYear() + " Eshwar Goud · All rights reserved",
+    statusText:"Open to opportunities · Reply within 24h"
   }
-  theme.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    localStorage.setItem(
-      "theme",
-      document.body.classList.contains("dark") ? "dark" : "light"
-    );
-  });
+};
 
-  /* ================= YEAR ================= */
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  /* ================= BLUE LIGHT PARALLAX ================= */
-  const lights = document.querySelectorAll(".blue-light");
-  window.addEventListener("mousemove", (e) => {
-    if (document.body.classList.contains("dark")) return;
-    const x = (e.clientX / window.innerWidth - .5) * 22;
-    const y = (e.clientY / window.innerHeight - .5) * 22;
-    lights.forEach((light, index) => {
-      const multiplier = index + 1;
-      light.style.transform =
-        `translate(${x * multiplier}px, ${y * multiplier}px)`;
-    });
-  });
-
-  /* ================= CURSOR LIGHT ================= */
-  const light = document.getElementById("cursorLight");
-  let mx = 0, my = 0, lx = 0, ly = 0;
-  let rafId;
-  window.addEventListener("pointermove", (e) => {
-    mx = e.clientX;
-    my = e.clientY;
-    if (!rafId) rafId = requestAnimationFrame(tick);
-  });
-  function tick() {
-    lx += (mx - lx) * 0.09;
-    ly += (my - ly) * 0.09;
-    light.style.left = lx + "px";
-    light.style.top = ly + "px";
-    if (Math.abs(mx - lx) > 0.1 || Math.abs(my - ly) > 0.1) {
-      rafId = requestAnimationFrame(tick);
-    } else {
-      rafId = null;
-    }
+/* ======================= HELPERS ======================= */
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const merge = (def, src) => {
+  if (Array.isArray(def)) return Array.isArray(src) ? src : def;
+  if (def && typeof def === 'object') {
+    const out = {...def};
+    if (src && typeof src === 'object') for (const k in def) if (k in src) out[k] = merge(def[k], src[k]);
+    return out;
   }
+  return (src === undefined || src === null || src === '') ? def : src;
+};
 
-  /* ================= CARD CURSOR TRACKING ================= */
-  document.querySelectorAll(".tilt, .tilt-coverage").forEach(card => {
-    card.addEventListener("pointermove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.setProperty("--mx", x + "%");
-      card.style.setProperty("--my", y + "%");
+/* ======================= RENDER ======================= */
+function renderAll(d){
+  document.getElementById('pageTitle').textContent = d.meta.title;
+  document.getElementById('pageDesc').setAttribute('content', d.meta.description);
+  document.getElementById('brandName').textContent = d.nav.brandName;
+  document.getElementById('brandSub').textContent = d.nav.brandSub;
+  document.getElementById('navStatusText').textContent = d.nav.statusText;
+  document.getElementById('navStatusLink').setAttribute('href', d.nav.statusLink || '#');
+
+  // HERO
+  document.getElementById('heroContent').innerHTML = `
+    <div class="eyebrow"><span class="eyebrow-dot"></span>${esc(d.hero.eyebrow)}</div>
+    <h1>
+      <span class="line"><span class="word">${esc(d.hero.firstName)}</span></span>
+      <span class="line"><span class="word gray">${esc(d.hero.lastName)}</span></span>
+    </h1>
+    <div class="role">
+      ${esc(d.hero.role)}
+      <span class="separator">·</span>
+      <span class="company">${esc(d.hero.roleCompany)}</span>
+    </div>
+    <p class="description">${d.hero.description}</p>
+    <div class="actions">
+      <a href="${esc(d.hero.primaryBtnLink)}" class="button primary">
+        <span>${esc(d.hero.primaryBtnText)}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="${esc(d.hero.secondaryBtnLink)}" class="button"><span>${esc(d.hero.secondaryBtnText)}</span></a>
+    </div>
+    <div class="trust">
+      ${d.hero.trust.map(t=>`
+        <div class="trust-item">
+          <div class="trust-label">${esc(t.label)}</div>
+          <div class="trust-value">${esc(t.value)}</div>
+        </div>`).join('')}
+    </div>`;
+
+  // HERO VISUAL
+  document.getElementById('heroVisual').innerHTML = `
+    <div class="photo-aura"></div>
+    <img src="${esc(d.photo.url)}" alt="${esc(d.hero.firstName+' '+d.hero.lastName)}" class="photo">
+    <div class="badge founder"><small>${esc(d.photo.badgeFounderLabel)}</small><strong>${esc(d.photo.badgeFounderText)}</strong></div>
+    <div class="badge status"><small>${esc(d.photo.badgeStatusLabel)}</small><strong><span class="badge-dot"></span>${esc(d.photo.badgeStatusText)}</strong></div>
+    ${d.photo.badgeGoldLabel?`<div class="badge gold"><small>${esc(d.photo.badgeGoldLabel)}</small><strong>${esc(d.photo.badgeGoldText)}</strong></div>`:''}`;
+
+  // STATS
+  document.getElementById('statsStrip').innerHTML = d.stats.map(s=>`
+    <div class="stat-item">
+      <div class="stat-num">${esc(s.num)}<em>${esc(s.suffix||'')}</em></div>
+      <div class="stat-label">${esc(s.label)}</div>
+    </div>`).join('');
+
+  // ABOUT
+  document.getElementById('aboutSection').innerHTML = `
+    <div class="section-tag">${esc(d.about.tag)}</div>
+    <h2 class="section-heading">${esc(d.about.heading)} <em>${esc(d.about.headingEm)}</em></h2>
+    <div class="about-grid">
+      <div class="about-copy">${d.about.paragraphs.map(p=>`<p>${p}</p>`).join('')}</div>
+      <div class="about-facts">
+        ${d.about.facts.map(f=>`<div class="fact"><span class="fact-label">${esc(f.label)}</span><span class="fact-value">${esc(f.value)}</span></div>`).join('')}
+      </div>
+    </div>`;
+
+  // SERVICES
+  document.getElementById('servicesSection').innerHTML = `
+    <div class="section-tag">${esc(d.services.tag)}</div>
+    <h2 class="section-heading">${esc(d.services.heading)} <em>${esc(d.services.headingEm)}</em></h2>
+    <div class="services-grid">
+      ${d.services.items.map(s=>`
+        <article class="service-card tilt">
+          <div class="service-icon">${esc(s.icon)}</div>
+          <h3>${esc(s.title)}</h3>
+          <p>${esc(s.desc)}</p>
+          <div class="service-tags">${(s.tags||[]).map(t=>`<span class="service-tag">${esc(t)}</span>`).join('')}</div>
+        </article>`).join('')}
+    </div>`;
+
+  // TOOLS
+  document.getElementById('toolsSection').innerHTML = `
+    <div class="section-tag">${esc(d.tools.tag)}</div>
+    <h2 class="section-heading">${esc(d.tools.heading)} <em>${esc(d.tools.headingEm)}</em></h2>
+    <div class="tools-grid">
+      ${d.tools.items.map(t=>`
+        <div class="tool-cell">
+          <div class="tool-icon">${esc(t.icon)}</div>
+          <div class="tool-name">${esc(t.name)}</div>
+        </div>`).join('')}
+    </div>`;
+
+  // EXPERIENCE
+  document.getElementById('experienceSection').innerHTML = `
+    <div class="section-tag">${esc(d.experience.tag)}</div>
+    <h2 class="section-heading">${esc(d.experience.heading)} <em>${esc(d.experience.headingEm)}</em></h2>
+    <div class="timeline">
+      ${d.experience.items.map(e=>`
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">${esc(e.date)}</div>
+          <div class="timeline-title">${esc(e.title)}</div>
+          <div class="timeline-desc">${esc(e.desc)}</div>
+        </div>`).join('')}
+    </div>`;
+
+  // CERTIFICATIONS
+  document.getElementById('certificationsSection').innerHTML = `
+    <div class="section-tag">${esc(d.certifications.tag)}</div>
+    <h2 class="section-heading">${esc(d.certifications.heading)} <em>${esc(d.certifications.headingEm)}</em></h2>
+    <div class="cert-grid">
+      ${d.certifications.items.map(c=>`
+        <div class="cert-card">
+          <div class="cert-badge">${esc(c.badge)}</div>
+          <div class="cert-title">${esc(c.title)}</div>
+          <div class="cert-sub">${esc(c.sub)}</div>
+        </div>`).join('')}
+    </div>`;
+
+  // CTA
+  document.getElementById('ctaSection').innerHTML = `
+    <div class="cta-glow"></div>
+    <div class="section-tag" style="justify-content:center;margin:0 auto 20px;display:inline-flex;">${esc(d.cta.tag)}</div>
+    <h2 class="cta-title">${esc(d.cta.title)}<br><em>${esc(d.cta.titleEm)}</em></h2>
+    <p class="cta-sub">${esc(d.cta.sub)}</p>
+    <div class="cta-actions">
+      <a href="${esc(d.cta.primaryBtnLink)}" class="button primary">
+        <span>${esc(d.cta.primaryBtnText)}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="${esc(d.cta.secondaryBtnLink)}" class="button"><span>${esc(d.cta.secondaryBtnText)}</span></a>
+    </div>`;
+
+  // FOOTER
+  document.getElementById('footerSection').innerHTML = `
+    <div class="footer-brand">
+      <div class="brand"><span class="brand-glyph"></span>${esc(d.nav.brandName)}<span>${esc(d.nav.brandSub)}</span></div>
+      <p>${esc(d.footer.brandText)}</p>
+    </div>
+    ${d.footer.columns.map(col=>`
+      <div class="footer-col">
+        <h4>${esc(col.title)}</h4>
+        ${col.links.map(l=>`<a href="${esc(l.href)}">${esc(l.label)}</a>`).join('')}
+      </div>`).join('')}`;
+
+  document.getElementById('footerBottom').innerHTML = `
+    <span>${esc(d.footer.copyright)}</span>
+    <span class="footer-status"><span class="footer-status-dot"></span>${esc(d.footer.statusText)}</span>`;
+
+  attachInteractions();
+}
+
+/* ======================= INTERACTIONS ======================= */
+let attached = false;
+function attachInteractions(){
+  // reveal
+  const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // card tracking
+  document.querySelectorAll('.tilt,.tilt-coverage').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+      card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
     });
   });
 
-  /* ================= SCROLL REVEAL ================= */
-  const reveals = document.querySelectorAll(".reveal");
-  const io = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
-  );
-  reveals.forEach(el => io.observe(el));
-
-  /* ================= PHOTO SCROLL PARALLAX ================= */
-  const visual = document.querySelector(".visual");
-  const photo = document.querySelector(".photo");
-  const founderBadge = document.querySelector(".badge.founder");
-  window.addEventListener("scroll", () => {
-    const y = window.scrollY;
-    if (y < window.innerHeight && visual) {
-      const p = y / window.innerHeight;
-      if (photo) photo.style.transform = `translateY(${p * -20}px)`;
-      if (founderBadge) founderBadge.style.transform = `translateY(${p * 16}px)`;
-    }
-  }, { passive: true });
-
-  /* ================= PHOTO POINTER PARALLAX ================= */
-  if (visual && photo) {
-    visual.addEventListener("pointermove", (e) => {
-      const rect = visual.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width - 0.5;
-      const py = (e.clientY - rect.top) / rect.height - 0.5;
-      photo.style.transform =
-        `translate(${px * -10}px, ${py * -10}px) scale(1.01)`;
+  // photo parallax
+  const visual=document.querySelector('.visual');
+  const photo=document.querySelector('.photo');
+  if(visual&&photo){
+    visual.addEventListener('pointermove',e=>{
+      const r=visual.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
+      photo.style.transform=`translate(${px*-10}px,${py*-10}px) scale(1.01)`;
     });
-    visual.addEventListener("pointerleave", () => {
-      photo.style.transform = "translate(0,0) scale(1)";
-    });
+    visual.addEventListener('pointerleave',()=>{photo.style.transform='translate(0,0) scale(1)';});
   }
+}
+
+/* ======================= THEME + FX ======================= */
+const theme=document.getElementById('theme');
+if(localStorage.getItem('theme')==='dark') document.body.classList.add('dark');
+theme.addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+  localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+});
+
+const lights=document.querySelectorAll('.blue-light');
+window.addEventListener('mousemove',e=>{
+  if(document.body.classList.contains('dark'))return;
+  const x=(e.clientX/window.innerWidth-.5)*22, y=(e.clientY/window.innerHeight-.5)*22;
+  lights.forEach((l,i)=>{const m=i+1; l.style.transform=`translate(${x*m}px,${y*m}px)`;});
+});
+
+const light=document.getElementById('cursorLight');
+let mx=0,my=0,lx=0,ly=0,rafId;
+window.addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;if(!rafId)rafId=requestAnimationFrame(tick);});
+function tick(){lx+=(mx-lx)*.09;ly+=(my-ly)*.09;light.style.left=lx+'px';light.style.top=ly+'px';
+  if(Math.abs(mx-lx)>.1||Math.abs(my-ly)>.1)rafId=requestAnimationFrame(tick);else rafId=null;}
+
+/* ======================= BOOT ======================= */
+(async function boot(){
+  let remote = {};
+  try{
+    const r = await fetch('/api/data',{cache:'no-store'});
+    if(r.ok) remote = await r.json();
+  }catch(e){ /* offline / not deployed — use defaults */ }
+  const data = merge(DEFAULT_DATA, remote || {});
+  renderAll(data);
+})();
 </script>
 </body>
 </html>
