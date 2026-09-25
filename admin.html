@@ -7,85 +7,198 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0a0c;--panel:#141418;--panel-2:#1c1c22;--border:#2a2a32;
-  --text:#f0f0f2;--muted:#8a8a94;--accent:#d4a017;--accent-2:#0071e3;
-  --green:#22c55e;--red:#ef4444;
+  --bg:#0a0a0c;--panel:#141418;--panel-2:#1c1c22;--panel-3:#25252c;--border:#2a2a32;
+  --text:#f0f0f2;--muted:#8a8a94;--dim:#5a5a64;--accent:#d4a017;--accent-2:#0071e3;
+  --green:#22c55e;--red:#ef4444;--amber:#f59e0b;--purple:#a855f7;
+  --shadow:0 20px 60px rgba(0,0,0,.5);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;font-size:14px}
+html,body{height:100%}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;font-size:13px;overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 input,textarea,select{font:inherit;color:inherit}
-input,textarea{background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;width:100%;font-size:13px;transition:border .15s}
-input:focus,textarea:focus{outline:none;border-color:var(--accent-2)}
-textarea{resize:vertical;min-height:70px;font-family:inherit;line-height:1.55}
-label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+input,textarea{background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;width:100%;font-size:13px;transition:border .15s,background .15s;font-family:inherit}
+input:focus,textarea:focus{outline:none;border-color:var(--accent-2);background:var(--panel-3)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+textarea{resize:vertical;min-height:70px;line-height:1.55;font-family:inherit}
+label{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-family:'JetBrains Mono',monospace;font-weight:500}
+label .req{color:var(--red);margin-left:2px}
+.hint{font-size:10.5px;color:var(--dim);margin-top:4px;font-family:'JetBrains Mono',monospace;line-height:1.5}
 
-/* login */
-.login-wrap{display:grid;place-items:center;min-height:100vh;padding:20px}
-.login-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:36px 32px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
-.login-card h1{font-size:22px;letter-spacing:-.03em;margin-bottom:6px}
-.login-card p{color:var(--muted);font-size:13px;margin-bottom:26px}
+/* ============ LOGIN ============ */
+.login-wrap{display:grid;place-items:center;min-height:100vh;padding:20px;background:radial-gradient(circle at 30% 20%,rgba(212,160,23,.06),transparent 60%),radial-gradient(circle at 70% 80%,rgba(0,113,227,.06),transparent 60%)}
+.login-card{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:40px 34px;box-shadow:var(--shadow)}
+.login-card .logo{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.login-card .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 16px var(--accent)}
+.login-card h1{font-size:24px;letter-spacing:-.03em;margin-bottom:6px}
+.login-card p{color:var(--muted);font-size:13px;margin-bottom:28px}
 .login-card .field{margin-bottom:16px}
 .login-btn{width:100%;background:var(--accent);color:#000;padding:12px;border-radius:10px;font-weight:600;font-size:13px;transition:.2s;margin-top:8px}
-.login-btn:hover{filter:brightness(1.1)}
+.login-btn:hover{filter:brightness(1.08)}
 .login-error{color:var(--red);font-size:12px;margin-top:12px;text-align:center;min-height:16px}
 
-/* dashboard */
-.topbar{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
-.topbar .left{display:flex;align-items:center;gap:14px;font-weight:600;letter-spacing:-.02em}
-.topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
-.topbar .right{display:flex;align-items:center;gap:8px}
-.btn{padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:600;border:1px solid var(--border);background:var(--panel-2);transition:.2s;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{background:#25252c}
+/* ============ APP SHELL ============ */
+.app{display:grid;grid-template-rows:52px 1fr;height:100vh;overflow:hidden}
+.app.hidden{display:none}
+
+/* ============ TOP BAR ============ */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:var(--panel);border-bottom:1px solid var(--border);gap:10px;z-index:40}
+.topbar .left{display:flex;align-items:center;gap:12px;min-width:0}
+.topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);flex-shrink:0}
+.topbar .title{font-weight:600;letter-spacing:-.02em;font-size:13px;white-space:nowrap}
+.topbar .dirty-badge{display:none;background:rgba(245,158,11,.15);color:var(--amber);padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
+.topbar .dirty-badge.show{display:inline-block}
+.topbar .right{display:flex;align-items:center;gap:6px}
+.toolbar-group{display:flex;align-items:center;gap:2px;background:var(--panel-2);padding:3px;border-radius:10px;border:1px solid var(--border)}
+.tb-btn{padding:6px 10px;border-radius:7px;font-size:12px;font-weight:500;transition:.15s;color:var(--muted);display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.tb-btn:hover{background:var(--panel-3);color:var(--text)}
+.tb-btn:disabled{opacity:.4;cursor:not-allowed}
+.tb-btn.active{background:var(--panel-3);color:var(--text)}
+.tb-btn .kbd{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);padding:1px 4px;border:1px solid var(--border);border-radius:4px;background:var(--bg)}
+.btn{padding:7px 13px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--panel-2);transition:.15s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{background:var(--panel-3)}
 .btn.primary{background:var(--accent);color:#000;border-color:var(--accent)}
-.btn.primary:hover{filter:brightness(1.1)}
+.btn.primary:hover{filter:brightness(1.08)}
 .btn.danger{color:var(--red);border-color:rgba(239,68,68,.3)}
 .btn.ghost{background:transparent}
-.btn.mini{padding:5px 10px;font-size:11px}
+.btn.mini{padding:5px 9px;font-size:11px}
 
-.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 60px)}
-.sidebar{border-right:1px solid var(--border);padding:20px 12px;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
-.sidebar a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:var(--muted);font-size:13px;transition:.15s;cursor:pointer;font-weight:500}
+/* ============ MAIN LAYOUT (3 columns) ============ */
+.workspace{display:grid;grid-template-columns:220px 1fr 1fr;height:100%;overflow:hidden;transition:grid-template-columns .3s cubic-bezier(.22,1,.36,1)}
+.workspace.no-preview{grid-template-columns:220px 1fr 0}
+.workspace.preview-max{grid-template-columns:0 0 1fr}
+.workspace.preview-max .sidebar,
+.workspace.preview-max .editor{display:none}
+
+/* ============ SIDEBAR ============ */
+.sidebar{background:var(--panel);border-right:1px solid var(--border);overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px}
+.sidebar-header{padding:6px 10px 10px;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.sidebar-header button{font-size:14px;color:var(--muted);width:20px;height:20px;border-radius:5px;display:grid;place-items:center}
+.sidebar-header button:hover{background:var(--panel-2);color:var(--text)}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:8px;color:var(--muted);font-size:12.5px;transition:.15s;cursor:pointer;font-weight:500;position:relative}
 .sidebar a:hover{background:var(--panel-2);color:var(--text)}
 .sidebar a.active{background:var(--panel-2);color:var(--text);box-shadow:inset 2px 0 var(--accent)}
-.sidebar a .idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);min-width:14px}
+.sidebar a .idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);min-width:14px;font-weight:600}
+.sidebar a.active .idx{color:var(--accent)}
+.sidebar a .count{font-size:9.5px;background:var(--panel-3);padding:1px 6px;border-radius:999px;color:var(--dim);font-family:'JetBrains Mono',monospace;margin-left:auto}
+.sidebar .divider{height:1px;background:var(--border);margin:8px 4px}
+.sidebar-footer{margin-top:auto;padding:10px 4px 4px;display:flex;flex-direction:column;gap:6px}
 
-.main{padding:32px 40px 120px;max-width:1000px}
-.section-head{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.section-head h2{font-size:24px;letter-spacing:-.03em;font-weight:600}
-.section-head p{color:var(--muted);font-size:13px;margin-top:4px}
-.panel{display:none}
-.panel.active{display:block;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* ============ EDITOR ============ */
+.editor{overflow-y:auto;padding:22px 26px 120px;background:var(--bg);position:relative}
+.editor-head{margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.editor-head .h-left h2{font-size:20px;letter-spacing:-.03em;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.editor-head .h-left p{color:var(--muted);font-size:12px;max-width:55ch}
+.editor-head .h-actions{display:flex;gap:6px;flex-shrink:0}
 
-.field{margin-bottom:18px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-@media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.field{margin-bottom:18px;position:relative}
+.field.has-error input,.field.has-error textarea{border-color:var(--red)}
+.field .error-msg{color:var(--red);font-size:10.5px;margin-top:4px;font-family:'JetBrains Mono',monospace}
 
-.array-item{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;position:relative}
-.array-item .item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
-.array-item .item-head span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
-.item-actions{display:flex;gap:6px}
-.icon-btn{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;font-size:13px;border:1px solid var(--border);background:var(--panel-2);transition:.15s}
-.icon-btn:hover{background:#25252c}
-.icon-btn.del:hover{background:rgba(239,68,68,.15);color:var(--red)}
-.add-btn{margin-top:6px;padding:10px 16px;border:1px dashed var(--border);border-radius:10px;width:100%;color:var(--muted);font-size:12.5px;font-weight:500;transition:.15s}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:1200px){.grid-3{grid-template-columns:1fr 1fr}}
+
+/* array */
+.array-block{margin-bottom:6px}
+.array-block > label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.array-block > label .arr-meta{font-size:10px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0}
+.array-item{background:var(--panel);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:.2s;position:relative}
+.array-item:hover{border-color:#35353e}
+.array-item.dragging{opacity:.4}
+.array-item.drag-over{border-color:var(--accent-2);box-shadow:0 0 0 1px var(--accent-2)}
+.array-item .item-head{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;background:var(--panel-2);border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.array-item .item-head .drag-handle{cursor:grab;color:var(--dim);font-size:14px;line-height:1;padding:0 4px;margin-left:-4px}
+.array-item .item-head .drag-handle:active{cursor:grabbing}
+.array-item .item-head .item-title{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:8px}
+.array-item .item-head .item-title .pill{background:var(--panel-3);color:var(--dim);padding:1px 6px;border-radius:4px;letter-spacing:.02em;font-size:9.5px}
+.item-actions{display:flex;gap:4px;align-items:center}
+.icon-btn{width:24px;height:24px;border-radius:6px;display:grid;place-items:center;font-size:12px;border:1px solid transparent;background:transparent;transition:.15s;color:var(--muted)}
+.icon-btn:hover{background:var(--panel-3);color:var(--text);border-color:var(--border)}
+.icon-btn.del:hover{background:rgba(239,68,68,.15);color:var(--red);border-color:rgba(239,68,68,.3)}
+.array-item .item-body{padding:16px 14px;display:grid;gap:14px}
+.array-item.collapsed .item-body{display:none}
+.array-item.collapsed .item-head{border-bottom:0}
+
+.add-btn{margin-top:4px;padding:10px 16px;border:1px dashed var(--border);border-radius:10px;width:100%;color:var(--muted);font-size:12px;font-weight:500;transition:.15s;display:flex;align-items:center;justify-content:center;gap:6px}
 .add-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(212,160,23,.05)}
 
-.image-field{display:flex;gap:12px;align-items:flex-start}
-.image-preview{width:110px;height:110px;border-radius:10px;background:var(--panel-2);border:1px solid var(--border);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:11px;color:var(--muted)}
+/* image field */
+.image-field{display:flex;gap:14px;align-items:flex-start}
+.image-preview{width:120px;height:120px;border-radius:10px;background:var(--panel-2);border:1px solid var(--border);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:11px;color:var(--dim)}
 .image-preview img{width:100%;height:100%;object-fit:cover}
-.image-inputs{flex:1;display:flex;flex-direction:column;gap:8px}
+.image-inputs{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0}
 .file-label{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;background:var(--panel-2);width:fit-content;transition:.15s;color:var(--text)}
-.file-label:hover{background:#25252c}
+.file-label:hover{background:var(--panel-3)}
 input[type=file]{display:none}
 
-.status-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--border);padding:10px 18px;border-radius:999px;font-size:12.5px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 60px rgba(0,0,0,.6);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:100}
+/* ============ PREVIEW PANE ============ */
+.preview-pane{background:var(--panel);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.preview-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--panel-2);gap:10px;flex-shrink:0}
+.preview-head .ph-left{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.preview-head .ph-left .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.preview-head .ph-left .url-box{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preview-head .ph-right{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.device-toggle{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:2px}
+.device-toggle button{padding:4px 9px;font-size:11px;border-radius:5px;color:var(--muted);transition:.15s}
+.device-toggle button.active{background:var(--panel-3);color:var(--text)}
+.preview-frame-wrap{flex:1;overflow:auto;background:#0a0a0c;display:flex;justify-content:center;padding:12px;position:relative}
+.preview-frame-wrap iframe{width:100%;height:100%;border:1px solid var(--border);border-radius:10px;background:#fff;transition:width .3s cubic-bezier(.22,1,.36,1),max-width .3s;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.preview-frame-wrap.device-mobile iframe{width:390px;max-width:100%}
+.preview-frame-wrap.device-tablet iframe{width:768px;max-width:100%}
+
+/* ============ STATUS BAR ============ */
+.status-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--border);padding:10px 18px;border-radius:999px;font-size:12.5px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:100}
 .status-bar.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 .status-bar .ico{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px}
 .status-bar.ok .ico{background:rgba(34,197,94,.15);color:var(--green)}
 .status-bar.err .ico{background:rgba(239,68,68,.15);color:var(--red)}
+.status-bar.info .ico{background:rgba(0,113,227,.15);color:var(--accent-2)}
+
+/* ============ COMMAND PALETTE ============ */
+.cmd-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:200;display:none;align-items:flex-start;justify-content:center;padding-top:15vh}
+.cmd-overlay.show{display:flex}
+.cmd-box{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;animation:cmdIn .2s cubic-bezier(.22,1,.36,1)}
+@keyframes cmdIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.cmd-input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--border);border-radius:0;padding:16px 20px;font-size:15px;color:var(--text)}
+.cmd-input:focus{outline:none;background:transparent;border-color:var(--border)}
+.cmd-input::placeholder{color:var(--dim)}
+.cmd-results{max-height:360px;overflow-y:auto;padding:6px}
+.cmd-item{padding:10px 14px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:13px}
+.cmd-item:hover,.cmd-item.selected{background:var(--panel-2)}
+.cmd-item .ico{width:20px;text-align:center;color:var(--muted)}
+.cmd-item .txt{flex:1}
+.cmd-item .txt small{display:block;color:var(--dim);font-size:11px;margin-top:1px}
+.cmd-item .kbd{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);padding:2px 6px;border:1px solid var(--border);border-radius:5px}
+.cmd-empty{padding:32px;text-align:center;color:var(--dim);font-size:13px}
+
+/* ============ MODAL ============ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:210;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{width:100%;max-width:520px;background:var(--panel);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;max-height:85vh;display:flex;flex-direction:column}
+.modal-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{font-size:16px;letter-spacing:-.02em}
+.modal-body{padding:20px 22px;overflow-y:auto}
+.modal-foot{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.modal textarea{font-family:'JetBrains Mono',monospace;font-size:11.5px;min-height:260px}
+
+/* scrollbar */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#2a2a32;border-radius:6px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:#3a3a44}
+
+/* sidebar collapse */
+.icon-only .sidebar a span:not(.idx):not(.count){display:none}
+.icon-only{grid-template-columns:56px 1fr 1fr}
+
+@media(max-width:1100px){
+  .workspace{grid-template-columns:200px 1fr}
+  .preview-pane{display:none}
+  .workspace.show-preview .preview-pane{display:flex;position:fixed;inset:52px 0 0 0;z-index:60;border-left:0}
+  .workspace.show-preview .editor{display:none}
+}
 </style>
 </head>
 <body>
@@ -93,8 +206,9 @@ input[type=file]{display:none}
 <!-- LOGIN -->
 <div class="login-wrap" id="loginView">
   <div class="login-card">
-    <h1>Admin Access</h1>
-    <p>Enter your credentials to edit the portfolio.</p>
+    <div class="logo"><span class="logo-dot"></span><span style="font-weight:600;letter-spacing:-.02em">Portfolio Admin</span></div>
+    <h1>Welcome back</h1>
+    <p>Sign in to manage your portfolio content.</p>
     <div class="field">
       <label>Username</label>
       <input type="text" id="loginUser" autocomplete="username" placeholder="admin">
@@ -108,179 +222,370 @@ input[type=file]{display:none}
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboardView" style="display:none">
+<!-- APP -->
+<div class="app hidden" id="app">
   <div class="topbar">
-    <div class="left"><span class="dot"></span>Portfolio Editor</div>
+    <div class="left">
+      <span class="dot"></span>
+      <span class="title">Portfolio Editor</span>
+      <span class="dirty-badge" id="dirtyBadge">UNSAVED</span>
+    </div>
     <div class="right">
-      <a class="btn ghost" href="/" target="_blank">View site ↗</a>
-      <button class="btn" id="reloadBtn">Reload</button>
-      <button class="btn primary" id="saveBtn">Save changes</button>
+      <div class="toolbar-group">
+        <button class="tb-btn" id="undoBtn" title="Undo (Ctrl+Z)">↶</button>
+        <button class="tb-btn" id="redoBtn" title="Redo (Ctrl+Shift+Z)">↷</button>
+      </div>
+      <div class="toolbar-group">
+        <button class="tb-btn" id="previewToggle" title="Toggle live preview">👁 Preview</button>
+        <button class="tb-btn" id="cmdBtn" title="Command palette">⌘K <span class="kbd">⌘K</span></button>
+      </div>
+      <button class="btn ghost" id="viewSiteBtn" title="Open live site">↗ Site</button>
+      <button class="btn" id="reloadBtn" title="Reload from server">Reload</button>
+      <button class="btn primary" id="saveBtn" title="Save (Ctrl+S)">Save changes</button>
       <button class="btn danger" id="logoutBtn">Logout</button>
     </div>
   </div>
-  <div class="layout">
+
+  <div class="workspace" id="workspace">
     <aside class="sidebar" id="sidebar"></aside>
-    <main class="main" id="main"></main>
+    <main class="editor" id="editor"></main>
+    <aside class="preview-pane" id="previewPane">
+      <div class="preview-head">
+        <div class="ph-left">
+          <span class="live-dot"></span>
+          <div class="url-box" id="previewUrl">/ · live preview</div>
+        </div>
+        <div class="ph-right">
+          <div class="device-toggle">
+            <button data-device="desktop" class="active">🖥</button>
+            <button data-device="tablet">📱</button>
+            <button data-device="mobile">📱</button>
+          </div>
+          <button class="icon-btn" id="refreshPreview" title="Reload preview">↻</button>
+        </div>
+      </div>
+      <div class="preview-frame-wrap" id="previewWrap">
+        <iframe id="previewFrame" src="/" title="Live preview"></iframe>
+      </div>
+    </aside>
   </div>
 </div>
 
 <div class="status-bar" id="statusBar"><span class="ico" id="statusIco">✓</span><span id="statusMsg"></span></div>
 
-<script>
-/* ========== STATE ========== */
-let state = {};
-let creds = null; // {user, pass}
+<!-- COMMAND PALETTE -->
+<div class="cmd-overlay" id="cmdOverlay">
+  <div class="cmd-box">
+    <input class="cmd-input" id="cmdInput" placeholder="Type a command or search fields…">
+    <div class="cmd-results" id="cmdResults"></div>
+  </div>
+</div>
 
+<!-- MODAL (JSON import/export) -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Modal</h3>
+      <button class="icon-btn" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<script>
+/* ==================================================================
+   STATE
+   ================================================================== */
+let state = {};
+let creds = null;
+let dirty = false;
+let history = { stack:[], index:-1 };
+let currentPanel = 'meta';
+let previewVisible = true;
+
+/* ==================================================================
+   DEFAULT DATA — mirrors index.html DEFAULT_DATA
+   ================================================================== */
 const DEFAULTS = {
-  meta:{title:"Eshwar Goud — Chartered Accountant (Intern)",description:"CA intern specialising in audit, taxation, and forensic accounting."},
+  meta:{title:"Eshwar Goud — Chartered Accountant (Intern) · Audit & Taxation",description:"Eshwar Goud — CA intern specialising in audit, taxation, and forensic accounting."},
   nav:{brandName:"Eshwar Goud",brandSub:"/ CA Intern",statusText:"Open to opportunities",statusLink:"mailto:eshwar@ca.in"},
-  hero:{eyebrow:"",firstName:"Eshwar",lastName:"Goud.",role:"Chartered Accountant (Intern)",roleCompany:"Audit & Assurance",
-        description:"",primaryBtnText:"Get in touch",primaryBtnLink:"mailto:eshwar@ca.in",
-        secondaryBtnText:"Download CV",secondaryBtnLink:"#",
-        trust:[{label:"Based in",value:"Hyderabad, India"}]},
-  photo:{url:"eshwar.jpeg",badgeFounderLabel:"CA Intern",badgeFounderText:"Audit & Assurance",
-         badgeStatusLabel:"Currently",badgeStatusText:"Articleship · Active",
-         badgeGoldLabel:"IPCC",badgeGoldText:"✓ Cleared"},
-  stats:[{num:"2",suffix:"+",label:"Years of articleship"}],
-  about:{tag:"About",heading:"",headingEm:"",paragraphs:[""],facts:[{label:"Role",value:"CA Intern"}]},
-  services:{tag:"What I do",heading:"",headingEm:"",items:[{icon:"📊",title:"",desc:"",tags:[""]}]},
-  tools:{tag:"Tools",heading:"",headingEm:"",items:[{icon:"📗",name:""}]},
-  experience:{tag:"Experience",heading:"",headingEm:"",items:[{date:"",title:"",desc:""}]},
-  certifications:{tag:"Certifications",heading:"",headingEm:"",items:[{badge:"🏅",title:"",sub:""}]},
-  cta:{tag:"",title:"",titleEm:"",sub:"",primaryBtnText:"",primaryBtnLink:"",secondaryBtnText:"",secondaryBtnLink:""},
-  footer:{brandText:"",columns:[{title:"Contact",links:[{label:"",href:""}]}],copyright:"",statusText:""}
+  hero:{
+    eyebrow:"CA Intern · Audit · Taxation · Forensic",
+    firstName:"Eshwar",lastName:"Goud.",
+    role:"Chartered Accountant (Intern)",roleCompany:"Audit & Assurance",
+    description:"I'm a <strong>Chartered Accountant intern</strong> with a sharp eye for detail and a passion for <strong>forensic accounting, audit, and strategic tax planning</strong>.",
+    primaryBtnText:"Get in touch",primaryBtnLink:"mailto:eshwar@ca.in",
+    secondaryBtnText:"Download CV",secondaryBtnLink:"#",
+    trust:[
+      {label:"Based in",value:"Hyderabad, India"},
+      {label:"CA Progress",value:"IPCC cleared · Final pursuing"},
+      {label:"Special interest",value:"Forensic & Fraud Audit"}
+    ]
+  },
+  photo:{url:"eshwar.jpeg",
+    badgeFounderLabel:"CA Intern",badgeFounderText:"Audit & Assurance",
+    badgeStatusLabel:"Currently",badgeStatusText:"Articleship · Active",
+    badgeGoldLabel:"IPCC",badgeGoldText:"✓ Cleared"},
+  stats:[
+    {num:"2",suffix:"+",label:"Years of articleship"},
+    {num:"25",suffix:"+",label:"Audits assisted"},
+    {num:"12",suffix:"+",label:"Tax returns filed"},
+    {num:"100",suffix:"%",label:"Ethical compliance"}
+  ],
+  about:{tag:"About",heading:"Beyond the balance sheet — I find the",headingEm:"story.",
+    paragraphs:[
+      "I'm a <strong>Chartered Accountant intern</strong> currently pursuing my articleship at a leading CA firm.",
+      "My experience spans <strong>statutory audits, internal audits, income tax filings, GST compliance, and financial statement analysis</strong>.",
+      "Outside of work, I follow <strong>IFRS, Ind AS updates, corporate finance trends, and financial modelling</strong>."
+    ],
+    facts:[
+      {label:"Role",value:"CA Intern (Articleship)"},
+      {label:"Qualification",value:"IPCC Cleared · CA Final Pursuing"},
+      {label:"Focus",value:"Audit · Taxation · Forensic"},
+      {label:"Based",value:"Hyderabad, India"}
+    ]
+  },
+  services:{tag:"What I do",heading:"Services I",headingEm:"deliver.",
+    items:[
+      {icon:"📊",title:"Statutory & Internal Audit",desc:"End-to-end audit support — planning, vouching, verification, and documentation.",tags:["Audit","Companies Act","ICAI"]},
+      {icon:"🧾",title:"Taxation & GST",desc:"Income tax computation, TDS returns, GST filing, and reconciliation.",tags:["ITR","GST","TDS"]},
+      {icon:"🔍",title:"Forensic Accounting",desc:"Fraud detection, financial discrepancy analysis, and investigative reporting.",tags:["Fraud","Forensics","Analytics"]}
+    ]
+  },
+  tools:{tag:"Tools & Software",heading:"The",headingEm:"stack I work with.",
+    items:[
+      {icon:"📗",name:"MS Excel"},{icon:"📘",name:"Tally Prime"},{icon:"📙",name:"SAP FICO"},
+      {icon:"📕",name:"Zoho Books"},{icon:"📓",name:"ClearTax"},{icon:"📔",name:"Winman"}
+    ]
+  },
+  experience:{tag:"Experience",heading:"My",headingEm:"journey so far.",
+    items:[
+      {date:"2024 — Present",title:"CA Articleship — Audit & Assurance",desc:"Currently completing articleship at a reputed CA firm."},
+      {date:"2023 — 2024",title:"CA IPCC Cleared",desc:"Cleared IPCC in first attempt."}
+    ]
+  },
+  certifications:{tag:"Certifications",heading:"Credentials &",headingEm:"learning.",
+    items:[
+      {badge:"🏅",title:"CA IPCC",sub:"Institute of Chartered Accountants of India (ICAI) — Cleared"},
+      {badge:"📜",title:"CA Foundation",sub:"ICAI — Cleared with distinction"}
+    ]
+  },
+  cta:{tag:"Let's connect",title:"Looking for a dedicated",titleEm:"CA professional?",
+    sub:"I'm available for articleship transfers, audit assistance, tax filing support, and entry-level CA roles.",
+    primaryBtnText:"eshwar@ca.in",primaryBtnLink:"mailto:eshwar@ca.in",
+    secondaryBtnText:"Download resume",secondaryBtnLink:"#"},
+  footer:{
+    brandText:"Chartered Accountant intern with a passion for audit, taxation, forensic accounting, and financial integrity.",
+    columns:[
+      {title:"Contact",links:[
+        {label:"eshwar@ca.in",href:"mailto:eshwar@ca.in"},
+        {label:"LinkedIn",href:"#"}
+      ]},
+      {title:"Details",links:[
+        {label:"Hyderabad, India",href:"#"},
+        {label:"IPCC Cleared",href:"#"}
+      ]}
+    ],
+    copyright:"© " + new Date().getFullYear() + " Eshwar Goud · All rights reserved",
+    statusText:"Open to opportunities · Reply within 24h"
+  }
 };
 
-/* ========== SCHEMA ========== */
+/* ==================================================================
+   SCHEMA — field types + placeholders + help text
+   ================================================================== */
 const SCHEMA = {
-  meta:{label:"Site Meta",fields:{
-    title:{label:"Page title",type:"text"},
-    description:{label:"Meta description",type:"textarea"}
+  meta:{label:"Site Meta",icon:"🌐",fields:{
+    title:{label:"Page title",type:"text",ph:"Eshwar Goud — Chartered Accountant",help:"Shown in browser tab and Google search results."},
+    description:{label:"Meta description",type:"textarea",ph:"A short 1–2 sentence summary for search engines (150–160 chars).",help:"Used by Google, LinkedIn, WhatsApp previews."}
   }},
-  nav:{label:"Navigation",fields:{
-    brandName:{label:"Brand name",type:"text"},
-    brandSub:{label:"Brand sub",type:"text"},
-    statusText:{label:"Status text",type:"text"},
-    statusLink:{label:"Status link",type:"text"}
+  nav:{label:"Navigation",icon:"🧭",fields:{
+    brandName:{label:"Brand name",type:"text",ph:"Eshwar Goud",help:"Your name in the top-left pill."},
+    brandSub:{label:"Brand sub",type:"text",ph:"/ CA Intern",help:"Small text after the brand name."},
+    statusText:{label:"Status text",type:"text",ph:"Open to opportunities",help:"Green-dot status in the nav."},
+    statusLink:{label:"Status link",type:"text",ph:"mailto:you@example.com",help:"Clicking the status opens this."}
   }},
-  hero:{label:"Hero",fields:{
-    eyebrow:{label:"Eyebrow",type:"text"},
-    firstName:{label:"First name",type:"text"},
-    lastName:{label:"Last name",type:"text"},
-    role:{label:"Role",type:"text"},
-    roleCompany:{label:"Role company / tag",type:"text"},
-    description:{label:"Description (HTML allowed)",type:"textarea"},
-    primaryBtnText:{label:"Primary button text",type:"text"},
-    primaryBtnLink:{label:"Primary button link",type:"text"},
-    secondaryBtnText:{label:"Secondary button text",type:"text"},
-    secondaryBtnLink:{label:"Secondary button link",type:"text"},
-    trust:{label:"Trust items",type:"array",itemLabel:"Trust item",fields:{
-      label:{label:"Label",type:"text"},value:{label:"Value",type:"text"}
+  hero:{label:"Hero Section",icon:"🚀",fields:{
+    eyebrow:{label:"Eyebrow badge",type:"text",ph:"CA Intern · Audit · Taxation",help:"Small pill above your name."},
+    firstName:{label:"First name",type:"text",ph:"Eshwar",help:"Line 1 of the big headline."},
+    lastName:{label:"Last name",type:"text",ph:"Goud.",help:"Line 2 — usually muted color."},
+    role:{label:"Role",type:"text",ph:"Chartered Accountant (Intern)"},
+    roleCompany:{label:"Role company / tag",type:"text",ph:"Audit & Assurance"},
+    description:{label:"Description (HTML allowed)",type:"textarea",ph:"I'm a <strong>CA intern</strong> with…"},
+    primaryBtnText:{label:"Primary button text",type:"text",ph:"Get in touch"},
+    primaryBtnLink:{label:"Primary button link",type:"text",ph:"mailto:you@example.com"},
+    secondaryBtnText:{label:"Secondary button text",type:"text",ph:"Download CV"},
+    secondaryBtnLink:{label:"Secondary button link",type:"text",ph:"#"},
+    trust:{label:"Trust items",type:"array",itemLabel:"Trust item",itemFields:{
+      label:{label:"Label",type:"text",ph:"Based in"},
+      value:{label:"Value",type:"text",ph:"Hyderabad, India"}
+    },help:"Small facts shown under the hero buttons."}
+  }},
+  photo:{label:"Photo & Badges",icon:"📸",fields:{
+    url:{label:"Photo",type:"image",help:"Upload or paste URL. Auto-compressed to ~1200px JPEG."},
+    badgeFounderLabel:{label:"Founder badge label",type:"text",ph:"CA Intern"},
+    badgeFounderText:{label:"Founder badge text",type:"text",ph:"Audit & Assurance"},
+    badgeStatusLabel:{label:"Status badge label",type:"text",ph:"Currently"},
+    badgeStatusText:{label:"Status badge text",type:"text",ph:"Articleship · Active"},
+    badgeGoldLabel:{label:"Gold badge label",type:"text",ph:"IPCC"},
+    badgeGoldText:{label:"Gold badge text",type:"text",ph:"✓ Cleared"}
+  }},
+  stats:{label:"Stats Strip",icon:"📊",fields:{
+    items:{label:"Stats",type:"array",itemLabel:"Stat",itemFields:{
+      num:{label:"Number",type:"text",ph:"2"},
+      suffix:{label:"Suffix",type:"text",ph:"+"},
+      label:{label:"Label",type:"text",ph:"Years of articleship"}
+    },help:"Shown as a horizontal strip. Keep 2–4 for best look."}
+  }},
+  about:{label:"About",icon:"👤",fields:{
+    tag:{label:"Section tag",type:"text",ph:"About"},
+    heading:{label:"Heading",type:"text",ph:"Beyond the balance sheet — I find the"},
+    headingEm:{label:"Heading (italic accent)",type:"text",ph:"story."},
+    paragraphs:{label:"Paragraphs (HTML allowed)",type:"array",itemLabel:"Paragraph",simple:true,simpleField:{label:"Text",type:"textarea",ph:"A paragraph about you…"}},
+    facts:{label:"Facts",type:"array",itemLabel:"Fact",itemFields:{
+      label:{label:"Label",type:"text",ph:"Role"},
+      value:{label:"Value",type:"text",ph:"CA Intern (Articleship)"}
     }}
   }},
-  photo:{label:"Photo & Badges",fields:{
-    url:{label:"Photo",type:"image"},
-    badgeFounderLabel:{label:"Founder badge label",type:"text"},
-    badgeFounderText:{label:"Founder badge text",type:"text"},
-    badgeStatusLabel:{label:"Status badge label",type:"text"},
-    badgeStatusText:{label:"Status badge text",type:"text"},
-    badgeGoldLabel:{label:"Gold badge label",type:"text"},
-    badgeGoldText:{label:"Gold badge text",type:"text"}
-  }},
-  stats:{label:"Stats Strip",fields:{
-    items:{label:"Stats",type:"array",itemLabel:"Stat",fields:{
-      num:{label:"Number",type:"text"},suffix:{label:"Suffix (e.g. +, %)",type:"text"},label:{label:"Label",type:"text"}
+  services:{label:"Services",icon:"💼",fields:{
+    tag:{label:"Section tag",type:"text",ph:"What I do"},
+    heading:{label:"Heading",type:"text",ph:"Services I"},
+    headingEm:{label:"Heading (italic)",type:"text",ph:"deliver."},
+    items:{label:"Service cards",type:"array",itemLabel:"Service",itemFields:{
+      icon:{label:"Icon (emoji)",type:"text",ph:"📊"},
+      title:{label:"Title",type:"text",ph:"Statutory & Internal Audit"},
+      desc:{label:"Description",type:"textarea",ph:"End-to-end audit support…"},
+      tags:{label:"Tags (comma-separated)",type:"csv",ph:"Audit, Companies Act, ICAI"}
     }}
   }},
-  about:{label:"About",fields:{
-    tag:{label:"Section tag",type:"text"},
-    heading:{label:"Heading",type:"text"},
-    headingEm:{label:"Heading (italic accent)",type:"text"},
-    paragraphs:{label:"Paragraphs (HTML allowed)",type:"array",itemLabel:"Paragraph",simple:true,fields:{value:{label:"Text",type:"textarea"}}},
-    facts:{label:"Facts",type:"array",itemLabel:"Fact",fields:{label:{label:"Label",type:"text"},value:{label:"Value",type:"text"}}}
-  }},
-  services:{label:"Services",fields:{
-    tag:{label:"Section tag",type:"text"},
-    heading:{label:"Heading",type:"text"},
-    headingEm:{label:"Heading (italic)",type:"text"},
-    items:{label:"Service cards",type:"array",itemLabel:"Service",fields:{
-      icon:{label:"Icon (emoji)",type:"text"},
-      title:{label:"Title",type:"text"},
-      desc:{label:"Description",type:"textarea"},
-      tags:{label:"Tags (comma-separated)",type:"csv"}
+  tools:{label:"Tools",icon:"🧰",fields:{
+    tag:{label:"Section tag",type:"text",ph:"Tools & Software"},
+    heading:{label:"Heading",type:"text",ph:"The"},
+    headingEm:{label:"Heading (italic)",type:"text",ph:"stack I work with."},
+    items:{label:"Tool items",type:"array",itemLabel:"Tool",itemFields:{
+      icon:{label:"Icon (emoji)",type:"text",ph:"📗"},
+      name:{label:"Name",type:"text",ph:"MS Excel"}
     }}
   }},
-  tools:{label:"Tools",fields:{
-    tag:{label:"Section tag",type:"text"},
-    heading:{label:"Heading",type:"text"},
-    headingEm:{label:"Heading (italic)",type:"text"},
-    items:{label:"Tool items",type:"array",itemLabel:"Tool",fields:{
-      icon:{label:"Icon (emoji)",type:"text"},name:{label:"Name",type:"text"}
+  experience:{label:"Experience",icon:"📅",fields:{
+    tag:{label:"Section tag",type:"text",ph:"Experience"},
+    heading:{label:"Heading",type:"text",ph:"My"},
+    headingEm:{label:"Heading (italic)",type:"text",ph:"journey so far."},
+    items:{label:"Timeline entries",type:"array",itemLabel:"Entry",itemFields:{
+      date:{label:"Date range",type:"text",ph:"2024 — Present"},
+      title:{label:"Title",type:"text",ph:"CA Articleship — Audit & Assurance"},
+      desc:{label:"Description",type:"textarea",ph:"What you did / learned…"}
     }}
   }},
-  experience:{label:"Experience",fields:{
-    tag:{label:"Section tag",type:"text"},
-    heading:{label:"Heading",type:"text"},
-    headingEm:{label:"Heading (italic)",type:"text"},
-    items:{label:"Timeline entries",type:"array",itemLabel:"Entry",fields:{
-      date:{label:"Date range",type:"text"},
-      title:{label:"Title",type:"text"},
-      desc:{label:"Description",type:"textarea"}
+  certifications:{label:"Certifications",icon:"🏅",fields:{
+    tag:{label:"Section tag",type:"text",ph:"Certifications"},
+    heading:{label:"Heading",type:"text",ph:"Credentials &"},
+    headingEm:{label:"Heading (italic)",type:"text",ph:"learning."},
+    items:{label:"Certifications",type:"array",itemLabel:"Cert",itemFields:{
+      badge:{label:"Badge (emoji)",type:"text",ph:"🏅"},
+      title:{label:"Title",type:"text",ph:"CA IPCC"},
+      sub:{label:"Subtitle",type:"text",ph:"ICAI — Cleared"}
     }}
   }},
-  certifications:{label:"Certifications",fields:{
-    tag:{label:"Section tag",type:"text"},
-    heading:{label:"Heading",type:"text"},
-    headingEm:{label:"Heading (italic)",type:"text"},
-    items:{label:"Certifications",type:"array",itemLabel:"Cert",fields:{
-      badge:{label:"Badge (emoji)",type:"text"},
-      title:{label:"Title",type:"text"},
-      sub:{label:"Subtitle",type:"text"}
-    }}
+  cta:{label:"Call To Action",icon:"📣",fields:{
+    tag:{label:"Section tag",type:"text",ph:"Let's connect"},
+    title:{label:"Title",type:"text",ph:"Looking for a dedicated"},
+    titleEm:{label:"Title (italic)",type:"text",ph:"CA professional?"},
+    sub:{label:"Subtitle",type:"textarea",ph:"A short paragraph…"},
+    primaryBtnText:{label:"Primary button text",type:"text",ph:"eshwar@ca.in"},
+    primaryBtnLink:{label:"Primary button link",type:"text",ph:"mailto:eshwar@ca.in"},
+    secondaryBtnText:{label:"Secondary button text",type:"text",ph:"Download resume"},
+    secondaryBtnLink:{label:"Secondary button link",type:"text",ph:"#"}
   }},
-  cta:{label:"CTA Section",fields:{
-    tag:{label:"Section tag",type:"text"},
-    title:{label:"Title",type:"text"},
-    titleEm:{label:"Title (italic)",type:"text"},
-    sub:{label:"Subtitle",type:"textarea"},
-    primaryBtnText:{label:"Primary button text",type:"text"},
-    primaryBtnLink:{label:"Primary button link",type:"text"},
-    secondaryBtnText:{label:"Secondary button text",type:"text"},
-    secondaryBtnLink:{label:"Secondary button link",type:"text"}
-  }},
-  footer:{label:"Footer",fields:{
-    brandText:{label:"Brand description",type:"textarea"},
-    columns:{label:"Footer columns",type:"array",itemLabel:"Column",fields:{
-      title:{label:"Column title",type:"text"},
-      links:{label:"Links",type:"array",itemLabel:"Link",fields:{
-        label:{label:"Label",type:"text"},href:{label:"Href",type:"text"}
+  footer:{label:"Footer",icon:"🦶",fields:{
+    brandText:{label:"Brand description",type:"textarea",ph:"A short description about you."},
+    columns:{label:"Footer columns",type:"array",itemLabel:"Column",itemFields:{
+      title:{label:"Column title",type:"text",ph:"Contact"},
+      links:{label:"Links",type:"array",itemLabel:"Link",itemFields:{
+        label:{label:"Label",type:"text",ph:"LinkedIn"},
+        href:{label:"Href",type:"text",ph:"https://linkedin.com/in/you"}
       }}
     }},
-    copyright:{label:"Copyright",type:"text"},
-    statusText:{label:"Status text",type:"text"}
+    copyright:{label:"Copyright",type:"text",ph:"© 2025 Your Name"},
+    statusText:{label:"Status text",type:"text",ph:"Open to opportunities · Reply within 24h"}
   }}
 };
 
-/* ========== HELPERS ========== */
+/* ==================================================================
+   HELPERS
+   ================================================================== */
 const $ = id => document.getElementById(id);
 const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const getPath = (obj,path)=>path.split('.').reduce((o,k)=>o?.[k],obj);
 const setPath = (obj,path,val)=>{const keys=path.split('.');const last=keys.pop();let cur=obj;for(const k of keys){if(cur[k]==null)cur[k]={};cur=cur[k];}cur[last]=val;};
 const authHeader = () => 'Basic ' + btoa(creds.user+':'+creds.pass);
 
-function toast(msg, ok=true){
+function deepMerge(base, src){
+  if(Array.isArray(base)) return Array.isArray(src)?src:base;
+  if(base && typeof base==='object'){
+    if(!src || typeof src!=='object') return base;
+    for(const k in src) base[k] = (k in base)?deepMerge(base[k],src[k]):src[k];
+    return base;
+  }
+  return (src===undefined||src===null)?base:src;
+}
+
+function toast(msg, kind='ok'){
   const bar=$('statusBar'), ico=$('statusIco'), m=$('statusMsg');
-  bar.className='status-bar show '+(ok?'ok':'err');
-  ico.textContent = ok?'✓':'!';
+  bar.className='status-bar show '+kind;
+  ico.textContent = kind==='ok'?'✓':kind==='err'?'!':'i';
   m.textContent = msg;
   clearTimeout(toast._t);
   toast._t=setTimeout(()=>bar.classList.remove('show'),2600);
 }
 
-/* ========== LOGIN ========== */
+function setDirty(v){
+  dirty = v;
+  $('dirtyBadge').classList.toggle('show', dirty);
+}
+
+/* ==================================================================
+   HISTORY (undo / redo)
+   ================================================================== */
+function pushHistory(){
+  history.stack = history.stack.slice(0, history.index+1);
+  history.stack.push(JSON.stringify(state));
+  if(history.stack.length > 60) history.stack.shift();
+  history.index = history.stack.length - 1;
+  updateUndoRedo();
+}
+function updateUndoRedo(){
+  $('undoBtn').disabled = history.index <= 0;
+  $('redoBtn').disabled = history.index >= history.stack.length - 1;
+}
+function undo(){
+  if(history.index <= 0) return;
+  history.index--;
+  state = JSON.parse(history.stack[history.index]);
+  renderPanel(currentPanel);
+  syncPreview();
+  setDirty(true);
+  updateUndoRedo();
+}
+function redo(){
+  if(history.index >= history.stack.length - 1) return;
+  history.index++;
+  state = JSON.parse(history.stack[history.index]);
+  renderPanel(currentPanel);
+  syncPreview();
+  setDirty(true);
+  updateUndoRedo();
+}
+$('undoBtn').addEventListener('click', undo);
+$('redoBtn').addEventListener('click', redo);
+
+/* ==================================================================
+   LOGIN
+   ================================================================== */
 $('loginBtn').addEventListener('click', doLogin);
 $('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+$('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginPass').focus();});
 
 async function doLogin(){
   const user=$('loginUser').value.trim();
@@ -294,24 +599,27 @@ async function doLogin(){
       creds={user,pass};
       sessionStorage.setItem('creds',JSON.stringify(creds));
       $('loginView').style.display='none';
-      $('dashboardView').style.display='block';
+      $('app').classList.remove('hidden');
       await loadData();
     } else {
       $('loginError').textContent='Invalid credentials.';
     }
   }catch(e){
-    $('loginError').textContent='Could not reach server. Is the API deployed?';
+    $('loginError').textContent='Could not reach server.';
   }
   $('loginBtn').textContent='Sign in';
 }
 
 function logout(){
+  if(dirty && !confirm('You have unsaved changes. Log out anyway?')) return;
   sessionStorage.removeItem('creds');
   location.reload();
 }
 $('logoutBtn').addEventListener('click',logout);
 
-/* ========== LOAD / SAVE ========== */
+/* ==================================================================
+   LOAD / SAVE
+   ================================================================== */
 async function loadData(){
   try{
     const r = await fetch('/api/data',{cache:'no-store'});
@@ -321,23 +629,21 @@ async function loadData(){
     } else throw new Error();
   }catch(e){
     state = structuredClone(DEFAULTS);
-    toast('Could not load — using defaults',false);
+    toast('Could not load — using defaults','err');
   }
+  history = { stack:[JSON.stringify(state)], index:0 };
+  updateUndoRedo();
+  setDirty(false);
   renderSidebar();
-  renderPanel('meta');
-}
-
-function deepMerge(base, src){
-  if(Array.isArray(base)) return Array.isArray(src)?src:base;
-  if(base && typeof base==='object'){
-    if(!src || typeof src!=='object') return base;
-    for(const k in src) base[k] = (k in base)?deepMerge(base[k],src[k]):src[k];
-    return base;
-  }
-  return (src===undefined||src===null)?base:src;
+  renderPanel(currentPanel);
+  syncPreview();
+  // If preview iframe is still loading, wait then sync
+  const f = $('previewFrame');
+  if(f) f.addEventListener('load', syncPreview, {once:true});
 }
 
 async function saveData(){
+  pushHistory();
   $('saveBtn').textContent='Saving…';
   try{
     const r = await fetch('/api/data',{
@@ -345,215 +651,625 @@ async function saveData(){
       headers:{'Content-Type':'application/json',Authorization:authHeader()},
       body:JSON.stringify(state)
     });
-    if(r.ok){ toast('Saved successfully'); }
-    else if(r.status===401){ toast('Unauthorized — please log in again',false); }
-    else { toast('Save failed ('+r.status+')',false); }
-  }catch(e){ toast('Network error',false); }
+    if(r.ok){ toast('Saved successfully'); setDirty(false); }
+    else if(r.status===401){ toast('Unauthorized — please log in again','err'); }
+    else { toast('Save failed ('+r.status+')','err'); }
+  }catch(e){ toast('Network error','err'); }
   $('saveBtn').textContent='Save changes';
 }
 $('saveBtn').addEventListener('click',saveData);
 $('reloadBtn').addEventListener('click',async()=>{
-  if(!confirm('Discard unsaved changes and reload?'))return;
+  if(dirty && !confirm('Discard unsaved changes and reload?'))return;
   await loadData();
 });
+$('viewSiteBtn').addEventListener('click',()=>window.open('/','_blank'));
 
-/* ========== SIDEBAR ========== */
+/* ==================================================================
+   PREVIEW SYNC (postMessage to iframe)
+   ================================================================== */
+function syncPreview(){
+  const f = $('previewFrame');
+  if(!f || !f.contentWindow) return;
+  try{
+    f.contentWindow.postMessage({type:'PORTFOLIO_UPDATE', data: state}, '*');
+  }catch(e){}
+}
+$('refreshPreview').addEventListener('click', ()=>{
+  const f = $('previewFrame');
+  f.src = f.src; // reload
+});
+document.querySelectorAll('.device-toggle button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.device-toggle button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const wrap = $('previewWrap');
+    wrap.classList.remove('device-mobile','device-tablet');
+    if(b.dataset.device==='mobile') wrap.classList.add('device-mobile');
+    if(b.dataset.device==='tablet') wrap.classList.add('device-tablet');
+  });
+});
+$('previewToggle').addEventListener('click', ()=>{
+  previewVisible = !previewVisible;
+  $('workspace').classList.toggle('no-preview', !previewVisible);
+  $('previewToggle').classList.toggle('active', previewVisible);
+});
+$('previewToggle').classList.add('active');
+
+/* ==================================================================
+   SIDEBAR
+   ================================================================== */
 function renderSidebar(){
-  const sb=$('sidebar');
-  sb.innerHTML = Object.entries(SCHEMA).map(([key,s],i)=>
-    `<a data-panel="${key}"><span class="idx">${String(i+1).padStart(2,'0')}</span>${esc(s.label)}</a>`
-  ).join('');
-  sb.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>renderPanel(a.dataset.panel)));
+  const sb = $('sidebar');
+  sb.innerHTML = `
+    <div class="sidebar-header">
+      <span>Sections</span>
+      <button id="addSectionBtn" title="Add custom section">+</button>
+    </div>
+    ${Object.entries(SCHEMA).map(([key,s],i)=>{
+      const data = state[key]||{};
+      const count = data.items?.length ?? (data.paragraphs?.length ?? (data.columns?.length ?? 0));
+      const badge = count? `<span class="count">${count}</span>`:'';
+      return `<a data-panel="${key}"><span class="idx">${String(i+1).padStart(2,'0')}</span><span style="flex:1">${esc(s.label)}</span>${badge}</a>`;
+    }).join('')}
+    <div class="divider"></div>
+    <div class="sidebar-header" style="padding-top:6px">Tools</div>
+    <a data-action="export"><span class="idx">↧</span><span style="flex:1">Export JSON</span></a>
+    <a data-action="import"><span class="idx">↥</span><span style="flex:1">Import JSON</span></a>
+    <a data-action="reset"><span class="idx">↺</span><span style="flex:1">Reset to defaults</span></a>
+  `;
+  sb.querySelectorAll('a[data-panel]').forEach(a=>a.addEventListener('click',()=>renderPanel(a.dataset.panel)));
+  sb.querySelectorAll('a[data-action]').forEach(a=>a.addEventListener('click',()=>handleAction(a.dataset.action)));
+  $('addSectionBtn').addEventListener('click', openAddSectionModal);
 }
 
-/* ========== PANEL RENDER ========== */
-function renderPanel(key){
-  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.toggle('active',a.dataset.panel===key));
-  const schema=SCHEMA[key];
-  const data=state[key]||{};
-  const main=$('main');
-  main.innerHTML=`
-    <div class="panel active">
-      <div class="section-head">
-        <h2>${esc(schema.label)}</h2>
-        <p>Edit fields below. Changes are saved when you click "Save changes".</p>
-      </div>
-      <div id="panelFields"></div>
-    </div>`;
-  const container=$('panelFields');
-  for(const [fk,fs] of Object.entries(schema.fields)){
-    container.appendChild(renderField(fs, data[fk], `${key}.${fk}`));
+function handleAction(action){
+  if(action==='export'){
+    openModal('Export JSON', `
+      <p style="color:var(--muted);font-size:12.5px;margin-bottom:12px">Copy this JSON — this is the exact data your site receives.</p>
+      <textarea id="exportArea" readonly>${esc(JSON.stringify(state,null,2))}</textarea>
+    `, [
+      {label:'Copy', cls:'primary', onClick:()=>{ $('exportArea').select(); document.execCommand('copy'); toast('Copied to clipboard'); }}
+    ]);
+  }
+  if(action==='import'){
+    openModal('Import JSON', `
+      <p style="color:var(--muted);font-size:12.5px;margin-bottom:12px">Paste JSON. This will replace your current content.</p>
+      <textarea id="importArea" placeholder='{"meta":{"title":"..."}, ...}'></textarea>
+    `, [
+      {label:'Cancel', cls:'', onClick:closeModal},
+      {label:'Import', cls:'primary', onClick:()=>{
+        try{
+          const parsed = JSON.parse($('importArea').value);
+          state = deepMerge(structuredClone(DEFAULTS), parsed);
+          pushHistory(); setDirty(true); renderPanel(currentPanel); renderSidebar(); syncPreview();
+          toast('Imported');
+          closeModal();
+        }catch(e){ toast('Invalid JSON','err'); }
+      }}
+    ]);
+  }
+  if(action==='reset'){
+    if(!confirm('Reset ALL content to defaults? This cannot be undone.')) return;
+    state = structuredClone(DEFAULTS);
+    pushHistory(); setDirty(true); renderPanel(currentPanel); renderSidebar(); syncPreview();
+    toast('Reset to defaults','info');
   }
 }
 
-/* ========== FIELD RENDER ========== */
-function renderField(fs, value, path){
-  const wrap=document.createElement('div');
-  wrap.className='field';
-  wrap.dataset.path=path;
+/* ==================================================================
+   PANEL RENDER
+   ================================================================== */
+function renderPanel(key){
+  currentPanel = key;
+  if(!SCHEMA[key]) key = 'meta';
+  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.toggle('active',a.dataset.panel===key));
+  const schema = SCHEMA[key];
+  const data = state[key]||{};
+  const ed = $('editor');
+  ed.innerHTML = `
+    <div class="editor-head">
+      <div class="h-left">
+        <h2><span style="opacity:.6">${schema.icon||'📄'}</span> ${esc(schema.label)}</h2>
+        <p>All changes are reflected in the live preview instantly. Press <kbd style="font-family:'JetBrains Mono';font-size:10.5px;background:var(--panel-2);padding:1px 5px;border-radius:4px;border:1px solid var(--border)">⌘S</kbd> to save.</p>
+      </div>
+      <div class="h-actions">
+        <button class="btn mini" id="duplicateSectionBtn" title="Duplicate entire section">Duplicate</button>
+        <button class="btn mini" id="clearSectionBtn" title="Clear all fields in this section">Clear</button>
+      </div>
+    </div>
+    <div id="panelFields"></div>
+  `;
+  const container = $('panelFields');
+  for(const [fk,fs] of Object.entries(schema.fields)){
+    container.appendChild(renderField(fs, data[fk], `${key}.${fk}`, key));
+  }
+  $('duplicateSectionBtn').addEventListener('click',()=>{
+    // duplicate: push a new copy of the array items
+    const data = state[key]||{};
+    Object.entries(data).forEach(([k,v])=>{
+      if(Array.isArray(v)) data[k] = v.concat(JSON.parse(JSON.stringify(v)));
+    });
+    pushHistory(); setDirty(true); renderPanel(key); syncPreview();
+    toast('Section duplicated');
+  });
+  $('clearSectionBtn').addEventListener('click',()=>{
+    if(!confirm('Clear all fields in this section?')) return;
+    const data = state[key]||{};
+    Object.keys(data).forEach(k=>{
+      if(Array.isArray(data[k])) data[k] = [];
+      else data[k] = '';
+    });
+    pushHistory(); setDirty(true); renderPanel(key); syncPreview();
+    toast('Section cleared','info');
+  });
+}
+
+/* ==================================================================
+   FIELD RENDER
+   ================================================================== */
+function renderField(fs, value, path, sectionKey){
+  const wrap = document.createElement('div');
+  wrap.className = 'field';
+  wrap.dataset.path = path;
 
   if(fs.type==='array'){
-    wrap.innerHTML=`<label>${esc(fs.label)}</label>`;
+    wrap.classList.add('array-block');
     const arr = Array.isArray(value)?value:[];
-    const list=document.createElement('div');
-    list.dataset.arrPath=path;
-    arr.forEach((item,i)=>list.appendChild(renderArrayItem(fs,item,i,path)));
+    const lbl = document.createElement('label');
+    lbl.innerHTML = `${esc(fs.label)} <span class="arr-meta">${arr.length} item${arr.length===1?'':'s'}</span>`;
+    wrap.appendChild(lbl);
+    const list = document.createElement('div');
+    list.dataset.arrPath = path;
+    arr.forEach((item,i)=>list.appendChild(renderArrayItem(fs,item,i,path,sectionKey)));
     wrap.appendChild(list);
-    const add=document.createElement('button');
-    add.className='add-btn';
-    add.type='button';
-    add.textContent='+ Add '+fs.itemLabel;
+    const add = document.createElement('button');
+    add.className='add-btn'; add.type='button';
+    add.innerHTML = `+ Add ${esc(fs.itemLabel)}`;
     add.addEventListener('click',()=>{
-      const newItem = fs.simple ? {value:''} : Object.fromEntries(Object.entries(fs.fields).map(([k,f])=>[k, f.type==='csv'?[]:'']));
-      const arr2=getPath(state,path)||[]; arr2.push(newItem); setPath(state,path,arr2);
-      renderPanel(path.split('.')[0]);
+      const newItem = fs.simple
+        ? {value:''}
+        : Object.fromEntries(Object.entries(fs.itemFields).map(([k,f])=>[k, f.type==='csv'?[]: (f.type==='array'?[]:'')]));
+      const a = getPath(state,path)||[];
+      a.push(newItem);
+      setPath(state,path,a);
+      pushHistory(); setDirty(true);
+      renderPanel(sectionKey); syncPreview();
+      // scroll to bottom
+      setTimeout(()=>{ const ed=$('editor'); ed.scrollTop = ed.scrollHeight; },30);
     });
     wrap.appendChild(add);
+    if(fs.help){
+      const h = document.createElement('div');
+      h.className='hint'; h.textContent=fs.help;
+      wrap.appendChild(h);
+    }
     return wrap;
   }
 
-  const label=document.createElement('label');
-  label.textContent=fs.label;
+  const label = document.createElement('label');
+  label.textContent = fs.label;
   wrap.appendChild(label);
 
   if(fs.type==='textarea'){
-    const t=document.createElement('textarea');
-    t.value=value||'';
-    t.addEventListener('input',()=>setPath(state,path,t.value));
+    const t = document.createElement('textarea');
+    t.value = value||'';
+    t.placeholder = fs.ph||'';
+    t.addEventListener('input',()=>{
+      setPath(state,path,t.value);
+      setDirty(true);
+      syncPreview();
+    });
+    t.addEventListener('blur',()=>pushHistory());
     wrap.appendChild(t);
   }
   else if(fs.type==='csv'){
-    const t=document.createElement('input');
+    const t = document.createElement('input');
     t.type='text';
-    t.value=(value||[]).join(', ');
-    t.placeholder='comma, separated, values';
-    t.addEventListener('input',()=>setPath(state,path,t.value.split(',').map(s=>s.trim()).filter(Boolean)));
+    t.value = (Array.isArray(value)?value:[]).join(', ');
+    t.placeholder = fs.ph||'comma, separated, values';
+    t.addEventListener('input',()=>{
+      setPath(state,path, t.value.split(',').map(s=>s.trim()).filter(Boolean));
+      setDirty(true); syncPreview();
+    });
+    t.addEventListener('blur',()=>pushHistory());
     wrap.appendChild(t);
   }
   else if(fs.type==='image'){
     wrap.appendChild(renderImageField(value, v=>{
       setPath(state,path,v);
-      const img=wrap.querySelector('.image-preview');
-      img.innerHTML = v?`<img src="${esc(v)}" alt="">`:'<span>No image</span>';
+      setDirty(true); syncPreview();
     }));
   }
   else{
-    const t=document.createElement('input');
+    const t = document.createElement('input');
     t.type='text';
-    t.value=value||'';
-    t.addEventListener('input',()=>setPath(state,path,t.value));
+    t.value = value||'';
+    t.placeholder = fs.ph||'';
+    t.addEventListener('input',()=>{
+      setPath(state,path,t.value);
+      setDirty(true); syncPreview();
+    });
+    t.addEventListener('blur',()=>pushHistory());
     wrap.appendChild(t);
+  }
+
+  if(fs.help){
+    const h = document.createElement('div');
+    h.className='hint'; h.textContent=fs.help;
+    wrap.appendChild(h);
   }
   return wrap;
 }
 
-function renderArrayItem(fs, item, i, basePath){
-  const box=document.createElement('div');
+/* ==================================================================
+   ARRAY ITEM
+   ================================================================== */
+function renderArrayItem(fs, item, i, basePath, sectionKey){
+  const box = document.createElement('div');
   box.className='array-item';
-  const head=document.createElement('div');
+  box.draggable = true;
+  box.dataset.index = i;
+
+  const head = document.createElement('div');
   head.className='item-head';
-  head.innerHTML=`<span>${esc(fs.itemLabel)} ${String(i+1).padStart(2,'0')}</span>`;
-  const actions=document.createElement('div');
+
+  // title logic — pick first non-empty text field
+  let titleText = `${fs.itemLabel} ${String(i+1).padStart(2,'0')}`;
+  const itemFields = fs.simple ? {value:fs.simpleField} : fs.itemFields;
+  const firstKey = Object.keys(itemFields)[0];
+  const firstVal = item[firstKey];
+  if(firstVal && typeof firstVal==='string'){
+    titleText = firstVal.length>50 ? firstVal.slice(0,50)+'…' : firstVal;
+  } else if(item.title || item.name || item.label){
+    titleText = item.title || item.name || item.label;
+  }
+
+  head.innerHTML = `
+    <div class="item-title">
+      <span class="drag-handle" title="Drag to reorder">⋮⋮</span>
+      <span>${esc(titleText)}</span>
+      <span class="pill">#${i+1}</span>
+    </div>
+  `;
+  const actions = document.createElement('div');
   actions.className='item-actions';
 
-  const up=document.createElement('button'); up.className='icon-btn'; up.textContent='↑'; up.type='button';
-  up.addEventListener('click',()=>{const a=getPath(state,basePath);if(i>0){[a[i-1],a[i]]=[a[i],a[i-1]];renderPanel(basePath.split('.')[0]);}});
-  const down=document.createElement('button'); down.className='icon-btn'; down.textContent='↓'; down.type='button';
-  down.addEventListener('click',()=>{const a=getPath(state,basePath);if(i<a.length-1){[a[i+1],a[i]]=[a[i],a[i+1]];renderPanel(basePath.split('.')[0]);}});
-  const del=document.createElement('button'); del.className='icon-btn del'; del.textContent='✕'; del.type='button';
-  del.addEventListener('click',()=>{if(!confirm('Delete this item?'))return;const a=getPath(state,basePath);a.splice(i,1);renderPanel(basePath.split('.')[0]);});
+  const toggle = document.createElement('button');
+  toggle.className='icon-btn'; toggle.textContent='▾'; toggle.title='Collapse/Expand';
+  toggle.addEventListener('click',e=>{ e.stopPropagation(); box.classList.toggle('collapsed'); });
 
-  actions.append(up,down,del);
+  const up = document.createElement('button');
+  up.className='icon-btn'; up.textContent='↑'; up.title='Move up';
+  up.addEventListener('click',e=>{
+    e.stopPropagation();
+    const a = getPath(state,basePath);
+    if(i>0){ [a[i-1],a[i]]=[a[i],a[i-1]]; pushHistory(); setDirty(true); renderPanel(sectionKey); syncPreview(); }
+  });
+
+  const down = document.createElement('button');
+  down.className='icon-btn'; down.textContent='↓'; down.title='Move down';
+  down.addEventListener('click',e=>{
+    e.stopPropagation();
+    const a = getPath(state,basePath);
+    if(i<a.length-1){ [a[i+1],a[i]]=[a[i],a[i+1]]; pushHistory(); setDirty(true); renderPanel(sectionKey); syncPreview(); }
+  });
+
+  const dup = document.createElement('button');
+  dup.className='icon-btn'; dup.textContent='⧉'; dup.title='Duplicate';
+  dup.addEventListener('click',e=>{
+    e.stopPropagation();
+    const a = getPath(state,basePath);
+    a.splice(i+1,0,JSON.parse(JSON.stringify(item)));
+    pushHistory(); setDirty(true); renderPanel(sectionKey); syncPreview();
+  });
+
+  const del = document.createElement('button');
+  del.className='icon-btn del'; del.textContent='✕'; del.title='Delete';
+  del.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(!confirm('Delete this item?')) return;
+    const a = getPath(state,basePath);
+    a.splice(i,1);
+    pushHistory(); setDirty(true); renderPanel(sectionKey); syncPreview();
+  });
+
+  actions.append(toggle,up,down,dup,del);
   head.appendChild(actions);
+  head.addEventListener('click',()=>box.classList.toggle('collapsed'));
   box.appendChild(head);
 
-  const body=document.createElement('div');
-  const itemFields = fs.simple ? {value:fs.fields.value} : fs.fields;
+  const body = document.createElement('div');
+  body.className='item-body';
   const keys = Object.keys(itemFields);
-  const cols = keys.length>=3?3:keys.length>=2?2:1;
-  body.style.display='grid';
-  body.style.gridTemplateColumns=`repeat(${cols},1fr)`;
-  body.style.gap='14px';
+  const cols = keys.length>=3?2:1;
+  body.style.gridTemplateColumns = `repeat(${cols}, minmax(0,1fr))`;
 
   for(const [fk,f] of Object.entries(itemFields)){
-    const cell=document.createElement('div');
-    if(f.type==='textarea') cell.style.gridColumn='1 / -1';
-    cell.appendChild(renderField(f, item[fk], `${basePath}.${i}.${fk}`));
-    // remove the wrapper's margin since grid handles spacing
-    cell.querySelector('.field').style.marginBottom='0';
+    const cell = document.createElement('div');
+    if(f.type==='textarea' || f.type==='array') cell.style.gridColumn='1 / -1';
+    const sub = renderField(f, item[fk], `${basePath}.${i}.${fk}`, sectionKey);
+    sub.style.marginBottom='0';
+    cell.appendChild(sub);
     body.appendChild(cell);
   }
   box.appendChild(body);
+
+  // drag & drop
+  box.addEventListener('dragstart',e=>{
+    box.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain', String(i));
+  });
+  box.addEventListener('dragend',()=>box.classList.remove('dragging'));
+  box.addEventListener('dragover',e=>{ e.preventDefault(); box.classList.add('drag-over'); });
+  box.addEventListener('dragleave',()=>box.classList.remove('drag-over'));
+  box.addEventListener('drop',e=>{
+    e.preventDefault();
+    box.classList.remove('drag-over');
+    const from = parseInt(e.dataTransfer.getData('text/plain'),10);
+    const to = i;
+    if(from===to||isNaN(from)) return;
+    const a = getPath(state,basePath);
+    const [moved] = a.splice(from,1);
+    a.splice(to,0,moved);
+    pushHistory(); setDirty(true); renderPanel(sectionKey); syncPreview();
+  });
+
   return box;
 }
 
+/* ==================================================================
+   IMAGE FIELD
+   ================================================================== */
 function renderImageField(value, onChange){
-  const w=document.createElement('div');
+  const w = document.createElement('div');
   w.className='image-field';
-  const preview=document.createElement('div');
+  const preview = document.createElement('div');
   preview.className='image-preview';
   preview.innerHTML = value?`<img src="${esc(value)}" alt="">`:'<span>No image</span>';
 
-  const right=document.createElement('div');
+  const right = document.createElement('div');
   right.className='image-inputs';
 
-  const urlInput=document.createElement('input');
+  const urlInput = document.createElement('input');
   urlInput.type='text';
-  urlInput.placeholder='Paste image URL or upload';
+  urlInput.placeholder='https://… or upload below';
   urlInput.value = value && !value.startsWith('data:') ? value : '';
-  urlInput.addEventListener('input',()=>onChange(urlInput.value));
+  urlInput.addEventListener('input',()=>{
+    onChange(urlInput.value);
+    preview.innerHTML = urlInput.value?`<img src="${esc(urlInput.value)}" alt="">`:'<span>No image</span>';
+  });
 
-  const fileWrap=document.createElement('label');
+  const fileWrap = document.createElement('label');
   fileWrap.className='file-label';
   fileWrap.innerHTML='📁 Upload image';
-  const fileInput=document.createElement('input');
+  const fileInput = document.createElement('input');
   fileInput.type='file';
   fileInput.accept='image/*';
   fileInput.addEventListener('change',()=>{
-    const file=fileInput.files[0]; if(!file)return;
-    compressImage(file, dataUrl=>{ urlInput.value=''; onChange(dataUrl); });
+    const file = fileInput.files[0]; if(!file) return;
+    compressImage(file, dataUrl=>{
+      urlInput.value='';
+      onChange(dataUrl);
+      preview.innerHTML = `<img src="${dataUrl}" alt="">`;
+    });
   });
   fileWrap.appendChild(fileInput);
 
-  const hint=document.createElement('div');
-  hint.style.cssText='font-size:11px;color:var(--muted);font-family:JetBrains Mono,monospace';
-  hint.textContent='Images are auto-compressed to ~1200px / JPEG 0.85';
+  const hint = document.createElement('div');
+  hint.className='hint';
+  hint.textContent='Auto-compressed to ~1200px · JPEG 0.85';
 
-  right.append(urlInput,fileWrap,hint);
-  w.append(preview,right);
+  right.append(urlInput, fileWrap, hint);
+  w.append(preview, right);
   return w;
 }
 
 function compressImage(file, cb){
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const img=new Image();
-    img.onload=()=>{
-      const max=1200;
-      let {width:w,height:h}=img;
-      if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r);}
-      const c=document.createElement('canvas'); c.width=w; c.height=h;
-      const ctx=c.getContext('2d');
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const max = 1200;
+      let {width:w,height:h} = img;
+      if(w>max||h>max){ const r = Math.min(max/w, max/h); w=Math.round(w*r); h=Math.round(h*r); }
+      const c = document.createElement('canvas');
+      c.width=w; c.height=h;
+      const ctx = c.getContext('2d');
       ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
       ctx.drawImage(img,0,0,w,h);
       cb(c.toDataURL('image/jpeg',0.85));
     };
-    img.src=e.target.result;
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
-/* ========== BOOT ========== */
+/* ==================================================================
+   COMMAND PALETTE
+   ================================================================== */
+const cmdOverlay = $('cmdOverlay');
+const cmdInput = $('cmdInput');
+const cmdResults = $('cmdResults');
+let cmdSel = 0;
+let cmdItems = [];
+
+function openCmd(){
+  cmdOverlay.classList.add('show');
+  cmdInput.value='';
+  cmdInput.focus();
+  buildCmdItems('');
+}
+function closeCmd(){ cmdOverlay.classList.remove('show'); }
+
+function buildCmdItems(query){
+  cmdItems = [];
+  const q = query.toLowerCase().trim();
+
+  // Section jump commands
+  Object.entries(SCHEMA).forEach(([key,s])=>{
+    const label = `Go to ${s.label}`;
+    if(!q || label.toLowerCase().includes(q) || key.includes(q)){
+      cmdItems.push({icon:s.icon||'📄', text:label, sub:`Section · ${key}`, action:()=>{ renderPanel(key); closeCmd(); }});
+    }
+  });
+
+  // Field search
+  if(q){
+    Object.entries(SCHEMA).forEach(([sk,s])=>{
+      Object.entries(s.fields).forEach(([fk,f])=>{
+        const label = f.label.toLowerCase();
+        if(label.includes(q) || fk.includes(q)){
+          cmdItems.push({
+            icon:'⌨', text:f.label, sub:`${s.label} · ${fk}`,
+            action:()=>{ renderPanel(sk); closeCmd();
+              setTimeout(()=>{
+                const el = document.querySelector(`[data-path="${sk}.${fk}"]`);
+                if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.querySelector('input,textarea')?.focus(); }
+              },60);
+            }
+          });
+        }
+      });
+    });
+  }
+
+  // Actions
+  const actions = [
+    {icon:'💾', text:'Save changes', sub:'Ctrl+S', action:()=>{ saveData(); closeCmd(); }},
+    {icon:'↻', text:'Reload from server', sub:'Discard unsaved', action:()=>{ $('reloadBtn').click(); closeCmd(); }},
+    {icon:'↗', text:'Open live site', sub:'New tab', action:()=>{ window.open('/','_blank'); closeCmd(); }},
+    {icon:'↧', text:'Export JSON', sub:'Download / copy', action:()=>{ handleAction('export'); closeCmd(); }},
+    {icon:'↥', text:'Import JSON', sub:'Paste data', action:()=>{ handleAction('import'); closeCmd(); }},
+    {icon:'👁', text:'Toggle live preview', sub:'Show/hide pane', action:()=>{ $('previewToggle').click(); closeCmd(); }},
+    {icon:'↺', text:'Undo', sub:'Ctrl+Z', action:()=>{ undo(); closeCmd(); }},
+    {icon:'↻', text:'Redo', sub:'Ctrl+Shift+Z', action:()=>{ redo(); closeCmd(); }},
+  ];
+  actions.forEach(a=>{ if(!q || a.text.toLowerCase().includes(q)) cmdItems.push(a); });
+
+  renderCmdResults();
+}
+
+function renderCmdResults(){
+  if(cmdItems.length===0){
+    cmdResults.innerHTML = `<div class="cmd-empty">No results</div>`;
+    return;
+  }
+  if(cmdSel>=cmdItems.length) cmdSel = cmdItems.length-1;
+  if(cmdSel<0) cmdSel=0;
+  cmdResults.innerHTML = cmdItems.map((it,i)=>`
+    <div class="cmd-item ${i===cmdSel?'selected':''}" data-i="${i}">
+      <span class="ico">${it.icon||'▸'}</span>
+      <span class="txt">${esc(it.text)}${it.sub?`<small>${esc(it.sub)}</small>`:''}</span>
+    </div>
+  `).join('');
+  cmdResults.querySelectorAll('.cmd-item').forEach(el=>{
+    el.addEventListener('click',()=>{ cmdItems[+el.dataset.i].action(); });
+    el.addEventListener('mouseenter',()=>{ cmdSel=+el.dataset.i; renderCmdResults(); });
+  });
+}
+
+cmdInput.addEventListener('input',()=>{ cmdSel=0; buildCmdItems(cmdInput.value); });
+cmdInput.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){ e.preventDefault(); cmdSel=Math.min(cmdSel+1,cmdItems.length-1); renderCmdResults(); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); cmdSel=Math.max(cmdSel-1,0); renderCmdResults(); }
+  else if(e.key==='Enter'){ e.preventDefault(); cmdItems[cmdSel]?.action(); }
+  else if(e.key==='Escape'){ closeCmd(); }
+});
+cmdOverlay.addEventListener('click',e=>{ if(e.target===cmdOverlay) closeCmd(); });
+$('cmdBtn').addEventListener('click',openCmd);
+
+/* ==================================================================
+   MODAL
+   ================================================================== */
+function openModal(title, bodyHTML, buttons){
+  $('modalTitle').textContent = title;
+  $('modalBody').innerHTML = bodyHTML;
+  $('modalFoot').innerHTML='';
+  buttons.forEach(b=>{
+    const el = document.createElement('button');
+    el.className = 'btn ' + (b.cls||'');
+    el.textContent = b.label;
+    el.addEventListener('click',b.onClick);
+    $('modalFoot').appendChild(el);
+  });
+  $('modalOverlay').classList.add('show');
+}
+function closeModal(){ $('modalOverlay').classList.remove('show'); }
+$('modalClose').addEventListener('click',closeModal);
+$('modalOverlay').addEventListener('click',e=>{ if(e.target===$('modalOverlay')) closeModal(); });
+
+/* ==================================================================
+   ADD CUSTOM SECTION
+   ================================================================== */
+function openAddSectionModal(){
+  openModal('Add custom section', `
+    <p style="color:var(--muted);font-size:12.5px;margin-bottom:16px">Custom sections appear in the sidebar but require an HTML template in index.html to render. For now they're stored for future use.</p>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div><label>Section key (no spaces)</label><input id="newSecKey" placeholder="achievements"></div>
+      <div><label>Display label</label><input id="newSecLabel" placeholder="Achievements"></div>
+      <div><label>Icon (emoji)</label><input id="newSecIcon" placeholder="🏆" value="📄"></div>
+      <div><label>Description</label><input id="newSecDesc" placeholder="Awards & recognitions"></div>
+    </div>
+  `, [
+    {label:'Cancel', onClick:closeModal},
+    {label:'Add section', cls:'primary', onClick:()=>{
+      const key = ($('newSecKey').value||'').trim().replace(/[^a-zA-Z0-9]/g,'');
+      const label = ($('newSecLabel').value||'').trim();
+      if(!key||!label){ toast('Key and label required','err'); return; }
+      if(SCHEMA[key]){ toast('Section already exists','err'); return; }
+      SCHEMA[key] = {
+        label, icon: $('newSecIcon').value||'📄',
+        fields:{
+          tag:{label:'Section tag',type:'text',ph:'Section'},
+          heading:{label:'Heading',type:'text',ph:'My'},
+          headingEm:{label:'Heading (italic)',type:'text',ph:'achievements.'},
+          items:{label:label,type:'array',itemLabel:'Item',itemFields:{
+            icon:{label:'Icon (emoji)',type:'text',ph:'🏆'},
+            title:{label:'Title',type:'text',ph:'Award name'},
+            desc:{label:'Description',type:'textarea',ph:'What is it about…'}
+          }}
+        }
+      };
+      state[key] = {tag:label,heading:'My',headingEm:'items.',items:[]};
+      pushHistory(); setDirty(true); renderSidebar(); renderPanel(key); syncPreview();
+      toast('Section added');
+      closeModal();
+    }}
+  ]);
+}
+
+/* ==================================================================
+   KEYBOARD SHORTCUTS
+   ================================================================== */
+document.addEventListener('keydown',e=>{
+  const mod = e.metaKey||e.ctrlKey;
+  if(mod && e.key==='s'){ e.preventDefault(); saveData(); }
+  else if(mod && e.key==='k'){ e.preventDefault(); openCmd(); }
+  else if(mod && e.key==='z' && !e.shiftKey){ e.preventDefault(); undo(); }
+  else if(mod && e.key==='z' && e.shiftKey){ e.preventDefault(); redo(); }
+  else if(mod && e.key==='p'){ e.preventDefault(); $('previewToggle').click(); }
+  else if(e.key==='Escape'){ closeCmd(); closeModal(); }
+  else if(mod && e.key==='b'){ e.preventDefault(); $('sidebar').parentElement.classList.toggle('icon-only'); }
+});
+
+/* warn before close if dirty */
+window.addEventListener('beforeunload',e=>{
+  if(dirty){ e.preventDefault(); e.returnValue=''; }
+});
+
+/* ==================================================================
+   BOOT
+   ================================================================== */
 (async function(){
-  const saved=sessionStorage.getItem('creds');
+  const saved = sessionStorage.getItem('creds');
   if(saved){
-    creds=JSON.parse(saved);
-    // verify
+    creds = JSON.parse(saved);
     try{
-      const r=await fetch('/api/data',{method:'HEAD',headers:{Authorization:authHeader()}});
+      const r = await fetch('/api/data',{method:'HEAD',headers:{Authorization:authHeader()}});
       if(r.status===200){
         $('loginView').style.display='none';
-        $('dashboardView').style.display='block';
+        $('app').classList.remove('hidden');
         await loadData();
         return;
       }
