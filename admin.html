@@ -1648,6 +1648,15 @@ function renderField(fs, value, path, sectionKey){
   if(fs.type==='array'){
     wrap.classList.add('array-block');
     const arr = Array.isArray(value)?value:[];
+    // Normalize legacy plain-string items (old data format) into {value:...}
+    // objects in place, so existing text shows up in the editor and edits
+    // actually persist (you can't set a property on a string primitive).
+    if(fs.simple){
+      arr.forEach((item,idx)=>{
+        if(typeof item === 'string') arr[idx] = {value:item};
+        else if(item == null) arr[idx] = {value:''};
+      });
+    }
     const lbl = document.createElement('label');
     lbl.innerHTML = `<span>${esc(fs.label)}</span> <span class="arr-meta">${arr.length} item${arr.length===1?'':'s'}</span>`;
     wrap.appendChild(lbl);
