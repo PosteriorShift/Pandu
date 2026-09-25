@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Portfolio Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0c;--panel:#141418;--panel-2:#1c1c22;--border:#2a2a32;
+  --text:#f0f0f2;--muted:#8a8a94;--accent:#d4a017;--accent-2:#0071e3;
+  --green:#22c55e;--red:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;font-size:14px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,textarea,select{font:inherit;color:inherit}
+input,textarea{background:var(--panel-2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;width:100%;font-size:13px;transition:border .15s}
+input:focus,textarea:focus{outline:none;border-color:var(--accent-2)}
+textarea{resize:vertical;min-height:70px;font-family:inherit;line-height:1.55}
+label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+
+/* login */
+.login-wrap{display:grid;place-items:center;min-height:100vh;padding:20px}
+.login-card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:36px 32px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.login-card h1{font-size:22px;letter-spacing:-.03em;margin-bottom:6px}
+.login-card p{color:var(--muted);font-size:13px;margin-bottom:26px}
+.login-card .field{margin-bottom:16px}
+.login-btn{width:100%;background:var(--accent);color:#000;padding:12px;border-radius:10px;font-weight:600;font-size:13px;transition:.2s;margin-top:8px}
+.login-btn:hover{filter:brightness(1.1)}
+.login-error{color:var(--red);font-size:12px;margin-top:12px;text-align:center;min-height:16px}
+
+/* dashboard */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.topbar .left{display:flex;align-items:center;gap:14px;font-weight:600;letter-spacing:-.02em}
+.topbar .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+.topbar .right{display:flex;align-items:center;gap:8px}
+.btn{padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:600;border:1px solid var(--border);background:var(--panel-2);transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:#25252c}
+.btn.primary{background:var(--accent);color:#000;border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.danger{color:var(--red);border-color:rgba(239,68,68,.3)}
+.btn.ghost{background:transparent}
+.btn.mini{padding:5px 10px;font-size:11px}
+
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 60px)}
+.sidebar{border-right:1px solid var(--border);padding:20px 12px;position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:var(--muted);font-size:13px;transition:.15s;cursor:pointer;font-weight:500}
+.sidebar a:hover{background:var(--panel-2);color:var(--text)}
+.sidebar a.active{background:var(--panel-2);color:var(--text);box-shadow:inset 2px 0 var(--accent)}
+.sidebar a .idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);min-width:14px}
+
+.main{padding:32px 40px 120px;max-width:1000px}
+.section-head{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.section-head h2{font-size:24px;letter-spacing:-.03em;font-weight:600}
+.section-head p{color:var(--muted);font-size:13px;margin-top:4px}
+.panel{display:none}
+.panel.active{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.field{margin-bottom:18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:800px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.array-item{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;position:relative}
+.array-item .item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.array-item .item-head span{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.item-actions{display:flex;gap:6px}
+.icon-btn{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;font-size:13px;border:1px solid var(--border);background:var(--panel-2);transition:.15s}
+.icon-btn:hover{background:#25252c}
+.icon-btn.del:hover{background:rgba(239,68,68,.15);color:var(--red)}
+.add-btn{margin-top:6px;padding:10px 16px;border:1px dashed var(--border);border-radius:10px;width:100%;color:var(--muted);font-size:12.5px;font-weight:500;transition:.15s}
+.add-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(212,160,23,.05)}
+
+.image-field{display:flex;gap:12px;align-items:flex-start}
+.image-preview{width:110px;height:110px;border-radius:10px;background:var(--panel-2);border:1px solid var(--border);overflow:hidden;flex-shrink:0;display:grid;place-items:center;font-size:11px;color:var(--muted)}
+.image-preview img{width:100%;height:100%;object-fit:cover}
+.image-inputs{flex:1;display:flex;flex-direction:column;gap:8px}
+.file-label{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;background:var(--panel-2);width:fit-content;transition:.15s;color:var(--text)}
+.file-label:hover{background:#25252c}
+input[type=file]{display:none}
+
+.status-bar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--border);padding:10px 18px;border-radius:999px;font-size:12.5px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 60px rgba(0,0,0,.6);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:100}
+.status-bar.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+.status-bar .ico{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px}
+.status-bar.ok .ico{background:rgba(34,197,94,.15);color:var(--green)}
+.status-bar.err .ico{background:rgba(239,68,68,.15);color:var(--red)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginView">
+  <div class="login-card">
+    <h1>Admin Access</h1>
+    <p>Enter your credentials to edit the portfolio.</p>
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="loginUser" autocomplete="username" placeholder="admin">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="loginPass" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <button class="login-btn" id="loginBtn">Sign in</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboardView" style="display:none">
+  <div class="topbar">
+    <div class="left"><span class="dot"></span>Portfolio Editor</div>
+    <div class="right">
+      <a class="btn ghost" href="/" target="_blank">View site ↗</a>
+      <button class="btn" id="reloadBtn">Reload</button>
+      <button class="btn primary" id="saveBtn">Save changes</button>
+      <button class="btn danger" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main" id="main"></main>
+  </div>
+</div>
+
+<div class="status-bar" id="statusBar"><span class="ico" id="statusIco">✓</span><span id="statusMsg"></span></div>
+
+<script>
+/* ========== STATE ========== */
+let state = {};
+let creds = null; // {user, pass}
+
+const DEFAULTS = {
+  meta:{title:"Eshwar Goud — Chartered Accountant (Intern)",description:"CA intern specialising in audit, taxation, and forensic accounting."},
+  nav:{brandName:"Eshwar Goud",brandSub:"/ CA Intern",statusText:"Open to opportunities",statusLink:"mailto:eshwar@ca.in"},
+  hero:{eyebrow:"",firstName:"Eshwar",lastName:"Goud.",role:"Chartered Accountant (Intern)",roleCompany:"Audit & Assurance",
+        description:"",primaryBtnText:"Get in touch",primaryBtnLink:"mailto:eshwar@ca.in",
+        secondaryBtnText:"Download CV",secondaryBtnLink:"#",
+        trust:[{label:"Based in",value:"Hyderabad, India"}]},
+  photo:{url:"eshwar.jpeg",badgeFounderLabel:"CA Intern",badgeFounderText:"Audit & Assurance",
+         badgeStatusLabel:"Currently",badgeStatusText:"Articleship · Active",
+         badgeGoldLabel:"IPCC",badgeGoldText:"✓ Cleared"},
+  stats:[{num:"2",suffix:"+",label:"Years of articleship"}],
+  about:{tag:"About",heading:"",headingEm:"",paragraphs:[""],facts:[{label:"Role",value:"CA Intern"}]},
+  services:{tag:"What I do",heading:"",headingEm:"",items:[{icon:"📊",title:"",desc:"",tags:[""]}]},
+  tools:{tag:"Tools",heading:"",headingEm:"",items:[{icon:"📗",name:""}]},
+  experience:{tag:"Experience",heading:"",headingEm:"",items:[{date:"",title:"",desc:""}]},
+  certifications:{tag:"Certifications",heading:"",headingEm:"",items:[{badge:"🏅",title:"",sub:""}]},
+  cta:{tag:"",title:"",titleEm:"",sub:"",primaryBtnText:"",primaryBtnLink:"",secondaryBtnText:"",secondaryBtnLink:""},
+  footer:{brandText:"",columns:[{title:"Contact",links:[{label:"",href:""}]}],copyright:"",statusText:""}
+};
+
+/* ========== SCHEMA ========== */
+const SCHEMA = {
+  meta:{label:"Site Meta",fields:{
+    title:{label:"Page title",type:"text"},
+    description:{label:"Meta description",type:"textarea"}
+  }},
+  nav:{label:"Navigation",fields:{
+    brandName:{label:"Brand name",type:"text"},
+    brandSub:{label:"Brand sub",type:"text"},
+    statusText:{label:"Status text",type:"text"},
+    statusLink:{label:"Status link",type:"text"}
+  }},
+  hero:{label:"Hero",fields:{
+    eyebrow:{label:"Eyebrow",type:"text"},
+    firstName:{label:"First name",type:"text"},
+    lastName:{label:"Last name",type:"text"},
+    role:{label:"Role",type:"text"},
+    roleCompany:{label:"Role company / tag",type:"text"},
+    description:{label:"Description (HTML allowed)",type:"textarea"},
+    primaryBtnText:{label:"Primary button text",type:"text"},
+    primaryBtnLink:{label:"Primary button link",type:"text"},
+    secondaryBtnText:{label:"Secondary button text",type:"text"},
+    secondaryBtnLink:{label:"Secondary button link",type:"text"},
+    trust:{label:"Trust items",type:"array",itemLabel:"Trust item",fields:{
+      label:{label:"Label",type:"text"},value:{label:"Value",type:"text"}
+    }}
+  }},
+  photo:{label:"Photo & Badges",fields:{
+    url:{label:"Photo",type:"image"},
+    badgeFounderLabel:{label:"Founder badge label",type:"text"},
+    badgeFounderText:{label:"Founder badge text",type:"text"},
+    badgeStatusLabel:{label:"Status badge label",type:"text"},
+    badgeStatusText:{label:"Status badge text",type:"text"},
+    badgeGoldLabel:{label:"Gold badge label",type:"text"},
+    badgeGoldText:{label:"Gold badge text",type:"text"}
+  }},
+  stats:{label:"Stats Strip",fields:{
+    items:{label:"Stats",type:"array",itemLabel:"Stat",fields:{
+      num:{label:"Number",type:"text"},suffix:{label:"Suffix (e.g. +, %)",type:"text"},label:{label:"Label",type:"text"}
+    }}
+  }},
+  about:{label:"About",fields:{
+    tag:{label:"Section tag",type:"text"},
+    heading:{label:"Heading",type:"text"},
+    headingEm:{label:"Heading (italic accent)",type:"text"},
+    paragraphs:{label:"Paragraphs (HTML allowed)",type:"array",itemLabel:"Paragraph",simple:true,fields:{value:{label:"Text",type:"textarea"}}},
+    facts:{label:"Facts",type:"array",itemLabel:"Fact",fields:{label:{label:"Label",type:"text"},value:{label:"Value",type:"text"}}}
+  }},
+  services:{label:"Services",fields:{
+    tag:{label:"Section tag",type:"text"},
+    heading:{label:"Heading",type:"text"},
+    headingEm:{label:"Heading (italic)",type:"text"},
+    items:{label:"Service cards",type:"array",itemLabel:"Service",fields:{
+      icon:{label:"Icon (emoji)",type:"text"},
+      title:{label:"Title",type:"text"},
+      desc:{label:"Description",type:"textarea"},
+      tags:{label:"Tags (comma-separated)",type:"csv"}
+    }}
+  }},
+  tools:{label:"Tools",fields:{
+    tag:{label:"Section tag",type:"text"},
+    heading:{label:"Heading",type:"text"},
+    headingEm:{label:"Heading (italic)",type:"text"},
+    items:{label:"Tool items",type:"array",itemLabel:"Tool",fields:{
+      icon:{label:"Icon (emoji)",type:"text"},name:{label:"Name",type:"text"}
+    }}
+  }},
+  experience:{label:"Experience",fields:{
+    tag:{label:"Section tag",type:"text"},
+    heading:{label:"Heading",type:"text"},
+    headingEm:{label:"Heading (italic)",type:"text"},
+    items:{label:"Timeline entries",type:"array",itemLabel:"Entry",fields:{
+      date:{label:"Date range",type:"text"},
+      title:{label:"Title",type:"text"},
+      desc:{label:"Description",type:"textarea"}
+    }}
+  }},
+  certifications:{label:"Certifications",fields:{
+    tag:{label:"Section tag",type:"text"},
+    heading:{label:"Heading",type:"text"},
+    headingEm:{label:"Heading (italic)",type:"text"},
+    items:{label:"Certifications",type:"array",itemLabel:"Cert",fields:{
+      badge:{label:"Badge (emoji)",type:"text"},
+      title:{label:"Title",type:"text"},
+      sub:{label:"Subtitle",type:"text"}
+    }}
+  }},
+  cta:{label:"CTA Section",fields:{
+    tag:{label:"Section tag",type:"text"},
+    title:{label:"Title",type:"text"},
+    titleEm:{label:"Title (italic)",type:"text"},
+    sub:{label:"Subtitle",type:"textarea"},
+    primaryBtnText:{label:"Primary button text",type:"text"},
+    primaryBtnLink:{label:"Primary button link",type:"text"},
+    secondaryBtnText:{label:"Secondary button text",type:"text"},
+    secondaryBtnLink:{label:"Secondary button link",type:"text"}
+  }},
+  footer:{label:"Footer",fields:{
+    brandText:{label:"Brand description",type:"textarea"},
+    columns:{label:"Footer columns",type:"array",itemLabel:"Column",fields:{
+      title:{label:"Column title",type:"text"},
+      links:{label:"Links",type:"array",itemLabel:"Link",fields:{
+        label:{label:"Label",type:"text"},href:{label:"Href",type:"text"}
+      }}
+    }},
+    copyright:{label:"Copyright",type:"text"},
+    statusText:{label:"Status text",type:"text"}
+  }}
+};
+
+/* ========== HELPERS ========== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const getPath = (obj,path)=>path.split('.').reduce((o,k)=>o?.[k],obj);
+const setPath = (obj,path,val)=>{const keys=path.split('.');const last=keys.pop();let cur=obj;for(const k of keys){if(cur[k]==null)cur[k]={};cur=cur[k];}cur[last]=val;};
+const authHeader = () => 'Basic ' + btoa(creds.user+':'+creds.pass);
+
+function toast(msg, ok=true){
+  const bar=$('statusBar'), ico=$('statusIco'), m=$('statusMsg');
+  bar.className='status-bar show '+(ok?'ok':'err');
+  ico.textContent = ok?'✓':'!';
+  m.textContent = msg;
+  clearTimeout(toast._t);
+  toast._t=setTimeout(()=>bar.classList.remove('show'),2600);
+}
+
+/* ========== LOGIN ========== */
+$('loginBtn').addEventListener('click', doLogin);
+$('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+async function doLogin(){
+  const user=$('loginUser').value.trim();
+  const pass=$('loginPass').value;
+  if(!user||!pass){ $('loginError').textContent='Please enter both fields.'; return; }
+  $('loginError').textContent='';
+  $('loginBtn').textContent='Signing in…';
+  try{
+    const r = await fetch('/api/data',{method:'HEAD',headers:{Authorization:'Basic '+btoa(user+':'+pass)}});
+    if(r.status===200){
+      creds={user,pass};
+      sessionStorage.setItem('creds',JSON.stringify(creds));
+      $('loginView').style.display='none';
+      $('dashboardView').style.display='block';
+      await loadData();
+    } else {
+      $('loginError').textContent='Invalid credentials.';
+    }
+  }catch(e){
+    $('loginError').textContent='Could not reach server. Is the API deployed?';
+  }
+  $('loginBtn').textContent='Sign in';
+}
+
+function logout(){
+  sessionStorage.removeItem('creds');
+  location.reload();
+}
+$('logoutBtn').addEventListener('click',logout);
+
+/* ========== LOAD / SAVE ========== */
+async function loadData(){
+  try{
+    const r = await fetch('/api/data',{cache:'no-store'});
+    if(r.ok){
+      const remote = await r.json();
+      state = deepMerge(structuredClone(DEFAULTS), remote||{});
+    } else throw new Error();
+  }catch(e){
+    state = structuredClone(DEFAULTS);
+    toast('Could not load — using defaults',false);
+  }
+  renderSidebar();
+  renderPanel('meta');
+}
+
+function deepMerge(base, src){
+  if(Array.isArray(base)) return Array.isArray(src)?src:base;
+  if(base && typeof base==='object'){
+    if(!src || typeof src!=='object') return base;
+    for(const k in src) base[k] = (k in base)?deepMerge(base[k],src[k]):src[k];
+    return base;
+  }
+  return (src===undefined||src===null)?base:src;
+}
+
+async function saveData(){
+  $('saveBtn').textContent='Saving…';
+  try{
+    const r = await fetch('/api/data',{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Authorization:authHeader()},
+      body:JSON.stringify(state)
+    });
+    if(r.ok){ toast('Saved successfully'); }
+    else if(r.status===401){ toast('Unauthorized — please log in again',false); }
+    else { toast('Save failed ('+r.status+')',false); }
+  }catch(e){ toast('Network error',false); }
+  $('saveBtn').textContent='Save changes';
+}
+$('saveBtn').addEventListener('click',saveData);
+$('reloadBtn').addEventListener('click',async()=>{
+  if(!confirm('Discard unsaved changes and reload?'))return;
+  await loadData();
+});
+
+/* ========== SIDEBAR ========== */
+function renderSidebar(){
+  const sb=$('sidebar');
+  sb.innerHTML = Object.entries(SCHEMA).map(([key,s],i)=>
+    `<a data-panel="${key}"><span class="idx">${String(i+1).padStart(2,'0')}</span>${esc(s.label)}</a>`
+  ).join('');
+  sb.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>renderPanel(a.dataset.panel)));
+}
+
+/* ========== PANEL RENDER ========== */
+function renderPanel(key){
+  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.toggle('active',a.dataset.panel===key));
+  const schema=SCHEMA[key];
+  const data=state[key]||{};
+  const main=$('main');
+  main.innerHTML=`
+    <div class="panel active">
+      <div class="section-head">
+        <h2>${esc(schema.label)}</h2>
+        <p>Edit fields below. Changes are saved when you click "Save changes".</p>
+      </div>
+      <div id="panelFields"></div>
+    </div>`;
+  const container=$('panelFields');
+  for(const [fk,fs] of Object.entries(schema.fields)){
+    container.appendChild(renderField(fs, data[fk], `${key}.${fk}`));
+  }
+}
+
+/* ========== FIELD RENDER ========== */
+function renderField(fs, value, path){
+  const wrap=document.createElement('div');
+  wrap.className='field';
+  wrap.dataset.path=path;
+
+  if(fs.type==='array'){
+    wrap.innerHTML=`<label>${esc(fs.label)}</label>`;
+    const arr = Array.isArray(value)?value:[];
+    const list=document.createElement('div');
+    list.dataset.arrPath=path;
+    arr.forEach((item,i)=>list.appendChild(renderArrayItem(fs,item,i,path)));
+    wrap.appendChild(list);
+    const add=document.createElement('button');
+    add.className='add-btn';
+    add.type='button';
+    add.textContent='+ Add '+fs.itemLabel;
+    add.addEventListener('click',()=>{
+      const newItem = fs.simple ? {value:''} : Object.fromEntries(Object.entries(fs.fields).map(([k,f])=>[k, f.type==='csv'?[]:'']));
+      const arr2=getPath(state,path)||[]; arr2.push(newItem); setPath(state,path,arr2);
+      renderPanel(path.split('.')[0]);
+    });
+    wrap.appendChild(add);
+    return wrap;
+  }
+
+  const label=document.createElement('label');
+  label.textContent=fs.label;
+  wrap.appendChild(label);
+
+  if(fs.type==='textarea'){
+    const t=document.createElement('textarea');
+    t.value=value||'';
+    t.addEventListener('input',()=>setPath(state,path,t.value));
+    wrap.appendChild(t);
+  }
+  else if(fs.type==='csv'){
+    const t=document.createElement('input');
+    t.type='text';
+    t.value=(value||[]).join(', ');
+    t.placeholder='comma, separated, values';
+    t.addEventListener('input',()=>setPath(state,path,t.value.split(',').map(s=>s.trim()).filter(Boolean)));
+    wrap.appendChild(t);
+  }
+  else if(fs.type==='image'){
+    wrap.appendChild(renderImageField(value, v=>{
+      setPath(state,path,v);
+      const img=wrap.querySelector('.image-preview');
+      img.innerHTML = v?`<img src="${esc(v)}" alt="">`:'<span>No image</span>';
+    }));
+  }
+  else{
+    const t=document.createElement('input');
+    t.type='text';
+    t.value=value||'';
+    t.addEventListener('input',()=>setPath(state,path,t.value));
+    wrap.appendChild(t);
+  }
+  return wrap;
+}
+
+function renderArrayItem(fs, item, i, basePath){
+  const box=document.createElement('div');
+  box.className='array-item';
+  const head=document.createElement('div');
+  head.className='item-head';
+  head.innerHTML=`<span>${esc(fs.itemLabel)} ${String(i+1).padStart(2,'0')}</span>`;
+  const actions=document.createElement('div');
+  actions.className='item-actions';
+
+  const up=document.createElement('button'); up.className='icon-btn'; up.textContent='↑'; up.type='button';
+  up.addEventListener('click',()=>{const a=getPath(state,basePath);if(i>0){[a[i-1],a[i]]=[a[i],a[i-1]];renderPanel(basePath.split('.')[0]);}});
+  const down=document.createElement('button'); down.className='icon-btn'; down.textContent='↓'; down.type='button';
+  down.addEventListener('click',()=>{const a=getPath(state,basePath);if(i<a.length-1){[a[i+1],a[i]]=[a[i],a[i+1]];renderPanel(basePath.split('.')[0]);}});
+  const del=document.createElement('button'); del.className='icon-btn del'; del.textContent='✕'; del.type='button';
+  del.addEventListener('click',()=>{if(!confirm('Delete this item?'))return;const a=getPath(state,basePath);a.splice(i,1);renderPanel(basePath.split('.')[0]);});
+
+  actions.append(up,down,del);
+  head.appendChild(actions);
+  box.appendChild(head);
+
+  const body=document.createElement('div');
+  const itemFields = fs.simple ? {value:fs.fields.value} : fs.fields;
+  const keys = Object.keys(itemFields);
+  const cols = keys.length>=3?3:keys.length>=2?2:1;
+  body.style.display='grid';
+  body.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  body.style.gap='14px';
+
+  for(const [fk,f] of Object.entries(itemFields)){
+    const cell=document.createElement('div');
+    if(f.type==='textarea') cell.style.gridColumn='1 / -1';
+    cell.appendChild(renderField(f, item[fk], `${basePath}.${i}.${fk}`));
+    // remove the wrapper's margin since grid handles spacing
+    cell.querySelector('.field').style.marginBottom='0';
+    body.appendChild(cell);
+  }
+  box.appendChild(body);
+  return box;
+}
+
+function renderImageField(value, onChange){
+  const w=document.createElement('div');
+  w.className='image-field';
+  const preview=document.createElement('div');
+  preview.className='image-preview';
+  preview.innerHTML = value?`<img src="${esc(value)}" alt="">`:'<span>No image</span>';
+
+  const right=document.createElement('div');
+  right.className='image-inputs';
+
+  const urlInput=document.createElement('input');
+  urlInput.type='text';
+  urlInput.placeholder='Paste image URL or upload';
+  urlInput.value = value && !value.startsWith('data:') ? value : '';
+  urlInput.addEventListener('input',()=>onChange(urlInput.value));
+
+  const fileWrap=document.createElement('label');
+  fileWrap.className='file-label';
+  fileWrap.innerHTML='📁 Upload image';
+  const fileInput=document.createElement('input');
+  fileInput.type='file';
+  fileInput.accept='image/*';
+  fileInput.addEventListener('change',()=>{
+    const file=fileInput.files[0]; if(!file)return;
+    compressImage(file, dataUrl=>{ urlInput.value=''; onChange(dataUrl); });
+  });
+  fileWrap.appendChild(fileInput);
+
+  const hint=document.createElement('div');
+  hint.style.cssText='font-size:11px;color:var(--muted);font-family:JetBrains Mono,monospace';
+  hint.textContent='Images are auto-compressed to ~1200px / JPEG 0.85';
+
+  right.append(urlInput,fileWrap,hint);
+  w.append(preview,right);
+  return w;
+}
+
+function compressImage(file, cb){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const max=1200;
+      let {width:w,height:h}=img;
+      if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r);}
+      const c=document.createElement('canvas'); c.width=w; c.height=h;
+      const ctx=c.getContext('2d');
+      ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
+      ctx.drawImage(img,0,0,w,h);
+      cb(c.toDataURL('image/jpeg',0.85));
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ========== BOOT ========== */
+(async function(){
+  const saved=sessionStorage.getItem('creds');
+  if(saved){
+    creds=JSON.parse(saved);
+    // verify
+    try{
+      const r=await fetch('/api/data',{method:'HEAD',headers:{Authorization:authHeader()}});
+      if(r.status===200){
+        $('loginView').style.display='none';
+        $('dashboardView').style.display='block';
+        await loadData();
+        return;
+      }
+    }catch(e){}
+    sessionStorage.removeItem('creds');
+  }
+})();
+</script>
+</body>
+</html>
